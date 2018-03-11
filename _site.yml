@@ -5,11 +5,10 @@ navbar:
  left:
   - text: "Home"
     href: index.html
-sidebar:
- title: "Learning Notes"
-  subcategoties:
-   - subtitle: "Intro. to Machine Learning"
-     subhref: notesML.html
+  - text: "Learning Notes"
+    children:
+     - title: "Intro. to Machine Learning"
+       href: notesML.html
    - subtitle: "Intro. to Network Programming"
      subhref: notesNP.html
    - subtitle: "UAV Autopilot and Image Processing"
