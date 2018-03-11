@@ -5,7 +5,7 @@ navbar:
  left:
   - text: "Home"
     href: index.html
-  - text: "Learning Notes"
+  - title: "Learning Notes"
     subcategoties:
      - subtitle: "Intro. to Machine Learning"
        subhref: notesML.html
