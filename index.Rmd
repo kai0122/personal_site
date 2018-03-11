@@ -14,5 +14,4 @@ title: "Kai's Blog"
 - Area of Interest: Computer Vision, Machine Learning, Internet of Things
 
 ### My Github personal page
-[My Github] [1]
- [1]: https://github.com/kai0122 "Github"
+[My Github](https://github.com/kai0122 "Github")
