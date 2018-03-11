@@ -1,5 +1,14 @@
 ---
 title: "Kai's Blog"
+author: "Kai Yang"
+output:
+ html_documents:
+   toc: true
+   toc_depth: 2
+   toc_float:
+    collapsed: false
+    smooth_scroll: false
+    
 ---
 
 ![](kai.jpg)
