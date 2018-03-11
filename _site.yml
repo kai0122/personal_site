@@ -6,7 +6,21 @@ navbar:
   - text: "Home"
     href: index.html
   - text: "Learning Notes"
-    href: notes.html
+    subcategoties:
+     - subtitle: "Intro. to Machine Learning"
+       subhref: notesML.html
+     - subtitle: "Intro. to Network Programming"
+       subhref: notesNP.html
+     - subtitle: "UAV Autopilot and Image Processing"
+       subhref: notesUAV.html
+     - subtitle: "AI in National Palace Museum"
+       subhref: notesAINPM.html
+     - subtitle: "Design and Implementation of IOT Applications"
+       subhref: notesIOT.html
+     - subtitle: "Smart Friendly Cities: Design and Practice"
+       subhref: notesSFC.html
+     - subtitle: "Computer Animation and Special Effects"
+       subhref: notesCA.html
 output:
  html_document:
   theme: flatly
