@@ -1,0 +1,9 @@
+name: "kais-Blog"
+output_dir: "."
+navbar:
+ title: "Kai's Blog"
+ left:
+  - text: "Home"
+    href: index.html
+  - text: "About Me"
+    href: about.html
