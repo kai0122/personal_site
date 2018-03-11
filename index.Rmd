@@ -1,8 +1,7 @@
 ---
 title: "Kai's Blog"
-author: "Kai Yang"
 output:
- html_documents:
+ html_document:
    toc: true
    toc_depth: 2
    toc_float:
