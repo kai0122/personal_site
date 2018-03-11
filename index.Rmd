@@ -8,3 +8,9 @@ title: "Kai's Blog"
 
 Here is a super cool photo.
 ![](kai.jpg)
+
+# About Me
+## Education
+- BS in Dept. of Computer Science at National Chaio Tung University, Taiwan (Sep 2015 - Jun 2019)
+- Overall GPA: 4.02/4.3
+- Major GPA: 4.01/4.3
