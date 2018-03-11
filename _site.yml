@@ -21,6 +21,9 @@ navbar:
        href: notesSFC.html
      - text: "Computer Animation and Special Effects"
        href: notesCA.html
+ right:
+  - icon: fa-facebook-f
+    href: https://www.facebook.com/show098822
 output:
  html_document:
   theme: flatly
