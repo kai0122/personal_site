@@ -2,15 +2,16 @@
 title: "Kai's Blog"
 ---
 
-- _Name:_ Kai
-- _Occupation:_ "Student"
-- _Hobbies:_ Learning software development instead of studyinh for exams.
-
-Here is a super cool photo.
 ![](kai.jpg)
 
 # About Me
 ## Education
 - BS in Dept. of Computer Science at National Chaio Tung University, Taiwan (Sep 2015 - Jun 2019)
+- Successfully applied to Exchange Student Program in Dept. of Computer Science in RWTH Aachen University (Apr 2019 - Sep 2019)
 - Overall GPA: 4.02/4.3
 - Major GPA: 4.01/4.3
+- Most Relevant Course: Introduction to Network Programming, Introduction to Wireless Networks, Principles of communication networks, Introduction to Multimedia Information System, Introduction to Machine Learning, UAV Autopilot and Computer Vision
+- Area of Interest: Computer Vision, Machine Learning, Internet of Things
+
+## My Github personal page
+[id]: <https://github.com/kai0122> "myGithub"
