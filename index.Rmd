@@ -4,4 +4,7 @@ title: "Kai's Blog"
 
 - _Name:_ Kai
 - _Occupation:_ "Student"
-Why I am awesome.
+- _Hobbies:_ Learning software development instead of studyinh for exams.
+
+Here is a super cool photo.
+![](kai.jpg)
