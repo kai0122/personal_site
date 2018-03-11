@@ -3,7 +3,7 @@ title: "Kai's Blog"
 output:
  html_document:
    toc: true
-   toc_depth: 2
+   toc_depth: 3
    toc_float:
     collapsed: false
     smooth_scroll: false
