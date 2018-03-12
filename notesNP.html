@@ -562,9 +562,27 @@ int TOTALCLI = 0;</code></pre>
 <div id="other-data-structures" class="section level4">
 <h4>Other Data Structures</h4>
 <ul>
-<li>I create a structure <strong>user</strong> for every connected client, containing name, port, address and whether the client left (die). ```cpp struct user { string name; string addr; string port; int die; user(string const&amp; str, string a, string p):name(str){ addr = a; port = p; die = 0; } user() { } };</li>
+<li>I create a structure <strong>user</strong> for every connected client, containing name, port, address and whether the client left (die).</li>
 </ul>
-<p>struct user childarr[FD_SETSIZE]; int client[FD_SETSIZE]; fd_set readSet, allSet; // for select() ```</p>
+<pre class="cpp"><code>struct user
+{
+    string name;
+    string addr;
+    string port;
+    int die;
+    user(string const&amp; str, string a, string p):name(str){
+        addr = a;
+        port = p;
+        die = 0;
+    }
+    user()
+    {
+    }
+};
+
+struct user childarr[FD_SETSIZE];
+int client[FD_SETSIZE]; 
+fd_set readSet, allSet; // for select()</code></pre>
 </div>
 </div>
 </div>

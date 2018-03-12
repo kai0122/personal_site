@@ -239,6 +239,10 @@ For messages received from stdin, client can only process the exit command, othe
 3. Server/Client should NOT crash or be hanged.
 4. Don’t use the port below 1024.
 
+
+  
+  
+  
 ### My Code Explaination
 #### Libraries to Include
 ```cpp
@@ -271,6 +275,7 @@ int TOTALCLI = 0;
 
 #### Other Data Structures
 * I create a structure **user** for every connected client, containing name, port, address and whether the client left (die).
+ 
 ```cpp
 struct user
 {
@@ -292,3 +297,5 @@ struct user childarr[FD_SETSIZE];
 int client[FD_SETSIZE]; 
 fd_set readSet, allSet;	// for select()
 ```
+
+  
