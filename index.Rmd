@@ -12,7 +12,7 @@ output:
    
 
 <!-- ![](kai.jpg) -->
-<img src="./kai.jpg" class="thumbnail" align="right" style="width: 300px; margin: 0px; "/>
+<img src="./kai.jpg" align="right" style="width: 300px; margin: 0px; "/>
 
 
 # About Me
