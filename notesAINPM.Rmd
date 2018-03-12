@@ -5,6 +5,7 @@ output:
    toc: true
    toc_depth: 5
    toc_float:
+    highlight: tango
     collapsed: false
     smooth_scroll: false
 
