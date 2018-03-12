@@ -11,8 +11,8 @@ output:
 ---
    
 
-![](kai.jpg)
-<img src="./kai.jpg" class="thumbnail" align="right" /> 
+<!-- ![](kai.jpg) -->
+<img src="./kai.jpg" class="thumbnail" align="right" style="width: 300px;"/> 
 
 # About Me
 ### Education
