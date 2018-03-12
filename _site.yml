@@ -10,7 +10,13 @@ navbar:
      - text: "Intro. to Machine Learning"
        href: notesML.html
      - text: "Intro. to Network Programming"
-       menu:
+       <ul class="dropdown-menu">
+          <li><a href="#">My Profile</a></li>
+          <li><a href="#">Friend Requests</a></li>
+          <li><a href="#">Account Settings</a></li>
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Log Out</a></li>
+        </ul>
         - text: "Project 1: Chat Room System" 
           href: notesNPChat.html
         - text: "Project 2: Reliable UDP File Transfer"
@@ -30,13 +36,6 @@ navbar:
  right:
   - icon: fa-facebook-f
     href: https://www.facebook.com/show098822
-
-pages:
-    - Home: index.Rmd
-     - Learning notes:
-       - Project 1 Chat Room System: notesNPChat.html
-       - Project 2 Reliable UDP File Transfer: notesNPUDP.Rmd
-       - Project 3 Non-Blocking File Transfer: notesNPNB.Rmd
 
 output:
  html_document:
