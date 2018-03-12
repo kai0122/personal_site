@@ -10,10 +10,7 @@ navbar:
      - text: "Intro. to Machine Learning"
        href: notesML.html
      - text: "Intro. to Network Programming"
-       href: notesNPNB.html
-       sidebar:
-        title: "Sample Title"
-        nav: sidebar-sample
+       href: notesNPChat.html       
      - text: "UAV Autopilot and Image Processing"
        href: notesUAV.html
      - text: "AI in National Palace Museum"
@@ -27,22 +24,10 @@ navbar:
  right:
   - icon: fa-facebook-f
     href: https://www.facebook.com/show098822
-
-sidebar-sample:
-  - title: "Parent Page A"
-    children:
-      - title: "Child Page A1"
-        url: /
-      - title: "Child Page A2"
-        url: /
-      - title: "Child Page A3"
-        url: /
-      - title: "Child Page A4"
-        url: /
         
 
 
 output:
  html_document:
-  theme: flatly
+  theme: Minty
   css: style.css
