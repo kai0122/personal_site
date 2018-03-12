@@ -12,10 +12,10 @@ output:
    
 
 <!-- ![](kai.jpg) -->
+# About Me
+
 <img src="./kai.jpg" align="right" style="width: 300px; margin: 0px; "/>
 
-
-# About Me
 ### Education
  - BS in Dept. of Computer Science at National Chaio Tung University, Taiwan (Sep 2015 - Jun 2019)
  - Successfully applied to Exchange Student Program in Dept. of Computer Science in RWTH Aachen University (Apr 2019 - Sep 2019)
