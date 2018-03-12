@@ -33,7 +33,7 @@ navbar:
 
 pages:
     - Home: index.Rmd
-    - Learning notes:
+     - Learning notes:
       - Project 1: Chat Room System: notesNPChat.html
       - Project 2: Reliable UDP File Transfer: notesNPUDP.Rmd
       - Project 3: Non-Blocking File Transfer: notesNPNB.Rmd
