@@ -62,3 +62,108 @@ In this project, we need to write two programs, a client and a server, to build 
  - Clients talk to one another via connecting to the server.
  - The server accepts connections from clients and sends commands to clients.
   
+### Specification
+#### Server
+A server can serve multiple clients simultaneously. After a connection is built, server will send a hello message to the client, and give the client a username ‘anonymous’. Clients can send different commands to server.
+    
+Messages which is transmitted between clients and the server are as following:
+
+##### Hello Message
+When a client connects to server, the server sends hello message to the client, and broadcasts this user’s coming to other clients.
+
+ - Send Format:
+  - To the new connected client
+```console
+[Server] Hello, anonymous! From: <Client IP>/<Client Port>
+To existing client
+[Server] Someone is coming!
+```
+  - Offline Message
+```console
+When a client disconnect to server, the server sends offline message to all the other online clients to tell them someone has been offline.
+```
+
+   
+
+
+Send Format:
+[Server] <USERNAME> is offline.
+Who Message
+A client can type command below to list all online users. Server will reply to sender a list of online users and tag the sender client. For N users, server will send N lines. Each of them shows details of a user.
+
+Recv Format:
+who
+Send Format:
+[Server] <USERNAME> <CLIENT IP>/<CLIENT PORT>
+[Server] <SENDER USERNAME> <CLIENT IP>/<CLIENT PORT> ->me
+Change Username Message
+A client can type command below to change his/her username.
+
+Server has to verify if the new name is valid which means the input name is:
+1. not anonymous,
+2. unique, and
+3. 2~12 English letters.
+It will reject user’s request if this name cannot fit the rule.
+
+Recv Format
+name <NEW USERNAME>
+
+Send Format:
+
+If the new name is anonymous.
+[Server] ERROR: Username cannot be anonymous.
+
+If the new name is not unique.
+[Server] ERROR: <NEW USERNAME> has been used by others.
+
+If the new name does not consist of 2~12 English letters.
+[Server] ERROR: Username can only consists of 2~12 English letters.
+
+Server will reply messages to all users once a user changes his/her name.
+
+Send Format:
+
+To user which changed his/her name
+[Server] You're now known as <NEW USERNAME>.
+
+To other users
+[Server] <OLD USERNAME> is now known as <NEW USERNAME>.
+
+Note:
+A user can be renamed as itself, that is, when “userA” wants to rename as “userA”, server should not return error message.
+
+Private Message
+A client can send a private message to a specific client.
+Server will send an error message back to the sender if either the sender’s name or the receiver’s name is anonymous. Otherwise, the server sends the private message to the specific client and sends back a notification to the sender.
+
+Recv Format:
+tell <USERNAME> <MESSAGE>
+
+Send Format (failed):
+
+If the sender’s name is anonymous
+[Server] ERROR: You are anonymous.
+If the receiver’s name is anonymous
+[Server] ERROR: The client to which you sent is anonymous.
+If the receiver doesn’t exist
+[Server] ERROR: The receiver doesn't exist.
+Send Format (successed):
+
+To sender:
+[Server] SUCCESS: Your message has been sent.
+To receiver:
+[Server] <SENDER USERNAME> tell you <MESSAGE>
+Broadcast Message
+A client can send a broadcast message to all clients.
+While receiving the command from a user, server inserts <SENDER USERNAME> at the head of it and broadcasts to all users including the sender.
+
+Recv Format:
+yell <MESSAGE>
+Send Format:
+[Server] <SENDER USERNAME> yell <MESSAGE>
+Error Command
+Commands which haven’t been declared above are error commands.
+When a server receives an error command, it should send an error message back to the sending client.
+
+Send Format:
+[Server] ERROR: Error command.

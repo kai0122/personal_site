@@ -390,6 +390,47 @@ pre { /* Code block - determines code spacing between lines */
 <li>The server accepts connections from clients and sends commands to clients.</li>
 </ul>
 </div>
+<div id="specification" class="section level3">
+<h3>Specification</h3>
+<div id="server" class="section level4">
+<h4>Server</h4>
+<p>A server can serve multiple clients simultaneously. After a connection is built, server will send a hello message to the client, and give the client a username ‘anonymous’. Clients can send different commands to server.</p>
+<p>Messages which is transmitted between clients and the server are as following:</p>
+<div id="hello-message" class="section level5">
+<h5>Hello Message</h5>
+<p>When a client connects to server, the server sends hello message to the client, and broadcasts this user’s coming to other clients.</p>
+<ul>
+<li>Send Format:</li>
+<li><p>To the new connected client</p>
+<pre class="console"><code>[Server] Hello, anonymous! From: &lt;Client IP&gt;/&lt;Client Port&gt;
+To existing client
+[Server] Someone is coming!</code></pre></li>
+<li><p>Offline Message</p>
+<pre class="console"><code>When a client disconnect to server, the server sends offline message to all the other online clients to tell them someone has been offline.</code></pre></li>
+</ul>
+<p>Send Format: <a href="#server">Server</a> <USERNAME> is offline. Who Message A client can type command below to list all online users. Server will reply to sender a list of online users and tag the sender client. For N users, server will send N lines. Each of them shows details of a user.</p>
+<p>Recv Format: who Send Format: <a href="#server">Server</a> <USERNAME> <CLIENT IP>/<CLIENT PORT> <a href="#server">Server</a> <SENDER USERNAME> <CLIENT IP>/<CLIENT PORT> -&gt;me Change Username Message A client can type command below to change his/her username.</p>
+<p>Server has to verify if the new name is valid which means the input name is: 1. not anonymous, 2. unique, and 3. 2~12 English letters. It will reject user’s request if this name cannot fit the rule.</p>
+<p>Recv Format name <NEW USERNAME></p>
+<p>Send Format:</p>
+<p>If the new name is anonymous. <a href="#server">Server</a> ERROR: Username cannot be anonymous.</p>
+<p>If the new name is not unique. <a href="#server">Server</a> ERROR: <NEW USERNAME> has been used by others.</p>
+<p>If the new name does not consist of 2~12 English letters. <a href="#server">Server</a> ERROR: Username can only consists of 2~12 English letters.</p>
+<p>Server will reply messages to all users once a user changes his/her name.</p>
+<p>Send Format:</p>
+<p>To user which changed his/her name <a href="#server">Server</a> You’re now known as <NEW USERNAME>.</p>
+<p>To other users <a href="#server">Server</a> <OLD USERNAME> is now known as <NEW USERNAME>.</p>
+<p>Note: A user can be renamed as itself, that is, when “userA” wants to rename as “userA”, server should not return error message.</p>
+<p>Private Message A client can send a private message to a specific client. Server will send an error message back to the sender if either the sender’s name or the receiver’s name is anonymous. Otherwise, the server sends the private message to the specific client and sends back a notification to the sender.</p>
+<p>Recv Format: tell <USERNAME> <MESSAGE></p>
+<p>Send Format (failed):</p>
+<p>If the sender’s name is anonymous <a href="#server">Server</a> ERROR: You are anonymous. If the receiver’s name is anonymous <a href="#server">Server</a> ERROR: The client to which you sent is anonymous. If the receiver doesn’t exist <a href="#server">Server</a> ERROR: The receiver doesn’t exist. Send Format (successed):</p>
+<p>To sender: <a href="#server">Server</a> SUCCESS: Your message has been sent. To receiver: <a href="#server">Server</a> <SENDER USERNAME> tell you <MESSAGE> Broadcast Message A client can send a broadcast message to all clients. While receiving the command from a user, server inserts <SENDER USERNAME> at the head of it and broadcasts to all users including the sender.</p>
+<p>Recv Format: yell <MESSAGE> Send Format: <a href="#server">Server</a> <SENDER USERNAME> yell <MESSAGE> Error Command Commands which haven’t been declared above are error commands. When a server receives an error command, it should send an error message back to the sending client.</p>
+<p>Send Format: <a href="#server">Server</a> ERROR: Error command.</p>
+</div>
+</div>
+</div>
 </div>
 
 
