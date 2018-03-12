@@ -10,6 +10,7 @@ navbar:
      - text: "Intro. to Machine Learning"
        href: notesML.html
      - text: "Intro. to Network Programming"
+       <div>User Settings</div>
        <ul class="dropdown-menu">
           <li><a href="#">My Profile</a></li>
           <li><a href="#">Friend Requests</a></li>
@@ -17,14 +18,14 @@ navbar:
           <li><a href="#">Support</a></li>
           <li><a href="#">Log Out</a></li>
         </ul>
-        - text: "Project 1: Chat Room System" 
+     - text: "UAV Autopilot and Image Processing"
+       href: notesUAV.html
+       - text: "Project 1: Chat Room System" 
           href: notesNPChat.html
         - text: "Project 2: Reliable UDP File Transfer"
           href: notesNPUDP.html
         - text: "Project 3: Non-Blocking File Transfer"
           href: notesNPNB.html
-     - text: "UAV Autopilot and Image Processing"
-       href: notesUAV.html
      - text: "AI in National Palace Museum"
        href: notesAINPM.html
      - text: "Design and Implementation of IOT Applications"
