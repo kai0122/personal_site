@@ -32,7 +32,7 @@ navbar:
     href: https://www.facebook.com/show098822
 
 pages:
-    - Home: index.md
+    - Home: index.Rmd
     - Learning notes:
       - Project 1: Chat Room System: notesNPChat.html
       - Project 2: Reliable UDP File Transfer: notesNPUDP.Rmd
