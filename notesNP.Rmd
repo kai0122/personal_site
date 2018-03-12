@@ -301,7 +301,7 @@ fd_set readSet, allSet;	// for select()
 #### Functions
 * skipblank(): For every unwanted blanks, we create a function to erase them.
 
-```console
+```cpp
 void skipblank(char *str){
 	int i = 0;
 	while(str[i++] == ' ');
@@ -329,7 +329,7 @@ void skipblank(string &str){
 
 * tabToBlank(): For every unwanted tabs, we create a function to erase them.
 
-```console
+```cpp
 void tabToBlank(char *str){
 	for(int i=0;i<strlen(str);i++){
 		if(str[i] == '\t')
@@ -340,7 +340,7 @@ void tabToBlank(char *str){
 
 * getIndex(): We get the index of the client from our user structure array, by comparing ports and addresses.
 
-```console
+```cpp
 int getIndex(const string msg, struct user *arr){
 	char addr[20];
 	char port[20];
@@ -367,7 +367,7 @@ int getIndex(const string msg, struct user *arr){
 
 * changeName(): If the client comes before, we assign it to the previous index in **user** structure and clear the current index content.
 
-```console
+```cpp
 int changeName(int index, string name){
 	int j=0;
 	string temp = "";
@@ -413,7 +413,7 @@ int changeName(int index, string name){
 
 * sendAll(): Broadcast a message to every clients.
 
-```console
+```cpp
 void sendAll(string msg, int except){
 	for(int i=0;i<FD_SETSIZE;i++){
 		if(childarr[i].die == 0 && i != except)
@@ -424,7 +424,7 @@ void sendAll(string msg, int except){
 
 * dealString(): Using previous funtions to deal with every messages.
 
-```console
+```cpp
 void dealString(string msg){
 	int index = getIndex(msg, childarr);
 	char recvline[msg.size()];

@@ -589,7 +589,7 @@ fd_set readSet, allSet; // for select()</code></pre>
 <ul>
 <li>skipblank(): For every unwanted blanks, we create a function to erase them.</li>
 </ul>
-<pre class="console"><code>void skipblank(char *str){
+<pre class="cpp"><code>void skipblank(char *str){
     int i = 0;
     while(str[i++] == &#39; &#39;);
     i--;
@@ -615,7 +615,7 @@ void skipblank(string &amp;str){
 <ul>
 <li>tabToBlank(): For every unwanted tabs, we create a function to erase them.</li>
 </ul>
-<pre class="console"><code>void tabToBlank(char *str){
+<pre class="cpp"><code>void tabToBlank(char *str){
     for(int i=0;i&lt;strlen(str);i++){
         if(str[i] == &#39;\t&#39;)
             str[i] = &#39; &#39;;
@@ -624,7 +624,7 @@ void skipblank(string &amp;str){
 <ul>
 <li>getIndex(): We get the index of the client from our user structure array, by comparing ports and addresses.</li>
 </ul>
-<pre class="console"><code>int getIndex(const string msg, struct user *arr){
+<pre class="cpp"><code>int getIndex(const string msg, struct user *arr){
     char addr[20];
     char port[20];
     int i = 0;
@@ -649,7 +649,7 @@ void skipblank(string &amp;str){
 <ul>
 <li>changeName(): If the client comes before, we assign it to the previous index in <strong>user</strong> structure and clear the current index content.</li>
 </ul>
-<pre class="console"><code>int changeName(int index, string name){
+<pre class="cpp"><code>int changeName(int index, string name){
     int j=0;
     string temp = &quot;&quot;;
     while(name[j] != &#39; &#39;){
@@ -693,7 +693,7 @@ void skipblank(string &amp;str){
 <ul>
 <li>sendAll(): Broadcast a message to every clients.</li>
 </ul>
-<pre class="console"><code>void sendAll(string msg, int except){
+<pre class="cpp"><code>void sendAll(string msg, int except){
     for(int i=0;i&lt;FD_SETSIZE;i++){
         if(childarr[i].die == 0 &amp;&amp; i != except)
             write(client[i], msg.c_str(), msg.size());
@@ -702,7 +702,7 @@ void skipblank(string &amp;str){
 <ul>
 <li>dealString(): Using previous funtions to deal with every messages.</li>
 </ul>
-<pre class="console"><code>void dealString(string msg){
+<pre class="cpp"><code>void dealString(string msg){
     int index = getIndex(msg, childarr);
     char recvline[msg.size()];
     int i=0;
