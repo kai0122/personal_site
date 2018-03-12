@@ -24,7 +24,10 @@ navbar:
  right:
   - icon: fa-facebook-f
     href: https://www.facebook.com/show098822
-        
+  - icon: fab fa-github
+    href: https://github.com/kai0122
+  - icon: fab fa-instagram
+    href: https://www.instagram.com/?hl=en      
 
 
 output:
