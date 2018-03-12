@@ -10,22 +10,11 @@ navbar:
      - text: "Intro. to Machine Learning"
        href: notesML.html
      - text: "Intro. to Network Programming"
-       <div>User Settings</div>
-       <ul class="dropdown-menu">
-          <li><a href="#">My Profile</a></li>
-          <li><a href="#">Friend Requests</a></li>
-          <li><a href="#">Account Settings</a></li>
-          <li><a href="#">Support</a></li>
-          <li><a href="#">Log Out</a></li>
-        </ul>
+       sidebar:
+        title: "Sample Title"
+        nav: sidebar-sample
      - text: "UAV Autopilot and Image Processing"
        href: notesUAV.html
-       - text: "Project 1: Chat Room System" 
-          href: notesNPChat.html
-        - text: "Project 2: Reliable UDP File Transfer"
-          href: notesNPUDP.html
-        - text: "Project 3: Non-Blocking File Transfer"
-          href: notesNPNB.html
      - text: "AI in National Palace Museum"
        href: notesAINPM.html
      - text: "Design and Implementation of IOT Applications"
@@ -37,6 +26,25 @@ navbar:
  right:
   - icon: fa-facebook-f
     href: https://www.facebook.com/show098822
+
+sidebar-sample:
+  - title: "Parent Page A"
+    children:
+      - title: "Child Page A1"
+        url: /
+      - title: "Child Page A2"
+        url: /
+      - title: "Child Page A3"
+        url: /
+      - title: "Child Page A4"
+        url: /
+- text: "Project 1: Chat Room System" 
+          href: notesNPChat.html
+        - text: "Project 2: Reliable UDP File Transfer"
+          href: notesNPUDP.html
+        - text: "Project 3: Non-Blocking File Transfer"
+          href: notesNPNB.html
+
 
 output:
  html_document:
