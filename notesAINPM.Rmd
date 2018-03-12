@@ -4,6 +4,7 @@ output:
  html_document:
    toc: true
    toc_depth: 5
+   toc_size: 14px
    toc_float:
     collapsed: false
     smooth_scroll: false
