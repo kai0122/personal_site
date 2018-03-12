@@ -88,6 +88,7 @@ When a client connects to server, the server sends hello message to the client, 
 ```console
 [Server] Someone is coming!
 ```
+
 ##### Offline Message
 When a client disconnect to server, the server sends offline message to all the other online clients to tell them someone has been offline.
 
