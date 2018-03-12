@@ -29,5 +29,5 @@ navbar:
 
 output:
  html_document:
-  theme: Minty
+  theme: cosmo
   css: style.css
