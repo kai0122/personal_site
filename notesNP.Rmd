@@ -244,7 +244,8 @@ For messages received from stdin, client can only process the exit command, othe
   
   
 ### My Code Explaination
-#### Libraries to Include
+#### Server Code
+##### Libraries to Include
 ```cpp
 #include <iostream>
 #include <cstdlib>
@@ -273,7 +274,7 @@ using namespace std;
 int TOTALCLI = 0;
 ```
 
-#### Other Data Structures
+##### Other Data Structures
 * I create a structure **user** for every connected client, containing name, port, address and whether the client left (die).
  
 ```cpp
@@ -298,7 +299,7 @@ int client[FD_SETSIZE];
 fd_set readSet, allSet;	// for select()
 ```
 
-#### Functions
+##### Functions
 * skipblank(): For every unwanted blanks, we create a function to erase them.
 
 ```cpp
@@ -653,3 +654,116 @@ void dealString(string msg){
 }  
 ```
 
+##### Main Function
+
+```cpp
+int main(int argc, char ** argv)
+{	
+	if(argc < 2){
+		cerr << "command error...\n";
+		exit(0);
+	}
+
+	int maxi, maxfd, listenfd, connectfd, sockfd;
+	int nready;
+
+
+	socklen_t clientLen;
+
+	struct sockaddr_in cliaddr, seraddr;
+
+
+	listenfd = socket(AF_INET, SOCK_STREAM, 0);
+	bzero(&seraddr, sizeof(seraddr));
+	seraddr.sin_family = AF_INET;
+	seraddr.sin_addr.s_addr = htonl(INADDR_ANY);
+	seraddr.sin_port = htons(atoi(argv[1]));
+
+	bind(listenfd, (sockaddr *) &seraddr, sizeof(seraddr));
+	listen(listenfd, LISTENQ);
+
+	maxfd = listenfd;
+	maxi = -1;
+	for(int i=0;i<FD_SETSIZE;i++)
+		client[i] = -1;	// initialize with no one in client array
+	FD_ZERO(&allSet);	// initialize
+	FD_SET(listenfd, &allSet);	//	listen to listenfd
+
+	while(1){
+		readSet = allSet;
+		nready = select(maxfd + 1, &readSet, NULL, NULL, NULL);
+
+		if(FD_ISSET(listenfd, &readSet)){
+			clientLen = sizeof(cliaddr);
+			connectfd = accept(listenfd, (sockaddr *) &cliaddr, &clientLen);
+
+			int i;
+			for(i=0;i<FD_SETSIZE;i++){
+				if(client[i] < 0){
+					//	client in
+					client[i] = connectfd;
+					cout << "client: " << client[i] << endl;
+					char temp[5];
+					sprintf(temp,"%4d",(int)cliaddr.sin_port);
+					string msg = string("[Server] Hello, anonymous! From: " + string(inet_ntoa(cliaddr.sin_addr)) + '/' + temp + '\n');
+					string msg2 = "[Server] Someone is coming!\n";
+
+					childarr[i] = user("anonymous", string(inet_ntoa(cliaddr.sin_addr)), temp);
+					
+					write(connectfd, msg.c_str(), msg.size());	//	send welcoming msg to new client
+					sendAll(msg2, i);
+
+					TOTALCLI++;
+					break;
+				}
+			}
+			if(i == FD_SETSIZE){
+				cout << "Too many client...\n";
+				exit(0);
+			}
+			
+			FD_SET(connectfd, &allSet);
+			if(connectfd > maxfd)
+				maxfd = connectfd;
+			if(maxi < i)
+				maxi = i;
+			if(--nready <= 0)
+				continue;
+		}
+
+		for(int i=0;i<=maxi;i++){
+			if((sockfd = client[i]) < 0)
+				continue;
+			if(FD_ISSET(sockfd, &readSet)){
+				int n;
+				char buffer[MAXLINE];
+				bzero(buffer, MAXLINE);
+				if((n = recv(sockfd, buffer, MAXLINE, 0)) > 0){
+					buffer[n] = 0;
+					string msg = childarr[i].addr + " " + childarr[i].port + "," + string(buffer);
+					
+					dealString(msg);
+				}
+				if(n == 0){
+					cout << "Client terminates...\n";
+					string msg = "[Server] " + childarr[i].name + " is offline.\n";
+					sendAll(msg, i);
+					close(sockfd);
+					TOTALCLI--;
+					FD_CLR(sockfd, &allSet);
+					client[i] = -1;
+				}
+				if(--nready <= 0)
+					break;	// no more readable descriptors
+			}
+		}
+
+
+	}
+
+
+	return 0;
+}
+```
+
+#### Client Code

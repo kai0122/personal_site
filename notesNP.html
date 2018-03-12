@@ -531,8 +531,10 @@ pre { /* Code block - determines code spacing between lines */
 </div>
 <div id="my-code-explaination" class="section level3">
 <h3>My Code Explaination</h3>
-<div id="libraries-to-include" class="section level4">
-<h4>Libraries to Include</h4>
+<div id="server-code" class="section level4">
+<h4>Server Code</h4>
+<div id="libraries-to-include" class="section level5">
+<h5>Libraries to Include</h5>
 <pre class="cpp"><code>#include &lt;iostream&gt;
 #include &lt;cstdlib&gt;
 #include &lt;cstdio&gt;
@@ -559,8 +561,8 @@ using namespace std;
 
 int TOTALCLI = 0;</code></pre>
 </div>
-<div id="other-data-structures" class="section level4">
-<h4>Other Data Structures</h4>
+<div id="other-data-structures" class="section level5">
+<h5>Other Data Structures</h5>
 <ul>
 <li>I create a structure <strong>user</strong> for every connected client, containing name, port, address and whether the client left (die).</li>
 </ul>
@@ -584,8 +586,8 @@ struct user childarr[FD_SETSIZE];
 int client[FD_SETSIZE]; 
 fd_set readSet, allSet; // for select()</code></pre>
 </div>
-<div id="functions" class="section level4">
-<h4>Functions</h4>
+<div id="functions" class="section level5">
+<h5>Functions</h5>
 <ul>
 <li>skipblank(): For every unwanted blanks, we create a function to erase them.</li>
 </ul>
@@ -928,6 +930,120 @@ void skipblank(string &amp;str){
         }
 
 }  </code></pre>
+</div>
+<div id="main-function" class="section level5">
+<h5>Main Function</h5>
+<pre class="cpp"><code>int main(int argc, char ** argv)
+{   
+    if(argc &lt; 2){
+        cerr &lt;&lt; &quot;command error...\n&quot;;
+        exit(0);
+    }
+
+    int maxi, maxfd, listenfd, connectfd, sockfd;
+    int nready;
+
+
+    socklen_t clientLen;
+
+    struct sockaddr_in cliaddr, seraddr;
+
+
+    listenfd = socket(AF_INET, SOCK_STREAM, 0);
+    bzero(&amp;seraddr, sizeof(seraddr));
+    seraddr.sin_family = AF_INET;
+    seraddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    seraddr.sin_port = htons(atoi(argv[1]));
+
+    bind(listenfd, (sockaddr *) &amp;seraddr, sizeof(seraddr));
+    listen(listenfd, LISTENQ);
+
+    maxfd = listenfd;
+    maxi = -1;
+    for(int i=0;i&lt;FD_SETSIZE;i++)
+        client[i] = -1; // initialize with no one in client array
+    FD_ZERO(&amp;allSet);   // initialize
+    FD_SET(listenfd, &amp;allSet);  //  listen to listenfd
+
+    while(1){
+        readSet = allSet;
+        nready = select(maxfd + 1, &amp;readSet, NULL, NULL, NULL);
+
+        if(FD_ISSET(listenfd, &amp;readSet)){
+            clientLen = sizeof(cliaddr);
+            connectfd = accept(listenfd, (sockaddr *) &amp;cliaddr, &amp;clientLen);
+
+            int i;
+            for(i=0;i&lt;FD_SETSIZE;i++){
+                if(client[i] &lt; 0){
+                    //  client in
+                    client[i] = connectfd;
+                    cout &lt;&lt; &quot;client: &quot; &lt;&lt; client[i] &lt;&lt; endl;
+                    char temp[5];
+                    sprintf(temp,&quot;%4d&quot;,(int)cliaddr.sin_port);
+                    string msg = string(&quot;[Server] Hello, anonymous! From: &quot; + string(inet_ntoa(cliaddr.sin_addr)) + &#39;/&#39; + temp + &#39;\n&#39;);
+                    string msg2 = &quot;[Server] Someone is coming!\n&quot;;
+
+                    childarr[i] = user(&quot;anonymous&quot;, string(inet_ntoa(cliaddr.sin_addr)), temp);
+                    
+                    write(connectfd, msg.c_str(), msg.size());  //  send welcoming msg to new client
+                    sendAll(msg2, i);
+
+                    TOTALCLI++;
+                    break;
+                }
+            }
+            if(i == FD_SETSIZE){
+                cout &lt;&lt; &quot;Too many client...\n&quot;;
+                exit(0);
+            }
+            
+            FD_SET(connectfd, &amp;allSet);
+            if(connectfd &gt; maxfd)
+                maxfd = connectfd;
+            if(maxi &lt; i)
+                maxi = i;
+            if(--nready &lt;= 0)
+                continue;
+        }
+
+        for(int i=0;i&lt;=maxi;i++){
+            if((sockfd = client[i]) &lt; 0)
+                continue;
+            if(FD_ISSET(sockfd, &amp;readSet)){
+                int n;
+                char buffer[MAXLINE];
+                bzero(buffer, MAXLINE);
+                if((n = recv(sockfd, buffer, MAXLINE, 0)) &gt; 0){
+                    buffer[n] = 0;
+                    string msg = childarr[i].addr + &quot; &quot; + childarr[i].port + &quot;,&quot; + string(buffer);
+                    
+                    dealString(msg);
+                }
+                if(n == 0){
+                    cout &lt;&lt; &quot;Client terminates...\n&quot;;
+                    string msg = &quot;[Server] &quot; + childarr[i].name + &quot; is offline.\n&quot;;
+                    sendAll(msg, i);
+                    close(sockfd);
+                    TOTALCLI--;
+                    FD_CLR(sockfd, &amp;allSet);
+                    client[i] = -1;
+                }
+                if(--nready &lt;= 0)
+                    break;  // no more readable descriptors
+            }
+        }
+
+
+    }
+
+
+    return 0;
+}</code></pre>
+</div>
+</div>
+<div id="client-code" class="section level4">
+<h4>Client Code</h4>
 </div>
 </div>
 </div>
