@@ -10,7 +10,7 @@ navbar:
      - text: "Intro. to Machine Learning"
        href: notesML.html
      - text: "Intro. to Network Programming"
-       submenu:
+       menu:
         - text: "Project 1: Chat Room System" 
           href: notesNPChat.html
         - text: "Project 2: Reliable UDP File Transfer"
