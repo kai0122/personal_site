@@ -584,6 +584,351 @@ struct user childarr[FD_SETSIZE];
 int client[FD_SETSIZE]; 
 fd_set readSet, allSet; // for select()</code></pre>
 </div>
+<div id="functions" class="section level4">
+<h4>Functions</h4>
+<ul>
+<li>skipblank(): For every unwanted blanks, we create a function to erase them.</li>
+</ul>
+<pre class="console"><code>void skipblank(char *str){
+    int i = 0;
+    while(str[i++] == &#39; &#39;);
+    i--;
+    int j = 0;
+    while((j + i) &lt; strlen(str)){
+        str[j] = str[j + i];
+        j++;
+    }
+    str[j] = &#39;\0&#39;;
+}
+
+void skipblank(string &amp;str){
+    int i = 0;
+    while(str[i++] == &#39; &#39;);
+    i--;
+    int j = 0;
+    while((j + i) &lt; str.size()){
+        str[j] = str[j + i];
+        j++;
+    }
+    str[j] = &#39;\0&#39;;
+}</code></pre>
+<ul>
+<li>tabToBlank(): For every unwanted tabs, we create a function to erase them.</li>
+</ul>
+<pre class="console"><code>void tabToBlank(char *str){
+    for(int i=0;i&lt;strlen(str);i++){
+        if(str[i] == &#39;\t&#39;)
+            str[i] = &#39; &#39;;
+    }
+}</code></pre>
+<ul>
+<li>getIndex(): We get the index of the client from our user structure array, by comparing ports and addresses.</li>
+</ul>
+<pre class="console"><code>int getIndex(const string msg, struct user *arr){
+    char addr[20];
+    char port[20];
+    int i = 0;
+    while(msg[i]!=&#39; &#39;){
+        addr[i] = msg[i];
+        i++;
+    }
+    i++;    // so i will not be &#39; &#39;
+    int j = 0;
+    while(msg[j + i]!=&#39;,&#39;){
+        port[j] = msg[j + i];
+        j++;
+    }
+    addr[i-1] = &#39;\0&#39;;
+    port[j] = &#39;\0&#39;;
+    for(i=0;i&lt;FD_SETSIZE;i++){
+        if(arr[i].addr == string(addr) &amp;&amp; arr[i].port == string(port))
+            return i;
+    }
+    return -1;
+}</code></pre>
+<ul>
+<li>changeName(): If the client comes before, we assign it to the previous index in <strong>user</strong> structure and clear the current index content.</li>
+</ul>
+<pre class="console"><code>int changeName(int index, string name){
+    int j=0;
+    string temp = &quot;&quot;;
+    while(name[j] != &#39; &#39;){
+        temp += name[j++];
+        if(j == name.size())
+            break;  // end
+    }
+    cout &lt;&lt; j &lt;&lt; &quot;, &quot; &lt;&lt; name.size();
+    if(j &lt; name.size()){
+        // get &#39; &#39;
+        while(name[j++] == &#39; &#39;);
+        cout &lt;&lt; j &lt;&lt; &quot;, &quot; &lt;&lt; name.size();
+        if(j == name.size() + 1){
+            cout &lt;&lt; &quot;.............\n&quot;;
+            cout &lt;&lt; name &lt;&lt; endl;
+            name = temp;
+            cout &lt;&lt; name &lt;&lt; endl;
+        }
+        else
+            return 3;   //  name not alphabets
+    }
+
+    cout &lt;&lt; name.size() &lt;&lt; &quot;,, &quot; &lt;&lt; name &lt;&lt; endl;
+    if(name.size() &gt; 12 || name.size() &lt; 2)
+        return 0;   //  name size error
+    if(name == &quot;anonymous\0&quot;)
+        return 1;   //  name = anonymous
+    for(int i=0;i&lt;FD_SETSIZE;i++){
+        if(name == childarr[i].name &amp;&amp; client[i] &gt; 0)
+            return 2;   //  name already exist
+    }
+    for(int i=0;i&lt;name.size();i++){
+        if(!((name[i] &lt;= &#39;z&#39; &amp;&amp; name[i] &gt;= &#39;a&#39;) || (name[i] &lt;= &#39;Z&#39; &amp;&amp; name[i] &gt;= &#39;A&#39;)))
+            return 3;   //  name not alphabets
+    }
+
+    //  name permitted
+    childarr[index].name = name;
+    return 4;
+}</code></pre>
+<ul>
+<li>sendAll(): Broadcast a message to every clients.</li>
+</ul>
+<pre class="console"><code>void sendAll(string msg, int except){
+    for(int i=0;i&lt;FD_SETSIZE;i++){
+        if(childarr[i].die == 0 &amp;&amp; i != except)
+            write(client[i], msg.c_str(), msg.size());
+    }
+}</code></pre>
+<ul>
+<li>dealString(): Using previous funtions to deal with every messages.</li>
+</ul>
+<pre class="console"><code>void dealString(string msg){
+    int index = getIndex(msg, childarr);
+    char recvline[msg.size()];
+    int i=0;
+    while(msg[i++]!=&#39;,&#39;);
+    //  ignore addr and port
+    int j;
+    for(j=i;j&lt;msg.size();j++)
+        recvline[j-i] = msg[j];
+    recvline[j-i] = &#39;\0&#39;;
+
+
+        tabToBlank(recvline);
+        skipblank(recvline);
+        cout &lt;&lt; string(recvline) &lt;&lt; endl;
+        
+        if(recvline[string(recvline).size()-1] == &#39;\n&#39; &amp;&amp; recvline[string(recvline).size()-2] == &#39;\r&#39;)
+            recvline[string(recvline).size()-2] = &#39;\0&#39;;
+        
+        if(recvline[0] == &#39;\x03&#39;){
+            cout &lt;&lt; &quot;Client terminates...\n&quot;;
+            string msg = &quot;[Server] &quot; + childarr[index].name + &quot; is offline.\n&quot;;
+            sendAll(msg, index);
+            close(client[index]);
+            client[index] = -1;
+            TOTALCLI--;
+            FD_CLR(client[index], &amp;allSet);
+        }
+
+
+        if(strlen(recvline) &lt; 2){
+            string msg = &quot;ERROR: Error command.&quot;;
+            write(client[index], msg.c_str(), msg.size());
+            return;
+        }
+        else{
+            char command[5];
+            for(int j=0;j&lt;4;j++)
+                command[j] = recvline[j];
+            command[4] = &#39;\0&#39;;
+            if(strcmp(command, &quot;exit\0&quot;) == 0 || strcmp(command, &quot;exit &quot;) == 0){
+                childarr[index].die = 1;    //  mark with die
+                
+                cout &lt;&lt; &quot;Client terminates...\n&quot;;
+                string msg = &quot;[Server] &quot; + childarr[index].name + &quot; is offline.\n&quot;;
+                sendAll(msg, index);
+                close(client[index]);
+                client[index] = -1;
+                TOTALCLI--;
+                FD_CLR(client[index], &amp;allSet);
+                return;
+            }
+        }
+
+        char temp[5];
+        for(int i=0;i&lt;4;i++)
+            temp[i] = recvline[i];
+        temp[i] = &#39;\0&#39;;
+        if(strcmp(temp, &quot;who \0&quot;) == 0 || strcmp(recvline, &quot;who\0&quot;) == 0 ){
+        //  list all online users
+            string msg = &quot;&quot;;
+            for(int j=0;j&lt;FD_SETSIZE;j++){
+                if(client[j] &gt; 0){
+                    if(index != j){
+                        msg += &quot;[Server] &quot; + childarr[j].name + &quot; &quot; + childarr[j].addr + &quot;/&quot; + childarr[j].port + &quot;\n&quot;;
+                    }
+                    else{
+                        msg += &quot;[Server] &quot; + childarr[j].name + &quot; &quot; + childarr[j].addr + &quot;/&quot; + childarr[j].port + &quot; -&gt;me\n&quot;;
+                    }
+                }
+            }
+            msg += &quot;\0&quot;;
+            write(client[index], msg.c_str(), msg.size());
+        }
+        else{
+            
+            //  *********************************************
+            char command[6];
+            for(int j=0;j&lt;5;j++)
+                command[j] = recvline[j];
+            command[5] = &#39;\0&#39;;
+            //  *********************************************
+            if(strcmp(command, &quot;name \0&quot;) == 0){
+                string oldName = childarr[index].name;
+                for(i=0;i&lt;string(recvline).size()-5;i++)
+                    recvline[i] = recvline[i + 5];
+                recvline[i] = &#39;\0&#39;;
+
+                skipblank(recvline);
+
+                int status = changeName(index, recvline);
+                switch(status){
+                    case 0:{
+                        string msg = &quot;[Server] ERROR: Username can only consists of 2~12 English letters.\n&quot;;
+                        write(client[index], msg.c_str(), msg.size());
+                        break;
+                    }
+                    case 1:{
+                        string msg = &quot;[Server] ERROR: Username cannot be anonymous.\n&quot;;
+                        write(client[index], msg.c_str(), msg.size());
+                        break;
+                    }
+                    case 2:{
+                        string msg = &quot;[Server] ERROR: &quot; + string(recvline) + &quot; has been used by others.\n&quot;;
+                        write(client[index], msg.c_str(), msg.size());
+                        break;
+                    }
+                    case 3:{
+                        string msg = &quot;[Server] ERROR: Username can only consists of 2~12 English letters.\n&quot;;
+                        write(client[index], msg.c_str(), msg.size());
+                        break;
+                    }
+                    case 4:{
+                        for(int j=0;j&lt;FD_SETSIZE;j++){
+                            if(childarr[j].die == 0){
+                                if(j == index){
+                                    string msg = &quot;[Server] You&#39;re now known as &quot; + string(recvline) + &quot;.\n&quot;;
+                                    write(client[j], msg.c_str(), msg.size());
+                                }
+                                else{
+                                    string msg = &quot;[Server] &quot; + oldName + &quot; is now known as &quot; + string(recvline) + &quot;.\n&quot;;
+                                    write(client[j], msg.c_str(), msg.size());
+                                }   
+                            }
+                        }
+                        break;
+                    }
+                    default:{
+                        break;
+                    }
+                }
+            }
+            else if(strcmp(command, &quot;tell \0&quot;) == 0){
+                for(i=0;i&lt;string(recvline).size()-5;i++)
+                    recvline[i] = recvline[i + 5];
+                recvline[i] = &#39;\0&#39;;
+                string name = &quot;&quot;, msgToSend = &quot;&quot;;
+                
+
+                skipblank(recvline);
+
+                int i = 0;
+                while(recvline[i] != &#39; &#39; &amp;&amp; recvline[i] != &#39;\n&#39; &amp;&amp; recvline[i] != &#39;\0&#39;)
+                    name += recvline[i++];
+                i++;
+
+                while(i &lt; strlen(recvline))
+                    msgToSend += recvline[i++];
+                
+                if(msgToSend == &quot;&quot;){
+                    string msg = &quot;ERROR: Error command.\n&quot;;
+                    write(client[index], msg.c_str(), msg.size());
+                    return;
+                }
+
+                
+                skipblank(msgToSend);
+
+                int selfNameError = 0, error = 0, toWho;
+                string msg = &quot;&quot;;
+                if(childarr[index].name == &quot;anonymous&quot;){
+                    selfNameError = 1;
+                    error = 1;
+                    msg += &quot;[Server] ERROR: You are anonymous.&quot;;
+                }
+                if(name == &quot;anonymous&quot;){
+                    error = 1;
+                    if(selfNameError == 1)
+                        msg += &quot;\n&quot;;
+                    msg += &quot;[Server] ERROR: The client to which you sent is anonymous.&quot;;
+                }
+                else{
+                    int j;
+                    for(j=0;j&lt;FD_SETSIZE;j++){
+                        if(name == childarr[j].name &amp;&amp; client[j] &gt; 0)   //  name exist and still alive
+                            break;
+                    }
+                    
+                    if(j == FD_SETSIZE){
+                        error = 1;
+                        if(selfNameError == 1)  // have msg already
+                            msg += &quot;\n&quot;;
+                        msg += &quot;[Server] ERROR: The receiver doesn&#39;t exist.&quot;;   
+                    }
+                    else
+                        toWho = j;
+                }
+                if(error == 1){
+                    msg += &quot;\n&quot;;
+                    write(client[index], msg.c_str(), msg.size());
+                }
+                else{
+                    //  no error
+                    string msg = &quot;[Server] SUCCESS: Your message has been sent.\n&quot;;
+                    write(client[index], msg.c_str(), msg.size());
+                    msg = &quot;[Server] &quot; + childarr[index].name + &quot; tell you &quot; + msgToSend + &quot;\n&quot;;
+                    write(client[toWho], msg.c_str(), msg.size());
+                }
+            }
+            else if(strcmp(command, &quot;yell \0&quot;) == 0){
+                for(i=0;i&lt;string(recvline).size()-5;i++)
+                    recvline[i] = recvline[i + 5];
+                recvline[i] = &#39;\0&#39;;
+
+                skipblank(recvline);
+                if(strcmp(recvline, &quot;&quot;) == 0){
+                    string msg = &quot;ERROR: Error command.\n&quot;;
+                    write(client[index], msg.c_str(), msg.size());
+                    return;
+                }
+
+
+
+                string msg = &quot;[Server] &quot; + childarr[index].name + &quot; yell &quot; + recvline + &quot;\n&quot;;
+                for(int j=0;j&lt;FD_SETSIZE;j++){
+                    if(childarr[j].die == 0)
+                        write(client[j], msg.c_str(), msg.size());
+                }
+            }
+            else{
+                string msg = &quot;ERROR: Error command.\n&quot;;
+                write(client[index], msg.c_str(), msg.size());
+            }
+        }
+
+}  </code></pre>
+</div>
 </div>
 </div>
 
