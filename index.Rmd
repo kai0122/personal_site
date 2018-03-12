@@ -14,7 +14,7 @@ output:
 <!-- ![](kai.jpg) -->
 # About Me
 
-<img src="./kai.jpg" align="right" style="width: 300px; margin: 0px; "/>
+<img src="./kai.jpg" align="right" style="width: 300px; margin: 10px; "/>
 
 ### Education
  - BS in Dept. of Computer Science at National Chaio Tung University, Taiwan (Sep 2015 - Jun 2019)
