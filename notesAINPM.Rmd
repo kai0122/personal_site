@@ -4,7 +4,6 @@ output:
  html_document:
    toc: true
    toc_depth: 5
-   toc_size: 14px
    toc_float:
     collapsed: false
     smooth_scroll: false
@@ -55,7 +54,7 @@ pre { /* Code block - determines code spacing between lines */
  - 珍玩
   
 For Example:
-![](https://i.imgur.com/22aJPFK.jpg)
+![](https://i.imgur.com/22aJPFK.jpg =700x)
 **+**
 ![](https://i.imgur.com/nwjzwY2.jpg)
 **=**
