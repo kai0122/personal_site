@@ -40,6 +40,17 @@ code.r{ /* Code block */
 pre { /* Code block - determines code spacing between lines */
     font-size: 18px;
 }
+
+.thumbnail:hover {
+    position:relative;
+    top:-25px;
+    left:-35px;
+    width:500px;
+    height:auto;
+    display:block;
+    z-index:999;
+}
+
 </style>
 
 ## Open Data (3/12/2019)
@@ -54,7 +65,7 @@ pre { /* Code block - determines code spacing between lines */
  - 珍玩
   
 For Example:
-![](https://i.imgur.com/22aJPFK.jpg){ width=700px }
+![](https://i.imgur.com/22aJPFK.jpg)
 **+**
 ![](https://i.imgur.com/nwjzwY2.jpg)
 **=**
