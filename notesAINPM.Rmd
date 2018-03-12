@@ -12,41 +12,41 @@ output:
 <style type="text/css">
 
 body{ /* Normal  */
-      font-size: 13px;
+      font-size: 24px;
   }
 td {  /* Table  */
-  font-size: 9px;
+  font-size: 22px;
 }
 h1.title {
-  font-size: 38px;
+  font-size: 50px;
   color: DarkRed;
 }
 h1 { /* Header 1 */
-  font-size: 28px;
+  font-size: 40px;
   color: DarkBlue;
 }
 h2 { /* Header 2 */
-    font-size: 22px;
+    font-size: 35px;
   color: DarkBlue;
 }
 h3 { /* Header 3 */
-  font-size: 18px;
+  font-size: 30px;
   font-family: "Times New Roman", Times, serif;
   color: DarkBlue;
 }
 code.r{ /* Code block */
-    font-size: 12px;
+    font-size: 24px;
 }
 pre { /* Code block - determines code spacing between lines */
-    font-size: 14px;
+    font-size: 24px;
 }
 </style>
 
 ## Open Data (3/12/2019)
   
 ### Style Transfer: Google Deep Dream Generator
-Excercise 1: 尋-交大實景做Content + 故宮國寶做Styler
-140.113.73.215/calligraphy.php
+Excercise 1: 尋-交大實景做Content + 故宮國寶做Styler    
+140.113.73.215/calligraphy.php    
  - 做一新畫印在A3/A4上（下週秀出）
  - 陶瓷
  - 銅器
