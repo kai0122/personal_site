@@ -1,5 +1,64 @@
 ---
-title: "Learning Notes"
----
+title: "Intro. of Network Programming"
+output:
+ html_document:
+   toc: true
+   toc_depth: 5
+   toc_float:
+    collapsed: false
+    smooth_scroll: false
 
-Why I am awesome.
+---
+<style type="text/css">
+
+body{ /* Normal  */
+      font-size: 18px;
+  }
+td {  /* Table  */
+  
+}
+h1.title {
+  font-size: 40px;
+  color: DarkRed;
+}
+h1 { /* Header 1 */
+  font-size: 35px;
+  color: DarkBlue;
+}
+h2 { /* Header 2 */
+    font-size: 30px;
+  color: DarkBlue;
+}
+h3 { /* Header 3 */
+  font-size: 25px;
+  font-family: "Times New Roman", Times, serif;
+  color: DarkBlue;
+}
+code.r{ /* Code block */
+    font-size: 18px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 18px;
+}
+
+.thumbnail:hover {
+    position:relative;
+    width:1000px;
+    height:auto;
+    display:block;
+    z-index:999;
+}
+
+</style>
+
+## Project1: Chat Room System
+
+
+Hint: It is suggested that you use select() for constructing the client and server programs.
+  
+### Overview
+In this project, we need to write two programs, a client and a server, to build a chat room system.   
+
+ - Clients talk to one another via connecting to the server.
+ - The server accepts connections from clients and sends commands to clients.
+  
