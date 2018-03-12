@@ -10,7 +10,7 @@ navbar:
      - text: "Intro. to Machine Learning"
        href: notesML.html
      - text: "Intro. to Network Programming"
-       list:
+       menu:
         - text: "Project 1: Chat Room System" 
           href: notesNPChat.html
         - text: "Project 2: Reliable UDP File Transfer"
@@ -30,6 +30,11 @@ navbar:
  right:
   - icon: fa-facebook-f
     href: https://www.facebook.com/show098822
+
+pages:
+    - Home: index.md
+    - Learning notes:
+
 output:
  html_document:
   theme: flatly
