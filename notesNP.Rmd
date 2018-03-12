@@ -238,3 +238,57 @@ For messages received from stdin, client can only process the exit command, othe
 2. Client should send message received from stdin to server directly without modification.
 3. Server/Client should NOT crash or be hanged.
 4. Don’t use the port below 1024.
+
+### My Code Explaination
+#### Libraries to Include
+```cpp
+#include <iostream>
+#include <cstdlib>
+#include <cstdio>
+#include <stdlib.h>
+#include <string>
+#include <cstring>
+#include <string.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#include <vector>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <sys/wait.h>
+#include <cerrno>
+
+using namespace std;
+
+#define MAXLINE 1000
+#define LISTENQ 100
+#define BLANK ' ' || '\t'
+
+int TOTALCLI = 0;
+```
+
+#### Other Data Structures
+* I create a structure **user** for every connected client, containing name, port, address and whether the client left (die).
+```cpp
+struct user
+{
+	string name;
+	string addr;
+	string port;
+	int die;
+	user(string const& str, string a, string p):name(str){
+		addr = a;
+		port = p;
+		die = 0;
+	}
+	user()
+	{
+	}
+};
+
+struct user childarr[FD_SETSIZE];
+int client[FD_SETSIZE]; 
+fd_set readSet, allSet;	// for select()
+```

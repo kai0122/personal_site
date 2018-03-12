@@ -529,6 +529,44 @@ pre { /* Code block - determines code spacing between lines */
 </ol>
 </div>
 </div>
+<div id="my-code-explaination" class="section level3">
+<h3>My Code Explaination</h3>
+<div id="libraries-to-include" class="section level4">
+<h4>Libraries to Include</h4>
+<pre class="cpp"><code>#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cstdio&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string&gt;
+#include &lt;cstring&gt;
+#include &lt;string.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;vector&gt;
+#include &lt;sys/ipc.h&gt;
+#include &lt;sys/shm.h&gt;
+#include &lt;sys/wait.h&gt;
+#include &lt;cerrno&gt;
+
+using namespace std;
+
+#define MAXLINE 1000
+#define LISTENQ 100
+#define BLANK &#39; &#39; || &#39;\t&#39;
+
+int TOTALCLI = 0;</code></pre>
+</div>
+<div id="other-data-structures" class="section level4">
+<h4>Other Data Structures</h4>
+<ul>
+<li>I create a structure <strong>user</strong> for every connected client, containing name, port, address and whether the client left (die). ```cpp struct user { string name; string addr; string port; int die; user(string const&amp; str, string a, string p):name(str){ addr = a; port = p; die = 0; } user() { } };</li>
+</ul>
+<p>struct user childarr[FD_SETSIZE]; int client[FD_SETSIZE]; fd_set readSet, allSet; // for select() ```</p>
+</div>
+</div>
 </div>
 
 
