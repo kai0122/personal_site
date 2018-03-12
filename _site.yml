@@ -10,6 +10,7 @@ navbar:
      - text: "Intro. to Machine Learning"
        href: notesML.html
      - text: "Intro. to Network Programming"
+       href: notesNPNB.html
        sidebar:
         title: "Sample Title"
         nav: sidebar-sample
