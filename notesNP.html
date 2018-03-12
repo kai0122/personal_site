@@ -363,6 +363,14 @@ h3 { /* Header 3 */
   font-family: "Times New Roman", Times, serif;
   color: DarkBlue;
 }
+h4 {
+    font-size: 23px;
+    color: Blue;
+}
+h5 {
+    font-size: 20px;
+    color: DarkGreen;
+}
 code.r{ /* Code block */
     font-size: 18px;
 }
@@ -402,11 +410,10 @@ pre { /* Code block - determines code spacing between lines */
 <ul>
 <li>Send Format:</li>
 <li><p>To the new connected client</p>
-<pre class="console"><code>[Server] Hello, anonymous! From: &lt;Client IP&gt;/&lt;Client Port&gt;
-To existing client
-[Server] Someone is coming!</code></pre></li>
-<li><p>Offline Message</p>
-<pre class="console"><code>When a client disconnect to server, the server sends offline message to all the other online clients to tell them someone has been offline.</code></pre></li>
+<pre class="console"><code>[Server] Hello, anonymous! From: &lt;Client IP&gt;/&lt;Client Port&gt;</code></pre></li>
+<li><p>To existing client</p>
+<pre class="console"><code>[Server] Someone is coming!</code></pre></li>
+<li><p>Offline Message When a client disconnect to server, the server sends offline message to all the other online clients to tell them someone has been offline.</p></li>
 </ul>
 <p>Send Format: <a href="#server">Server</a> <USERNAME> is offline. Who Message A client can type command below to list all online users. Server will reply to sender a list of online users and tag the sender client. For N users, server will send N lines. Each of them shows details of a user.</p>
 <p>Recv Format: who Send Format: <a href="#server">Server</a> <USERNAME> <CLIENT IP>/<CLIENT PORT> <a href="#server">Server</a> <SENDER USERNAME> <CLIENT IP>/<CLIENT PORT> -&gt;me Change Username Message A client can type command below to change his/her username.</p>

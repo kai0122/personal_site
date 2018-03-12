@@ -34,6 +34,14 @@ h3 { /* Header 3 */
   font-family: "Times New Roman", Times, serif;
   color: DarkBlue;
 }
+h4 {
+	font-size: 23px;
+	color: Blue;
+}
+h5 {
+	font-size: 20px;
+	color: DarkGreen;
+}
 code.r{ /* Code block */
     font-size: 18px;
 }
@@ -72,16 +80,17 @@ Messages which is transmitted between clients and the server are as following:
 When a client connects to server, the server sends hello message to the client, and broadcasts this user’s coming to other clients.
 
  - Send Format:
-  - To the new connected client
+  * To the new connected client
 ```console
 [Server] Hello, anonymous! From: <Client IP>/<Client Port>
-To existing client
+```
+  * To existing client
+```console
 [Server] Someone is coming!
 ```
-  - Offline Message
-```console
-When a client disconnect to server, the server sends offline message to all the other online clients to tell them someone has been offline.
-```
+  * Offline Message
+  When a client disconnect to server, the server sends offline message to all the other online clients to tell them someone has been offline.
+
 
    
 
