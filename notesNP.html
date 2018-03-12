@@ -519,6 +519,15 @@ pre { /* Code block - determines code spacing between lines */
 <li><p>Note: For messages received from stdin, client can only process the exit command, others should be sent to the server without modification. All messages received from stdin (except exit command) should be sent to server directly.</p></li>
 </ul>
 </div>
+<div id="other-notes" class="section level4">
+<h4>Other Notes</h4>
+<ol style="list-style-type: decimal">
+<li>All messages transmitted between a server and a client should end with a newline (‘’).</li>
+<li>Client should send message received from stdin to server directly without modification.</li>
+<li>Server/Client should NOT crash or be hanged.</li>
+<li>Don’t use the port below 1024.</li>
+</ol>
+</div>
 </div>
 </div>
 
