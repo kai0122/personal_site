@@ -29,5 +29,5 @@ navbar:
 
 output:
  html_document:
-  theme: cosmo
+  theme: Darkly
   css: style.css
