@@ -10,7 +10,8 @@ output:
     
 ---
  
-<script src="https://d3js.org/d3.v4.min.js"></script>
+<iframe scrolling="no" frameborder="no" clocktype="html5" style="overflow:hidden;border:0;margin:0;padding:0;width:356px;height:180px;"src="http://www.clocklink.com/html5embed.php?clock=042&timezone=CCT&color=red&size=356&Title=&Message=&Target=&From=2018,1,1,0,0,0&Color=red"></iframe>
+
  
 ![](kai.jpg)
 
