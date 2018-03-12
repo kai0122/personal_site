@@ -506,6 +506,19 @@ pre { /* Code block - determines code spacing between lines */
 </ul>
 </div>
 </div>
+<div id="client" class="section level4">
+<h4>Client</h4>
+<p>A client cannot connect to more than one server at the same time. Users should give server IP_ADDRESS/DOMAIN_NAME and Port as the arguments of client program. If the number of arguments is not two, the client program should terminate.</p>
+<pre class="console"><code>./client &lt;SERVER_IP or DOMAIN_NAME&gt; &lt;SERVER_PORT&gt;</code></pre>
+<ul>
+<li><p>Exit Command User can type command below to terminate the process at any time.</p></li>
+<li><p>Command Format:</p>
+<pre class="console"><code>exit</code></pre></li>
+<li><p>Note: This command should be process by the client locally. That is, the client should close the connection and terminate the process while it receives the exit command.</p></li>
+<li><p>Receive &amp; Display Format Client keeps receiving messages from stdin and sends messages to the server directly. While receiving a message from the server, the client should send to the server without modification.</p></li>
+<li><p>Note: For messages received from stdin, client can only process the exit command, others should be sent to the server without modification. All messages received from stdin (except exit command) should be sent to server directly.</p></li>
+</ul>
+</div>
 </div>
 </div>
 

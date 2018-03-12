@@ -208,3 +208,29 @@ When a server receives an error command, it should send an error message back to
 ```console
 [Server] ERROR: Error command.
 ```
+
+#### Client
+A client cannot connect to more than one server at the same time. Users should give server IP_ADDRESS/DOMAIN_NAME and Port as the arguments of client program. If the number of arguments is not two, the client program should terminate.
+
+```console
+./client <SERVER_IP or DOMAIN_NAME> <SERVER_PORT>
+```
+
+* Exit Command
+User can type command below to terminate the process at any time.
+
+* Command Format:
+```console
+exit
+```
+
+* Note:
+This command should be process by the client locally. That is, the client should close the connection and terminate the process while it receives the exit command.
+
+* Receive & Display Format
+Client keeps receiving messages from stdin and sends messages to the server directly. While receiving a message from the server, the client should send to the server without modification.
+
+* Note:
+For messages received from stdin, client can only process the exit command, others should be sent to the server without modification. All messages received from stdin (except exit command) should be sent to server directly.
+
+
