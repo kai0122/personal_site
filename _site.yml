@@ -38,12 +38,7 @@ sidebar-sample:
         url: /
       - title: "Child Page A4"
         url: /
-- text: "Project 1: Chat Room System" 
-          href: notesNPChat.html
-        - text: "Project 2: Reliable UDP File Transfer"
-          href: notesNPUDP.html
-        - text: "Project 3: Non-Blocking File Transfer"
-          href: notesNPNB.html
+        
 
 
 output:
