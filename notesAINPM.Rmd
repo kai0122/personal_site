@@ -14,17 +14,17 @@ output:
 
 ## Style Transfer: Google Deep Dream Generator
 
- ### Excercise 1: 尋-交大實景做Content + 故宮國寶做Styler
-  做一新畫印在A3/A4上（下週秀出）
-  - 陶瓷
-  - 銅器
-  - 書法
-  - 繪畫
-  - 珍玩
-  #### 140.113.73.215/calligraphy.php
-  For Example:
-  ![](https://i.imgur.com/22aJPFK.jpg)
-  **+**
-  ![](https://i.imgur.com/nwjzwY2.jpg)
-  **=**
-  ![](https://i.imgur.com/uigps19.jpg)
+### Excercise 1: 尋-交大實景做Content + 故宮國寶做Styler
+做一新畫印在A3/A4上（下週秀出）
+ - 陶瓷
+ - 銅器
+ - 書法
+ - 繪畫
+ - 珍玩
+ - 140.113.73.215/calligraphy.php
+ For Example:
+ ![](https://i.imgur.com/22aJPFK.jpg)
+ **+**
+ ![](https://i.imgur.com/nwjzwY2.jpg)
+ **=**
+ ![](https://i.imgur.com/uigps19.jpg)
