@@ -3,7 +3,7 @@ title: "Intro. of Network Programming"
 output:
  html_document:
    toc: true
-   toc_depth: 5
+   toc_depth: 4
    toc_float:
     collapsed: false
     smooth_scroll: false
