@@ -63,8 +63,8 @@ pre { /* Code block - determines code spacing between lines */
  - 珍玩
   
 For Example:
-<img src="https://i.imgur.com/22aJPFK.jpg" class="thumbnail" width="700" /> 
+<img src="https://i.imgur.com/22aJPFK.jpg" class="thumbnail" style="width: 700px;" /> 
 **+**
-<img src="https://i.imgur.com/nwjzwY2.jpg" class="thumbnail" width="700" />
+<img src="https://i.imgur.com/nwjzwY2.jpg" class="thumbnail" style="width: 700px;" />
 **=**
-<img src="https://i.imgur.com/uigps19.jpg" class="thumbnail" width="700" />
+<img src="https://i.imgur.com/uigps19.jpg" class="thumbnail" style="width: 700px;" />
