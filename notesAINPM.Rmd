@@ -54,7 +54,7 @@ pre { /* Code block - determines code spacing between lines */
  - 珍玩
   
 For Example:
-![](https://i.imgur.com/22aJPFK.jpg =700x)
+![](https://i.imgur.com/22aJPFK.jpg){ width: 700px; }
 **+**
 ![](https://i.imgur.com/nwjzwY2.jpg)
 **=**
