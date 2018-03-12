@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Intro. of Network Programming</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Kai's Blog</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Learning Notes
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="notesML.html">Intro. to Machine Learning</a>
+    </li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+        Intro. to Network Programming
+         
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="notesNPChat.html">Project 1: Chat Room System</a>
+        </li>
+        <li>
+          <a href="notesNPUDP.html">Project 2: Reliable UDP File Transfer</a>
+        </li>
+        <li>
+          <a href="notesNPNB.html">Project 3: Non-Blocking File Transfer</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="notesUAV.html">UAV Autopilot and Image Processing</a>
+    </li>
+    <li>
+      <a href="notesAINPM.html">AI in National Palace Museum</a>
+    </li>
+    <li>
+      <a href="notesIOT.html">Design and Implementation of IOT Applications</a>
+    </li>
+    <li>
+      <a href="notesSFC.html">Smart Friendly Cities: Design and Practice</a>
+    </li>
+    <li>
+      <a href="notesCA.html">Computer Animation and Special Effects</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://www.facebook.com/show098822">
+    <span class="fa fa-facebook-f"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Intro. of Network Programming</h1>
+
+</div>
+
+
+<style type="text/css">
+
+body{ /* Normal  */
+      font-size: 18px;
+  }
+td {  /* Table  */
+  
+}
+h1.title {
+  font-size: 40px;
+  color: DarkRed;
+}
+h1 { /* Header 1 */
+  font-size: 35px;
+  color: DarkBlue;
+}
+h2 { /* Header 2 */
+    font-size: 30px;
+  color: DarkBlue;
+}
+h3 { /* Header 3 */
+  font-size: 25px;
+  font-family: "Times New Roman", Times, serif;
+  color: DarkBlue;
+}
+h4 {
+    font-size: 23px;
+    color: Blue;
+}
+h5 {
+    font-size: 20px;
+    color: DarkGreen;
+}
+code.r{ /* Code block */
+    font-size: 13px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 13px;
+}
+
+.thumbnail:hover {
+    position:relative;
+    width:1000px;
+    height:auto;
+    display:block;
+    z-index:999;
+}
+
+</style>
+<div id="project1-chat-room-system" class="section level2">
+<h2>Project1: Chat Room System</h2>
+<p>Hint: It is suggested that you use <strong>select()</strong> for constructing the client and server programs.</p>
+<div id="overview" class="section level3">
+<h3>Overview</h3>
+<p>In this project, we need to write two programs, a client and a server, to build a chat room system.</p>
+<ul>
+<li>Clients talk to one another via connecting to the server.</li>
+<li>The server accepts connections from clients and sends commands to clients.</li>
+</ul>
+</div>
+<div id="specification" class="section level3">
+<h3>Specification</h3>
+<div id="server" class="section level4">
+<h4>Server</h4>
+<p>A server can serve multiple clients simultaneously. After a connection is built, server will send a hello message to the client, and give the client a username ‘anonymous’. Clients can send different commands to server.</p>
+<p>Messages which is transmitted between clients and the server are as following:</p>
+<div id="hello-message" class="section level5">
+<h5>Hello Message</h5>
+<p>When a client connects to server, the server sends hello message to the client, and broadcasts this user’s coming to other clients.</p>
+<ul>
+<li>Send Format:
+<ul>
+<li><p>To the new connected client</p>
+<pre class="console"><code>[Server] Hello, anonymous! From: &lt;Client IP&gt;/&lt;Client Port&gt;</code></pre></li>
+<li><p>To existing client</p>
+<pre class="console"><code>[Server] Someone is coming!</code></pre></li>
+</ul></li>
+</ul>
+</div>
+<div id="offline-message" class="section level5">
+<h5>Offline Message</h5>
+<p>When a client disconnect to server, the server sends offline message to all the other online clients to tell them someone has been offline.</p>
+<ul>
+<li><p>Send Format:</p>
+<pre class="console"><code>[Server] &lt;USERNAME&gt; is offline.</code></pre></li>
+</ul>
+</div>
+<div id="who-message" class="section level5">
+<h5>Who Message</h5>
+<p>A client can type command below to list all online users. Server will reply to sender a list of online users and tag the sender client. For N users, server will send N lines. Each of them shows details of a user.</p>
+<ul>
+<li><p>Recv Format:</p>
+<pre class="console"><code>who</code></pre></li>
+<li><p>Send Format:</p>
+<pre class="console"><code>[Server] &lt;USERNAME&gt; &lt;CLIENT IP&gt;/&lt;CLIENT PORT&gt;
+[Server] &lt;SENDER USERNAME&gt; &lt;CLIENT IP&gt;/&lt;CLIENT PORT&gt; -&gt;me</code></pre></li>
+</ul>
+</div>
+<div id="change-username-message" class="section level5">
+<h5>Change Username Message</h5>
+<p>A client can type command below to change his/her username.</p>
+<p>Server has to verify if the new name is valid which means the input name is: 1. not anonymous, 2. unique, and 3. 2~12 English letters. It will reject user’s request if this name cannot fit the rule.</p>
+<ul>
+<li><p>Recv Format</p>
+<pre class="console"><code>name &lt;NEW USERNAME&gt;</code></pre></li>
+<li>Send Format:
+<ul>
+<li><p>If the new name is anonymous.</p>
+<pre class="console"><code>[Server] ERROR: Username cannot be anonymous.</code></pre></li>
+<li><p>If the new name is not unique.</p>
+<pre class="console"><code>[Server] ERROR: &lt;NEW USERNAME&gt; has been used by others.</code></pre></li>
+<li><p>If the new name does not consist of 2~12 English letters.</p>
+<pre class="console"><code>[Server] ERROR: Username can only consists of 2~12 English letters.</code></pre>
+<p>Server will reply messages to all users once a user changes his/her name.</p></li>
+</ul></li>
+<li>Send Format:
+<ul>
+<li><p>To user which changed his/her name</p>
+<pre class="console"><code>[Server] You&#39;re now known as &lt;NEW USERNAME&gt;.</code></pre></li>
+<li><p>To other users</p>
+<pre class="console"><code>[Server] &lt;OLD USERNAME&gt; is now known as &lt;NEW USERNAME&gt;.</code></pre></li>
+</ul></li>
+<li><p>Note: A user can be renamed as itself, that is, when “userA” wants to rename as “userA”, server should not return error message.</p></li>
+</ul>
+</div>
+<div id="private-message" class="section level5">
+<h5>Private Message</h5>
+<p>A client can send a private message to a specific client. Server will send an error message back to the sender if either the sender’s name or the receiver’s name is anonymous. Otherwise, the server sends the private message to the specific client and sends back a notification to the sender.</p>
+<ul>
+<li><p>Recv Format:</p>
+<pre class="console"><code>tell &lt;USERNAME&gt; &lt;MESSAGE&gt;</code></pre></li>
+<li>Send Format (failed):
+<ul>
+<li><p>If the sender’s name is anonymous</p>
+<pre class="console"><code>[Server] ERROR: You are anonymous.</code></pre></li>
+<li><p>If the receiver’s name is anonymous</p>
+<pre class="console"><code>[Server] ERROR: The client to which you sent is anonymous.</code></pre></li>
+<li><p>If the receiver doesn’t exist</p>
+<pre class="console"><code>[Server] ERROR: The receiver doesn&#39;t exist.</code></pre></li>
+</ul></li>
+<li>Send Format (successed):
+<ul>
+<li><p>To sender:</p>
+<pre class="console"><code>[Server] SUCCESS: Your message has been sent.</code></pre></li>
+<li><p>To receiver:</p>
+<pre class="console"><code>[Server] &lt;SENDER USERNAME&gt; tell you &lt;MESSAGE&gt;</code></pre></li>
+</ul></li>
+</ul>
+</div>
+<div id="broadcast-message" class="section level5">
+<h5>Broadcast Message</h5>
+<p>A client can send a broadcast message to all clients. While receiving the command from a user, server inserts <SENDER USERNAME> at the head of it and broadcasts to all users including the sender.</p>
+<ul>
+<li><p>Recv Format:</p>
+<pre class="console"><code>yell &lt;MESSAGE&gt;</code></pre></li>
+<li><p>Send Format:</p>
+<pre class="console"><code>[Server] &lt;SENDER USERNAME&gt; yell &lt;MESSAGE&gt;</code></pre></li>
+</ul>
+</div>
+<div id="error-command" class="section level5">
+<h5>Error Command</h5>
+<p>Commands which haven’t been declared above are error commands. When a server receives an error command, it should send an error message back to the sending client.</p>
+<ul>
+<li><p>Send Format:</p>
+<pre class="console"><code>[Server] ERROR: Error command.</code></pre></li>
+</ul>
+</div>
+</div>
+<div id="client" class="section level4">
+<h4>Client</h4>
+<p>A client cannot connect to more than one server at the same time. Users should give server IP_ADDRESS/DOMAIN_NAME and Port as the arguments of client program. If the number of arguments is not two, the client program should terminate.</p>
+<pre class="console"><code>./client &lt;SERVER_IP or DOMAIN_NAME&gt; &lt;SERVER_PORT&gt;</code></pre>
+<ul>
+<li><p>Exit Command User can type command below to terminate the process at any time.</p></li>
+<li><p>Command Format:</p>
+<pre class="console"><code>exit</code></pre></li>
+<li><p>Note: This command should be process by the client locally. That is, the client should close the connection and terminate the process while it receives the exit command.</p></li>
+<li><p>Receive &amp; Display Format Client keeps receiving messages from stdin and sends messages to the server directly. While receiving a message from the server, the client should send to the server without modification.</p></li>
+<li><p>Note: For messages received from stdin, client can only process the exit command, others should be sent to the server without modification. All messages received from stdin (except exit command) should be sent to server directly.</p></li>
+</ul>
+</div>
+<div id="other-notes" class="section level4">
+<h4>Other Notes</h4>
+<ol style="list-style-type: decimal">
+<li>All messages transmitted between a server and a client should end with a newline (‘’).</li>
+<li>Client should send message received from stdin to server directly without modification.</li>
+<li>Server/Client should NOT crash or be hanged.</li>
+<li>Don’t use the port below 1024.</li>
+</ol>
+<p><br/> <br/></p>
+</div>
+</div>
+<div id="my-code-explaination" class="section level3">
+<h3>My Code Explaination</h3>
+<div id="server-code" class="section level4">
+<h4>Server Code</h4>
+<div id="libraries-to-include" class="section level5">
+<h5>Libraries to Include</h5>
+<pre class="cpp"><code>#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cstdio&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string&gt;
+#include &lt;cstring&gt;
+#include &lt;string.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;vector&gt;
+#include &lt;sys/ipc.h&gt;
+#include &lt;sys/shm.h&gt;
+#include &lt;sys/wait.h&gt;
+#include &lt;cerrno&gt;
+
+using namespace std;
+
+#define MAXLINE 1000
+#define LISTENQ 100
+#define BLANK &#39; &#39; || &#39;\t&#39;
+
+int TOTALCLI = 0;</code></pre>
+</div>
+<div id="other-data-structures" class="section level5">
+<h5>Other Data Structures</h5>
+<ul>
+<li>I create a structure <strong>user</strong> for every connected client, containing name, port, address and whether the client left (die).</li>
+</ul>
+<pre class="cpp"><code>struct user
+{
+    string name;
+    string addr;
+    string port;
+    int die;
+    user(string const&amp; str, string a, string p):name(str){
+        addr = a;
+        port = p;
+        die = 0;
+    }
+    user()
+    {
+    }
+};
+
+struct user childarr[FD_SETSIZE];
+int client[FD_SETSIZE]; 
+fd_set readSet, allSet; // for select()</code></pre>
+</div>
+<div id="functions" class="section level5">
+<h5>Functions</h5>
+<ul>
+<li>skipblank(): For every unwanted blanks, we create a function to erase them.</li>
+</ul>
+<pre class="cpp"><code>void skipblank(char *str){
+    int i = 0;
+    while(str[i++] == &#39; &#39;);
+    i--;
+    int j = 0;
+    while((j + i) &lt; strlen(str)){
+        str[j] = str[j + i];
+        j++;
+    }
+    str[j] = &#39;\0&#39;;
+}
+
+void skipblank(string &amp;str){
+    int i = 0;
+    while(str[i++] == &#39; &#39;);
+    i--;
+    int j = 0;
+    while((j + i) &lt; str.size()){
+        str[j] = str[j + i];
+        j++;
+    }
+    str[j] = &#39;\0&#39;;
+}</code></pre>
+<ul>
+<li>tabToBlank(): For every unwanted tabs, we create a function to erase them.</li>
+</ul>
+<pre class="cpp"><code>void tabToBlank(char *str){
+    for(int i=0;i&lt;strlen(str);i++){
+        if(str[i] == &#39;\t&#39;)
+            str[i] = &#39; &#39;;
+    }
+}</code></pre>
+<ul>
+<li>getIndex(): We get the index of the client from our user structure array, by comparing ports and addresses.</li>
+</ul>
+<pre class="cpp"><code>int getIndex(const string msg, struct user *arr){
+    char addr[20];
+    char port[20];
+    int i = 0;
+    while(msg[i]!=&#39; &#39;){
+        addr[i] = msg[i];
+        i++;
+    }
+    i++;    // so i will not be &#39; &#39;
+    int j = 0;
+    while(msg[j + i]!=&#39;,&#39;){
+        port[j] = msg[j + i];
+        j++;
+    }
+    addr[i-1] = &#39;\0&#39;;
+    port[j] = &#39;\0&#39;;
+    for(i=0;i&lt;FD_SETSIZE;i++){
+        if(arr[i].addr == string(addr) &amp;&amp; arr[i].port == string(port))
+            return i;
+    }
+    return -1;
+}</code></pre>
+<ul>
+<li>changeName(): If the client comes before, we assign it to the previous index in <strong>user</strong> structure and clear the current index content.</li>
+</ul>
+<pre class="cpp"><code>int changeName(int index, string name){
+    int j=0;
+    string temp = &quot;&quot;;
+    while(name[j] != &#39; &#39;){
+        temp += name[j++];
+        if(j == name.size())
+            break;  // end
+    }
+    cout &lt;&lt; j &lt;&lt; &quot;, &quot; &lt;&lt; name.size();
+    if(j &lt; name.size()){
+        // get &#39; &#39;
+        while(name[j++] == &#39; &#39;);
+        cout &lt;&lt; j &lt;&lt; &quot;, &quot; &lt;&lt; name.size();
+        if(j == name.size() + 1){
+            cout &lt;&lt; &quot;.............\n&quot;;
+            cout &lt;&lt; name &lt;&lt; endl;
+            name = temp;
+            cout &lt;&lt; name &lt;&lt; endl;
+        }
+        else
+            return 3;   //  name not alphabets
+    }
+
+    cout &lt;&lt; name.size() &lt;&lt; &quot;,, &quot; &lt;&lt; name &lt;&lt; endl;
+    if(name.size() &gt; 12 || name.size() &lt; 2)
+        return 0;   //  name size error
+    if(name == &quot;anonymous\0&quot;)
+        return 1;   //  name = anonymous
+    for(int i=0;i&lt;FD_SETSIZE;i++){
+        if(name == childarr[i].name &amp;&amp; client[i] &gt; 0)
+            return 2;   //  name already exist
+    }
+    for(int i=0;i&lt;name.size();i++){
+        if(!((name[i] &lt;= &#39;z&#39; &amp;&amp; name[i] &gt;= &#39;a&#39;) || (name[i] &lt;= &#39;Z&#39; &amp;&amp; name[i] &gt;= &#39;A&#39;)))
+            return 3;   //  name not alphabets
+    }
+
+    //  name permitted
+    childarr[index].name = name;
+    return 4;
+}</code></pre>
+<ul>
+<li>sendAll(): Broadcast a message to every clients.</li>
+</ul>
+<pre class="cpp"><code>void sendAll(string msg, int except){
+    for(int i=0;i&lt;FD_SETSIZE;i++){
+        if(childarr[i].die == 0 &amp;&amp; i != except)
+            write(client[i], msg.c_str(), msg.size());
+    }
+}</code></pre>
+<ul>
+<li>dealString(): Using previous funtions to deal with every messages.</li>
+</ul>
+<pre class="cpp"><code>void dealString(string msg){
+    int index = getIndex(msg, childarr);
+    char recvline[msg.size()];
+    int i=0;
+    while(msg[i++]!=&#39;,&#39;);
+    //  ignore addr and port
+    int j;
+    for(j=i;j&lt;msg.size();j++)
+        recvline[j-i] = msg[j];
+    recvline[j-i] = &#39;\0&#39;;
+
+
+        tabToBlank(recvline);
+        skipblank(recvline);
+        cout &lt;&lt; string(recvline) &lt;&lt; endl;
+        
+        if(recvline[string(recvline).size()-1] == &#39;\n&#39; &amp;&amp; recvline[string(recvline).size()-2] == &#39;\r&#39;)
+            recvline[string(recvline).size()-2] = &#39;\0&#39;;
+        
+        if(recvline[0] == &#39;\x03&#39;){
+            cout &lt;&lt; &quot;Client terminates...\n&quot;;
+            string msg = &quot;[Server] &quot; + childarr[index].name + &quot; is offline.\n&quot;;
+            sendAll(msg, index);
+            close(client[index]);
+            client[index] = -1;
+            TOTALCLI--;
+            FD_CLR(client[index], &amp;allSet);
+        }
+
+
+        if(strlen(recvline) &lt; 2){
+            string msg = &quot;ERROR: Error command.&quot;;
+            write(client[index], msg.c_str(), msg.size());
+            return;
+        }
+        else{
+            char command[5];
+            for(int j=0;j&lt;4;j++)
+                command[j] = recvline[j];
+            command[4] = &#39;\0&#39;;
+            if(strcmp(command, &quot;exit\0&quot;) == 0 || strcmp(command, &quot;exit &quot;) == 0){
+                childarr[index].die = 1;    //  mark with die
+                
+                cout &lt;&lt; &quot;Client terminates...\n&quot;;
+                string msg = &quot;[Server] &quot; + childarr[index].name + &quot; is offline.\n&quot;;
+                sendAll(msg, index);
+                close(client[index]);
+                client[index] = -1;
+                TOTALCLI--;
+                FD_CLR(client[index], &amp;allSet);
+                return;
+            }
+        }
+
+        char temp[5];
+        for(int i=0;i&lt;4;i++)
+            temp[i] = recvline[i];
+        temp[i] = &#39;\0&#39;;
+        if(strcmp(temp, &quot;who \0&quot;) == 0 || strcmp(recvline, &quot;who\0&quot;) == 0 ){
+        //  list all online users
+            string msg = &quot;&quot;;
+            for(int j=0;j&lt;FD_SETSIZE;j++){
+                if(client[j] &gt; 0){
+                    if(index != j){
+                        msg += &quot;[Server] &quot; + childarr[j].name + &quot; &quot; + childarr[j].addr + &quot;/&quot; + childarr[j].port + &quot;\n&quot;;
+                    }
+                    else{
+                        msg += &quot;[Server] &quot; + childarr[j].name + &quot; &quot; + childarr[j].addr + &quot;/&quot; + childarr[j].port + &quot; -&gt;me\n&quot;;
+                    }
+                }
+            }
+            msg += &quot;\0&quot;;
+            write(client[index], msg.c_str(), msg.size());
+        }
+        else{
+            
+            //  *********************************************
+            char command[6];
+            for(int j=0;j&lt;5;j++)
+                command[j] = recvline[j];
+            command[5] = &#39;\0&#39;;
+            //  *********************************************
+            if(strcmp(command, &quot;name \0&quot;) == 0){
+                string oldName = childarr[index].name;
+                for(i=0;i&lt;string(recvline).size()-5;i++)
+                    recvline[i] = recvline[i + 5];
+                recvline[i] = &#39;\0&#39;;
+
+                skipblank(recvline);
+
+                int status = changeName(index, recvline);
+                switch(status){
+                    case 0:{
+                        string msg = &quot;[Server] ERROR: Username can only consists of 2~12 English letters.\n&quot;;
+                        write(client[index], msg.c_str(), msg.size());
+                        break;
+                    }
+                    case 1:{
+                        string msg = &quot;[Server] ERROR: Username cannot be anonymous.\n&quot;;
+                        write(client[index], msg.c_str(), msg.size());
+                        break;
+                    }
+                    case 2:{
+                        string msg = &quot;[Server] ERROR: &quot; + string(recvline) + &quot; has been used by others.\n&quot;;
+                        write(client[index], msg.c_str(), msg.size());
+                        break;
+                    }
+                    case 3:{
+                        string msg = &quot;[Server] ERROR: Username can only consists of 2~12 English letters.\n&quot;;
+                        write(client[index], msg.c_str(), msg.size());
+                        break;
+                    }
+                    case 4:{
+                        for(int j=0;j&lt;FD_SETSIZE;j++){
+                            if(childarr[j].die == 0){
+                                if(j == index){
+                                    string msg = &quot;[Server] You&#39;re now known as &quot; + string(recvline) + &quot;.\n&quot;;
+                                    write(client[j], msg.c_str(), msg.size());
+                                }
+                                else{
+                                    string msg = &quot;[Server] &quot; + oldName + &quot; is now known as &quot; + string(recvline) + &quot;.\n&quot;;
+                                    write(client[j], msg.c_str(), msg.size());
+                                }   
+                            }
+                        }
+                        break;
+                    }
+                    default:{
+                        break;
+                    }
+                }
+            }
+            else if(strcmp(command, &quot;tell \0&quot;) == 0){
+                for(i=0;i&lt;string(recvline).size()-5;i++)
+                    recvline[i] = recvline[i + 5];
+                recvline[i] = &#39;\0&#39;;
+                string name = &quot;&quot;, msgToSend = &quot;&quot;;
+                
+
+                skipblank(recvline);
+
+                int i = 0;
+                while(recvline[i] != &#39; &#39; &amp;&amp; recvline[i] != &#39;\n&#39; &amp;&amp; recvline[i] != &#39;\0&#39;)
+                    name += recvline[i++];
+                i++;
+
+                while(i &lt; strlen(recvline))
+                    msgToSend += recvline[i++];
+                
+                if(msgToSend == &quot;&quot;){
+                    string msg = &quot;ERROR: Error command.\n&quot;;
+                    write(client[index], msg.c_str(), msg.size());
+                    return;
+                }
+
+                
+                skipblank(msgToSend);
+
+                int selfNameError = 0, error = 0, toWho;
+                string msg = &quot;&quot;;
+                if(childarr[index].name == &quot;anonymous&quot;){
+                    selfNameError = 1;
+                    error = 1;
+                    msg += &quot;[Server] ERROR: You are anonymous.&quot;;
+                }
+                if(name == &quot;anonymous&quot;){
+                    error = 1;
+                    if(selfNameError == 1)
+                        msg += &quot;\n&quot;;
+                    msg += &quot;[Server] ERROR: The client to which you sent is anonymous.&quot;;
+                }
+                else{
+                    int j;
+                    for(j=0;j&lt;FD_SETSIZE;j++){
+                        if(name == childarr[j].name &amp;&amp; client[j] &gt; 0)   //  name exist and still alive
+                            break;
+                    }
+                    
+                    if(j == FD_SETSIZE){
+                        error = 1;
+                        if(selfNameError == 1)  // have msg already
+                            msg += &quot;\n&quot;;
+                        msg += &quot;[Server] ERROR: The receiver doesn&#39;t exist.&quot;;   
+                    }
+                    else
+                        toWho = j;
+                }
+                if(error == 1){
+                    msg += &quot;\n&quot;;
+                    write(client[index], msg.c_str(), msg.size());
+                }
+                else{
+                    //  no error
+                    string msg = &quot;[Server] SUCCESS: Your message has been sent.\n&quot;;
+                    write(client[index], msg.c_str(), msg.size());
+                    msg = &quot;[Server] &quot; + childarr[index].name + &quot; tell you &quot; + msgToSend + &quot;\n&quot;;
+                    write(client[toWho], msg.c_str(), msg.size());
+                }
+            }
+            else if(strcmp(command, &quot;yell \0&quot;) == 0){
+                for(i=0;i&lt;string(recvline).size()-5;i++)
+                    recvline[i] = recvline[i + 5];
+                recvline[i] = &#39;\0&#39;;
+
+                skipblank(recvline);
+                if(strcmp(recvline, &quot;&quot;) == 0){
+                    string msg = &quot;ERROR: Error command.\n&quot;;
+                    write(client[index], msg.c_str(), msg.size());
+                    return;
+                }
+
+
+
+                string msg = &quot;[Server] &quot; + childarr[index].name + &quot; yell &quot; + recvline + &quot;\n&quot;;
+                for(int j=0;j&lt;FD_SETSIZE;j++){
+                    if(childarr[j].die == 0)
+                        write(client[j], msg.c_str(), msg.size());
+                }
+            }
+            else{
+                string msg = &quot;ERROR: Error command.\n&quot;;
+                write(client[index], msg.c_str(), msg.size());
+            }
+        }
+
+}  </code></pre>
+</div>
+<div id="main-function" class="section level5">
+<h5>Main Function</h5>
+<pre class="cpp"><code>int main(int argc, char ** argv)
+{   
+    if(argc &lt; 2){
+        cerr &lt;&lt; &quot;command error...\n&quot;;
+        exit(0);
+    }
+
+    int maxi, maxfd, listenfd, connectfd, sockfd;
+    int nready;
+
+
+    socklen_t clientLen;
+
+    struct sockaddr_in cliaddr, seraddr;
+
+
+    listenfd = socket(AF_INET, SOCK_STREAM, 0);
+    bzero(&amp;seraddr, sizeof(seraddr));
+    seraddr.sin_family = AF_INET;
+    seraddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    seraddr.sin_port = htons(atoi(argv[1]));
+
+    bind(listenfd, (sockaddr *) &amp;seraddr, sizeof(seraddr));
+    listen(listenfd, LISTENQ);
+
+    maxfd = listenfd;
+    maxi = -1;
+    for(int i=0;i&lt;FD_SETSIZE;i++)
+        client[i] = -1; // initialize with no one in client array
+    FD_ZERO(&amp;allSet);   // initialize
+    FD_SET(listenfd, &amp;allSet);  //  listen to listenfd
+
+    while(1){
+        readSet = allSet;
+        nready = select(maxfd + 1, &amp;readSet, NULL, NULL, NULL);
+
+        if(FD_ISSET(listenfd, &amp;readSet)){
+            clientLen = sizeof(cliaddr);
+            connectfd = accept(listenfd, (sockaddr *) &amp;cliaddr, &amp;clientLen);
+
+            int i;
+            for(i=0;i&lt;FD_SETSIZE;i++){
+                if(client[i] &lt; 0){
+                    //  client in
+                    client[i] = connectfd;
+                    cout &lt;&lt; &quot;client: &quot; &lt;&lt; client[i] &lt;&lt; endl;
+                    char temp[5];
+                    sprintf(temp,&quot;%4d&quot;,(int)cliaddr.sin_port);
+                    string msg = string(&quot;[Server] Hello, anonymous! From: &quot; + string(inet_ntoa(cliaddr.sin_addr)) + &#39;/&#39; + temp + &#39;\n&#39;);
+                    string msg2 = &quot;[Server] Someone is coming!\n&quot;;
+
+                    childarr[i] = user(&quot;anonymous&quot;, string(inet_ntoa(cliaddr.sin_addr)), temp);
+                    
+                    write(connectfd, msg.c_str(), msg.size());  //  send welcoming msg to new client
+                    sendAll(msg2, i);
+
+                    TOTALCLI++;
+                    break;
+                }
+            }
+            if(i == FD_SETSIZE){
+                cout &lt;&lt; &quot;Too many client...\n&quot;;
+                exit(0);
+            }
+            
+            FD_SET(connectfd, &amp;allSet);
+            if(connectfd &gt; maxfd)
+                maxfd = connectfd;
+            if(maxi &lt; i)
+                maxi = i;
+            if(--nready &lt;= 0)
+                continue;
+        }
+
+        for(int i=0;i&lt;=maxi;i++){
+            if((sockfd = client[i]) &lt; 0)
+                continue;
+            if(FD_ISSET(sockfd, &amp;readSet)){
+                int n;
+                char buffer[MAXLINE];
+                bzero(buffer, MAXLINE);
+                if((n = recv(sockfd, buffer, MAXLINE, 0)) &gt; 0){
+                    buffer[n] = 0;
+                    string msg = childarr[i].addr + &quot; &quot; + childarr[i].port + &quot;,&quot; + string(buffer);
+                    
+                    dealString(msg);
+                }
+                if(n == 0){
+                    cout &lt;&lt; &quot;Client terminates...\n&quot;;
+                    string msg = &quot;[Server] &quot; + childarr[i].name + &quot; is offline.\n&quot;;
+                    sendAll(msg, i);
+                    close(sockfd);
+                    TOTALCLI--;
+                    FD_CLR(sockfd, &amp;allSet);
+                    client[i] = -1;
+                }
+                if(--nready &lt;= 0)
+                    break;  // no more readable descriptors
+            }
+        }
+
+
+    }
+
+
+    return 0;
+}</code></pre>
+</div>
+</div>
+<div id="client-code" class="section level4">
+<h4>Client Code</h4>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

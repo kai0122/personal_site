@@ -10,7 +10,13 @@ navbar:
      - text: "Intro. to Machine Learning"
        href: notesML.html
      - text: "Intro. to Network Programming"
-       href: notesNP.html
+       menu:
+        - text: "Project 1: Chat Room System" 
+          href: notesNPChat.html
+        - text: "Project 2: Reliable UDP File Transfer"
+          href: notesNPUDP.html
+        - text: "Project 3: Non-Blocking File Transfer"
+          href: notesNPNB.html
      - text: "UAV Autopilot and Image Processing"
        href: notesUAV.html
      - text: "AI in National Palace Museum"
