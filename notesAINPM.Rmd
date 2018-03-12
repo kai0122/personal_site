@@ -43,7 +43,7 @@ pre { /* Code block - determines code spacing between lines */
 
 .thumbnail:hover {
     position:relative;
-    width:700px;
+    width:1000px;
     height:auto;
     display:block;
     z-index:999;
@@ -63,15 +63,8 @@ pre { /* Code block - determines code spacing between lines */
  - 珍玩
   
 For Example:
-<img src="https://i.imgur.com/22aJPFK.jpg" class="thumbnail" width="500" /> 
+<img src="https://i.imgur.com/22aJPFK.jpg" class="thumbnail" width="700" /> 
 **+**
-<img src="https://i.imgur.com/nwjzwY2.jpg" class="thumbnail" width="500" />
+<img src="https://i.imgur.com/nwjzwY2.jpg" class="thumbnail" width="700" />
 **=**
-<img src="https://i.imgur.com/uigps19.jpg" class="thumbnail" width="500" />
-/*
-![](https://i.imgur.com/22aJPFK.jpg)
-**+**
-![](https://i.imgur.com/nwjzwY2.jpg)
-**=**
-![](https://i.imgur.com/uigps19.jpg)
-*/
+<img src="https://i.imgur.com/uigps19.jpg" class="thumbnail" width="700" />
