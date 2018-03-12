@@ -389,7 +389,7 @@ pre { /* Code block - determines code spacing between lines */
 </style>
 <div id="project1-chat-room-system" class="section level2">
 <h2>Project1: Chat Room System</h2>
-<p>Hint: It is suggested that you use select() for constructing the client and server programs.</p>
+<p>Hint: It is suggested that you use <strong>select()</strong> for constructing the client and server programs.</p>
 <div id="overview" class="section level3">
 <h3>Overview</h3>
 <p>In this project, we need to write two programs, a client and a server, to build a chat room system.</p>
@@ -408,12 +408,14 @@ pre { /* Code block - determines code spacing between lines */
 <h5>Hello Message</h5>
 <p>When a client connects to server, the server sends hello message to the client, and broadcasts this user’s coming to other clients.</p>
 <ul>
-<li>Send Format:</li>
+<li>Send Format:
+<ul>
 <li><p>To the new connected client</p>
 <pre class="console"><code>[Server] Hello, anonymous! From: &lt;Client IP&gt;/&lt;Client Port&gt;</code></pre></li>
 <li><p>To existing client</p>
 <pre class="console"><code>[Server] Someone is coming!</code></pre></li>
 <li><p>Offline Message When a client disconnect to server, the server sends offline message to all the other online clients to tell them someone has been offline.</p></li>
+</ul></li>
 </ul>
 <p>Send Format: <a href="#server">Server</a> <USERNAME> is offline. Who Message A client can type command below to list all online users. Server will reply to sender a list of online users and tag the sender client. For N users, server will send N lines. Each of them shows details of a user.</p>
 <p>Recv Format: who Send Format: <a href="#server">Server</a> <USERNAME> <CLIENT IP>/<CLIENT PORT> <a href="#server">Server</a> <SENDER USERNAME> <CLIENT IP>/<CLIENT PORT> -&gt;me Change Username Message A client can type command below to change his/her username.</p>
