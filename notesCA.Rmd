@@ -194,3 +194,32 @@ pre { /* Code block - determines code spacing between lines */
 * Larger stability region can be achieved using information at time t(n+1) -> **Implicit**
 	<img src="https://i.imgur.com/f2IJ1XU.png" width="500" />
 * We must evaluate f with x(n+1) before we know its value.
+
+## Particle System
+* Particles are objects modeled as point masses
+* Particle properties:
+	* mass
+	* position
+	* velocity
+	* force accumulator
+	* age, lifespan
+	* rendering properties
+* x` = v
+* v` = f/m
+* x`` = f/m
+ 
+##### Spatial Forces
+* Forces that depend on nearby particles within a local region
+
+##### Unary Forces
+* Forces that only depend on 1 particle
+
+##### n-ary Forces
+* Forces that depend on n particles
+* binary forces: spring and damper
+
+##### Spring Force (彈力)
+<img src="https://i.imgur.com/HsJ2ul3.png" width="500" />
+
+##### Damper Force (阻尼力)
+<img src="https://i.imgur.com/9AnGxka.png" width="500" />
