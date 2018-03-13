@@ -123,6 +123,7 @@ pre { /* Code block - determines code spacing between lines */
  
 ##### Higher-Order ODEs
 <img src="https://i.imgur.com/SnWOCNG.png" width="500" />
+<img src="https://i.imgur.com/Tc9JErV.png" width="500" />
  
 ##### Visualizing Solution of ODE
 * x(t): a moving point
@@ -183,3 +184,13 @@ pre { /* Code block - determines code spacing between lines */
 	* v` = -(c/m) * v
 * Step size of Euler's method is limited by k:
 	<img src="https://i.imgur.com/FZPTBdq.png" width="500" />
+* Systems that have some big k's mixed in are called **stiff equations**
+* Remedy to stiff equations:
+	* Using **small** step size -> inefficient
+	* Implicit method
+ 
+##### Implicit Method
+* Euler's method is explicit: uses only information at tim t(n) to advance solution to time t(n+1)
+* Larger stability region can be achieved using information at time t(n+1) -> **Implicit**
+	<img src="https://i.imgur.com/f2IJ1XU.png" width="500" />
+* We must evaluate f with x(n+1) before we know its value.
