@@ -118,7 +118,7 @@ pre { /* Code block - determines code spacing between lines */
  
 ##### First-Ordinary Differential Equation (ODE)
 * All derivatives are with respect to a single independent **variable**, usually representing **time**
-	<img src="https://i.imgur.com/u7QQ6BI.jpg" width="300" />
+	<img src="https://i.imgur.com/u7QQ6BI.jpg" width="500" />
 * Higher ODE can be transformed into this 1st order system.
  
 ##### Higher-Order ODEs
@@ -139,7 +139,7 @@ pre { /* Code block - determines code spacing between lines */
 * Follow a polygonal path
 * By evaluating the derivative at discrete time steps
 * Bigger steps, bigger errors
-<img src="https://i.imgur.com/GXc0wTW.png" width="300" />
+<img src="https://i.imgur.com/GXc0wTW.png" width="500" />
  
 ##### Euler's Method
 * Simplest numerical solution method
