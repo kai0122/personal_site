@@ -90,13 +90,14 @@ pre { /* Code block - determines code spacing between lines */
 	* Crowds simulation
  
 ## Introduction
+ 
 ### Kinematics
 	* The study or specification of motion, independent of the underlying physics that created the motion.
 	* Articulated Figure: A figure made up of a series of links (bones) connected at joints.
 	* Forward Kinematics: Given the character's state, calculate its pose
-		![](https://i.imgur.com/gkZTxqo.png)
+		<img src="https://i.imgur.com/gkZTxqo.png" width="500" /> 
 	* Inverse Kinematice: Given the character's pose, calculate its state
-		![](https://i.imgur.com/HlSqOsN.png)
+		<img src="https://i.imgur.com/HlSqOsN.png" width="500" />
  
 ### Motion Capture
 	* Live action recording
