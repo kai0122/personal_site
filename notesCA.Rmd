@@ -108,7 +108,18 @@ pre { /* Code block - determines code spacing between lines */
 ### Motion Editing
 * Get a specific motion
 * Want something else while preserving original
-
  
-## Ordinary Diffrential Equations
+ 
 
+## Ordinary Differential Equations
+### Differential Equations
+* describes the **relation between an unknown function and its derivatives**
+* solving a differential equation is to **find a function that satisfies the relation**
+ 
+### First-Ordinary Differential Equation (ODE)
+* All derivatives are with respect to a single independent **variable**, usually representing **time**
+	<img src="https://i.imgur.com/u7QQ6BI.jpg" width="500" />
+* Higher ODE can be transformed into this 1st order system.
+ 
+### Higher-Order ODEs
+<img src="https://i.imgur.com/SnWOCNG.png" width="500" />
