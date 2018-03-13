@@ -91,7 +91,7 @@ pre { /* Code block - determines code spacing between lines */
  
 ## Introduction
  
-### Kinematics
+##### Kinematics
 * The study or specification of motion, independent of the underlying physics that created the motion.
 * Articulated Figure: A figure made up of a series of links (bones) connected at joints.
 * Forward Kinematics: Given the character's state, calculate its pose
@@ -99,13 +99,13 @@ pre { /* Code block - determines code spacing between lines */
 * Inverse Kinematice: Given the character's pose, calculate its state
 	<img src="https://i.imgur.com/HlSqOsN.png" width="500" />
  
-### Motion Capture
+##### Motion Capture
 * Live action recording
 * track motion of reference points
 * convert to joint angles to drive an articulated 3D model
 * drive a deformable surface
  
-### Motion Editing
+##### Motion Editing
 * Get a specific motion
 * Want something else while preserving original
  
@@ -153,3 +153,33 @@ pre { /* Code block - determines code spacing between lines */
 * Improvement using **midpoint method**: **slope** at midtime is used
  
 ##### The Midpoint Method
+* Accuracy of the Midpoint Method is O(h^3)
+<img src="https://i.imgur.com/Zpz3L4S.png" width="500" />
+
+##### Notes
+* Don't use Euler's method
+	* Inaccuracy
+	* Inefficiency (or unstable)
+ 
+##### Stability of Analytic Solution of ODE
+* Stable: if solutions resulting from perturbations of initial value **remain close** to original solution.
+* Unstable: if solutions diverges away from original solution without bound.
+* Neutrally Stable: if solutions are neither stable nor unstable
+* Simple Approach to determining **stability** and **accuracy** of numerical method:
+	* Apply it to scalar ODE **x`= Ax**, where A is constant. 
+	* Example:
+		<img src="https://i.imgur.com/KTEb3wj.png.jpg" width="500" />
+      
+##### Propagated Error
+* Error made early in the process will also affect the late computations ---- the early error will be propagated
+* Global error is the sum of propageted error and local error
+
+## Stiff Equations
+* Consider s simple ODE x` = -kx (Dampler System), k is a stiffness constant
+* Spring Force: Fs = -ks * x
+* Damping Force: reduce the amplitiude of oscillation
+	* Fd = -c * v
+	* ma = -c * v
+	* v` = -(c/m) * v
+* Step size of Euler's method is limited by k:
+	<img src="https://i.imgur.com/FZPTBdq.png" width="500" />

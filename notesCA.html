@@ -447,8 +447,8 @@ pre { /* Code block - determines code spacing between lines */
 </div>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<div id="kinematics" class="section level3">
-<h3>Kinematics</h3>
+<div id="kinematics" class="section level5">
+<h5>Kinematics</h5>
 <ul>
 <li>The study or specification of motion, independent of the underlying physics that created the motion.</li>
 <li>Articulated Figure: A figure made up of a series of links (bones) connected at joints.</li>
@@ -456,8 +456,8 @@ pre { /* Code block - determines code spacing between lines */
 <li>Inverse Kinematice: Given the character’s pose, calculate its state <img src="https://i.imgur.com/HlSqOsN.png" width="500" /></li>
 </ul>
 </div>
-<div id="motion-capture" class="section level3">
-<h3>Motion Capture</h3>
+<div id="motion-capture" class="section level5">
+<h5>Motion Capture</h5>
 <ul>
 <li>Live action recording</li>
 <li>track motion of reference points</li>
@@ -465,8 +465,8 @@ pre { /* Code block - determines code spacing between lines */
 <li>drive a deformable surface</li>
 </ul>
 </div>
-<div id="motion-editing" class="section level3">
-<h3>Motion Editing</h3>
+<div id="motion-editing" class="section level5">
+<h5>Motion Editing</h5>
 <ul>
 <li>Get a specific motion</li>
 <li>Want something else while preserving original</li>
@@ -540,7 +540,54 @@ pre { /* Code block - determines code spacing between lines */
 </div>
 <div id="the-midpoint-method" class="section level5">
 <h5>The Midpoint Method</h5>
+<ul>
+<li>Accuracy of the Midpoint Method is O(h^3) <img src="https://i.imgur.com/Zpz3L4S.png" width="500" /></li>
+</ul>
 </div>
+<div id="notes" class="section level5">
+<h5>Notes</h5>
+<ul>
+<li>Don’t use Euler’s method
+<ul>
+<li>Inaccuracy</li>
+<li>Inefficiency (or unstable)</li>
+</ul></li>
+</ul>
+</div>
+<div id="stability-of-analytic-solution-of-ode" class="section level5">
+<h5>Stability of Analytic Solution of ODE</h5>
+<ul>
+<li>Stable: if solutions resulting from perturbations of initial value <strong>remain close</strong> to original solution.</li>
+<li>Unstable: if solutions diverges away from original solution without bound.</li>
+<li>Neutrally Stable: if solutions are neither stable nor unstable</li>
+<li>Simple Approach to determining <strong>stability</strong> and <strong>accuracy</strong> of numerical method:
+<ul>
+<li>Apply it to scalar ODE <strong>x`= Ax</strong>, where A is constant.</li>
+<li>Example: <img src="https://i.imgur.com/KTEb3wj.png.jpg" width="500" /></li>
+</ul></li>
+</ul>
+</div>
+<div id="propagated-error" class="section level5">
+<h5>Propagated Error</h5>
+<ul>
+<li>Error made early in the process will also affect the late computations —- the early error will be propagated</li>
+<li>Global error is the sum of propageted error and local error</li>
+</ul>
+</div>
+</div>
+<div id="stiff-equations" class="section level2">
+<h2>Stiff Equations</h2>
+<ul>
+<li>Consider s simple ODE x` = -kx (Dampler System), k is a stiffness constant</li>
+<li>Spring Force: Fs = -ks * x</li>
+<li>Damping Force: reduce the amplitiude of oscillation
+<ul>
+<li>Fd = -c * v</li>
+<li>ma = -c * v</li>
+<li>v` = -(c/m) * v</li>
+</ul></li>
+<li>Step size of Euler’s method is limited by k: <img src="https://i.imgur.com/FZPTBdq.png" width="500" /></li>
+</ul>
 </div>
 
 
