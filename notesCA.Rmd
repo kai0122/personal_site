@@ -123,3 +123,20 @@ pre { /* Code block - determines code spacing between lines */
  
 ### Higher-Order ODEs
 <img src="https://i.imgur.com/SnWOCNG.png" width="500" />
+ 
+#### Visualizing Solution of ODE
+* x(t): a moving point
+* f(x,t): x's velocities
+ 
+#### Vector Field
+* The differential equation x` = f(x,t), defines a vector field over x.
+ 
+#### Initial Value Problem
+* Given x` = f(x,t) and x0 = x(t0), find x(t).
+* Given the starting point, follow the integral curve.
+ 
+#### Numerical Solution of ODEs
+* Follow a polygonal path
+* By evaluating the derivative at discrete time steps
+* Bigger steps, bigger errors
+<img src="https://i.imgur.com/6RcROVV.png" width="500" />
