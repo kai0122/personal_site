@@ -112,31 +112,44 @@ pre { /* Code block - determines code spacing between lines */
  
 
 ## Ordinary Differential Equations
-### Differential Equations
+#### Differential Equations
 * describes the **relation between an unknown function and its derivatives**
 * solving a differential equation is to **find a function that satisfies the relation**
  
-### First-Ordinary Differential Equation (ODE)
+##### First-Ordinary Differential Equation (ODE)
 * All derivatives are with respect to a single independent **variable**, usually representing **time**
 	<img src="https://i.imgur.com/u7QQ6BI.jpg" width="500" />
 * Higher ODE can be transformed into this 1st order system.
  
-### Higher-Order ODEs
+##### Higher-Order ODEs
 <img src="https://i.imgur.com/SnWOCNG.png" width="500" />
  
-#### Visualizing Solution of ODE
+##### Visualizing Solution of ODE
 * x(t): a moving point
 * f(x,t): x's velocities
  
-#### Vector Field
+##### Vector Field
 * The differential equation x` = f(x,t), defines a vector field over x.
  
-#### Initial Value Problem
+##### Initial Value Problem
 * Given x` = f(x,t) and x0 = x(t0), find x(t).
 * Given the starting point, follow the integral curve.
  
-#### Numerical Solution of ODEs
+##### Numerical Solution of ODEs
 * Follow a polygonal path
 * By evaluating the derivative at discrete time steps
 * Bigger steps, bigger errors
-<img src="https://i.imgur.com/6RcROVV.png" width="500" />
+<img src="https://i.imgur.com/GXc0wTW.png" width="500" />
+ 
+##### Euler's Method
+* Simplest numerical solution method
+* Bigger time step, bigger errors
+* x(t+h) = x(t) + h * f(x,t)
+<img src="https://i.imgur.com/akW0SZR.png" width="500" />
+* Drawbacks of Duler's Method
+	* Inaccurancy
+	* Inefficiency
+		* Need to use small time-steps to **avoid divergence**
+* Improvement using **midpoint method**: **slope** at midtime is used
+ 
+##### The Midpoint Method

@@ -475,50 +475,70 @@ pre { /* Code block - determines code spacing between lines */
 </div>
 <div id="ordinary-differential-equations" class="section level2">
 <h2>Ordinary Differential Equations</h2>
-<div id="differential-equations" class="section level3">
-<h3>Differential Equations</h3>
+<div id="differential-equations" class="section level4">
+<h4>Differential Equations</h4>
 <ul>
 <li>describes the <strong>relation between an unknown function and its derivatives</strong></li>
 <li>solving a differential equation is to <strong>find a function that satisfies the relation</strong></li>
 </ul>
-</div>
-<div id="first-ordinary-differential-equation-ode" class="section level3">
-<h3>First-Ordinary Differential Equation (ODE)</h3>
+<div id="first-ordinary-differential-equation-ode" class="section level5">
+<h5>First-Ordinary Differential Equation (ODE)</h5>
 <ul>
 <li>All derivatives are with respect to a single independent <strong>variable</strong>, usually representing <strong>time</strong> <img src="https://i.imgur.com/u7QQ6BI.jpg" width="500" /></li>
 <li>Higher ODE can be transformed into this 1st order system.</li>
 </ul>
 </div>
-<div id="higher-order-odes" class="section level3">
-<h3>Higher-Order ODEs</h3>
+<div id="higher-order-odes" class="section level5">
+<h5>Higher-Order ODEs</h5>
 <p><img src="https://i.imgur.com/SnWOCNG.png" width="500" /></p>
-<div id="visualizing-solution-of-ode" class="section level4">
-<h4>Visualizing Solution of ODE</h4>
+</div>
+<div id="visualizing-solution-of-ode" class="section level5">
+<h5>Visualizing Solution of ODE</h5>
 <ul>
 <li>x(t): a moving point</li>
 <li>f(x,t): x’s velocities</li>
 </ul>
 </div>
-<div id="vector-field" class="section level4">
-<h4>Vector Field</h4>
+<div id="vector-field" class="section level5">
+<h5>Vector Field</h5>
 <ul>
 <li>The differential equation x` = f(x,t), defines a vector field over x.</li>
 </ul>
 </div>
-<div id="initial-value-problem" class="section level4">
-<h4>Initial Value Problem</h4>
+<div id="initial-value-problem" class="section level5">
+<h5>Initial Value Problem</h5>
 <ul>
 <li>Given x` = f(x,t) and x0 = x(t0), find x(t).</li>
 <li>Given the starting point, follow the integral curve.</li>
 </ul>
 </div>
-<div id="numerical-solution-of-odes" class="section level4">
-<h4>Numerical Solution of ODEs</h4>
+<div id="numerical-solution-of-odes" class="section level5">
+<h5>Numerical Solution of ODEs</h5>
 <ul>
 <li>Follow a polygonal path</li>
 <li>By evaluating the derivative at discrete time steps</li>
-<li>Bigger steps, bigger errors <img src="https://i.imgur.com/6RcROVV.png" width="500" /></li>
+<li>Bigger steps, bigger errors <img src="https://i.imgur.com/GXc0wTW.png" width="500" /></li>
 </ul>
+</div>
+<div id="eulers-method" class="section level5">
+<h5>Euler’s Method</h5>
+<ul>
+<li>Simplest numerical solution method</li>
+<li>Bigger time step, bigger errors</li>
+<li>x(t+h) = x(t) + h * f(x,t) <img src="https://i.imgur.com/akW0SZR.png" width="500" /></li>
+<li>Drawbacks of Duler’s Method
+<ul>
+<li>Inaccurancy</li>
+<li>Inefficiency
+<ul>
+<li>Need to use small time-steps to <strong>avoid divergence</strong></li>
+</ul></li>
+</ul></li>
+<li>Improvement using <strong>midpoint method</strong>: <strong>slope</strong> at midtime is used</li>
+</ul>
+</div>
+<div id="the-midpoint-method" class="section level5">
+<h5>The Midpoint Method</h5>
 </div>
 </div>
 </div>
