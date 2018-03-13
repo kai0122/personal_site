@@ -598,7 +598,10 @@ pre { /* Code block - determines code spacing between lines */
 <h5>Implicit Method</h5>
 <ul>
 <li>Euler’s method is explicit: uses only information at tim t(n) to advance solution to time t(n+1)</li>
-<li>Larger stability region can be achieved using information at time t(n+1) -&gt; <strong>Implicit</strong> <img src="https://i.imgur.com/zrglopq.png" width="500" /></li>
+<li>Larger stability region can be achieved using information at time t(n+1) -&gt; <strong>Implicit</strong>
+<ul>
+<li>x(n+1) = x(n) + h * f(x(n+1), t(n+1))</li>
+</ul></li>
 <li>We must evaluate f with x(n+1) before we know its value.</li>
 </ul>
 </div>
