@@ -1,5 +1,92 @@
 ---
-title: "Learning Notes"
+title: "Computer Animation and Special Effects"
+output:
+ html_document:
+   toc: true
+   toc_depth: 4
+   toc_float:
+    collapsed: false
+    smooth_scroll: false
+
 ---
 
-Why I am awesome.
+<style type="text/css">
+
+body{ /* Normal  */
+      font-size: 18px;
+  }
+td {  /* Table  */
+  
+}
+h1.title {
+  font-size: 40px;
+  color: DarkRed;
+}
+h1 { /* Header 1 */
+  font-size: 35px;
+  color: DarkBlue;
+}
+h2 { /* Header 2 */
+    font-size: 30px;
+  color: DarkBlue;
+}
+h3 { /* Header 3 */
+  font-size: 25px;
+  font-family: "Times New Roman", Times, serif;
+  color: DarkBlue;
+}
+h4 {
+	font-size: 23px;
+	color: Blue;
+}
+h5 {
+	font-size: 20px;
+	color: DarkGreen;
+}
+code.r{ /* Code block */
+    font-size: 13px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 13px;
+}
+
+.thumbnail:hover {
+    position:relative;
+    width:1000px;
+    height:auto;
+    display:block;
+    z-index:999;
+}
+
+</style>
+
+
+## Course Informations
+* No textbook
+* Grading Schemes:
+	* Assignment 1 (25%): Particle System
+	* Assignment 2 (25%): Character Animation
+	* Assignment 3 (20%): Paper Presentation or Case study on special effects
+	* Final Projects (30%)
+		* 2 students/team
+ 
+## Course Overview
+* Physics/Math background
+	* 3D rotations
+	* Rigid-body dynamics
+	* Solving ordinary differential equation
+	* Optimization
+* Character Animation
+	* Keyframing
+	* Motion Capture
+	* Motion Editing
+* Physics-based animation
+	* Cloth simulation
+	* Fluid simulation
+	* Biped simulation
+	* Hair simulation
+* Behavior Animation
+	* Flocking behavior
+	* Crowds simulation
+
+
