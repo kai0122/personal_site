@@ -267,10 +267,13 @@ pre { /* Code block - determines code spacing between lines */
 	* Legal state: Ci(x1, x2, x3, ...) = 0, for all i
 	* Constraint Force: linear combination of constraint gradients: <img src="https://i.imgur.com/NKeASoo.png" style="width: 100px;" />	
 	<img src="https://i.imgur.com/2A2XsaI.png" style="width: 550px;" />
-* system of constraint equation **C(q) = 0**
+1. system of constraint equation **C(q) = 0**
 <img src="https://i.imgur.com/NiFKSJk.png" style="width: 700px;" />
-
-
-
+2. To compute the **legal acceleration**:
+<img src="https://i.imgur.com/f3j8QoR.png" style="width: 700px;" />
+3. To ensure the constraint force does not produce Work
+<img src="https://i.imgur.com/5uR4jD8.png" style="width: 700px;" />
+4. All vectors satisfy the condition can be expressed as:
+<img src="https://i.imgur.com/7xWsTGZ.png" style="width: 700px;" />
 
 ### Parametric contraint
