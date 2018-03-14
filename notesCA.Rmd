@@ -280,5 +280,10 @@ pre { /* Code block - determines code spacing between lines */
 
 * Constraint Gradients:
 <img src="https://i.imgur.com/STP3Srr.png" style="width: 400px;" />
+	* Legal states: the intersection of two planes
+	* Normal of legal states:
+	<img src="https://i.imgur.com/oMOFITT.png" style="width: 400px;" />
+	* Constraint forces are aligned with the normal of legal states
+	* Work done by constraint forces is **zero**
 
 ### Parametric contraint
