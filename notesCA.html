@@ -661,6 +661,37 @@ pre { /* Code block - determines code spacing between lines */
 </ul>
 </div>
 </div>
+<div id="constraint-particles" class="section level2">
+<h2>Constraint Particles</h2>
+<div id="constraint-force" class="section level5">
+<h5>Constraint Force</h5>
+<ul>
+<li>Single implicit constraint</li>
+<li>Multiple implicit constraint</li>
+<li>Constraints:
+<ul>
+<li>Implicit: C(x) = |x| - r = 0</li>
+<li>Parametric <img src="https://i.imgur.com/ZvkRplB.png" width="500" /></li>
+</ul></li>
+<li>Legal Acceleration <img src="https://i.imgur.com/ZuXePKq.png" width="500" /></li>
+<li>Constraint Force
+<ul>
+<li>Use the legal condition to compute the constraint force: f^ <img src="https://i.imgur.com/gON4vGf.png" width="500" /></li>
+<li>We have one equation and two variables -&gt; need more condition to solve the constraint force</li>
+</ul></li>
+</ul>
+</div>
+<div id="virtual-work-" class="section level5">
+<h5>Virtual Work (虛功)</h5>
+<ul>
+<li>Constraint force is passive (no energy gain or loss)</li>
+<li>Kinetic energy (動能) of the system: T = 1/2 * m * x<code>·x</code>
+<ul>
+<li>T<code>= 1/2 * m (x``·x</code>+x<code>·x``) = m * x</code>·x`` = x(f + f^) -&gt; <strong>f and f^ 所作的虛功</strong> <img src="https://i.imgur.com/VRdOOIV.png" width="500" /></li>
+</ul></li>
+</ul>
+</div>
+</div>
 
 
 

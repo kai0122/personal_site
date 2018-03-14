@@ -230,3 +230,24 @@ pre { /* Code block - determines code spacing between lines */
 ### Collision Response
 * A less accurate but easier alternative is to just modify **positions** and **velocities**
 <img src="https://i.imgur.com/XzcvXXZ.png" width="500" />
+
+## Constraint Particles
+##### Constraint Force
+* Single implicit constraint
+* Multiple implicit constraint
+* Constraints:
+	* Implicit: C(x) = |x| - r = 0
+	* Parametric
+		<img src="https://i.imgur.com/ZvkRplB.png" width="500" />
+* Legal Acceleration
+<img src="https://i.imgur.com/ZuXePKq.png" width="500" />
+* Constraint Force
+	* Use the legal condition to compute the constraint force: f^
+	<img src="https://i.imgur.com/gON4vGf.png" width="500" />
+	* We have one equation and two variables -> need more condition to solve the constraint force
+  
+##### Virtual Work (虛功)
+* Constraint force is passive (no energy gain or loss)
+* Kinetic energy (動能) of the system: T = 1/2 * m * x`·x`
+	* T` = 1/2 * m (x``·x`+x`·x``) = m * x`·x`` = x(f + f^) -> **f and f^ 所作的虛功**
+	<img src="https://i.imgur.com/VRdOOIV.png" width="500" />
