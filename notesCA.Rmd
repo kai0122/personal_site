@@ -275,5 +275,10 @@ pre { /* Code block - determines code spacing between lines */
 <img src="https://i.imgur.com/5uR4jD8.png" style="width: 700px;" />
 4. All vectors satisfy the condition can be expressed as:
 <img src="https://i.imgur.com/7xWsTGZ.png" style="width: 700px;" />
+5. Constraint forces obtained by solving the linear system
+<img src="https://i.imgur.com/5ab7Fgw.png" style="width: 700px;" />
+
+* Constraint Gradients:
+<img src="https://i.imgur.com/STP3Srr.png" style="width: 400px;" />
 
 ### Parametric contraint
