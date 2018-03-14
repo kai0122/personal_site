@@ -268,7 +268,7 @@ pre { /* Code block - determines code spacing between lines */
 	* Constraint Force: linear combination of constraint gradients: <img src="https://i.imgur.com/NKeASoo.png" style="width: 100px;" />	
 	<img src="https://i.imgur.com/2A2XsaI.png" style="width: 550px;" />
 * system of constraint equation **C(q) = 0**
-<img src="https://i.imgur.com/NiFKSJk.png" style="width: 100px;" />
+<img src="https://i.imgur.com/NiFKSJk.png" style="width: 700px;" />
 
 
 
