@@ -287,3 +287,17 @@ pre { /* Code block - determines code spacing between lines */
 	* Work done by constraint forces is **zero**
 
 ### Parametric contraint
+* Parametic:
+<img src="https://i.imgur.com/Mv6F9Rx.png" style="width: 650px;" />
+* 1 degree of freedom:
+	* Solve for θ``
+	<img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
+* This type of method is called **Lagrangian Dynamics**
+	* Instead of working on unconstrained **q**
+	* We work on a constrained space **u** and solve for **u``** through the parametric function **q(u)**
+* Advantages
+	* Fewer degrees of freedom
+	* Constraints are always met
+* Disadvantages
+	* Hard to find a parametric function that captures the desired constraints
+

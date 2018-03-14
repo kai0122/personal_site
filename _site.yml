@@ -21,6 +21,12 @@ navbar:
        href: notesSFC.html
      - text: "Computer Animation and Special Effects"
        href: notesCA.html
+  - text: "Graduation Project"
+    menu:
+      - text: "Introduction"
+        href: "graduIntro.html"
+      - text: "Project"
+        href: "graduProj.html"
  right:
   - icon: fa-facebook-f
     href: https://www.facebook.com/show098822

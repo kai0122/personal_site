@@ -11,7 +11,7 @@
 
 
 
-<title>Kai’s Blog</title>
+<title></title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,9 +19,6 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -168,107 +165,6 @@ $(document).ready(function () {
 
 
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = false;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
-
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
-
-
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
@@ -360,52 +256,14 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Kai’s Blog</h1>
 
 </div>
 
 
-<!-- ![](kai.jpg) -->
-<p><img src="kai.jpg" align="right" style="width: 300px; margin: 50px; "/></p>
-<div id="about-me" class="section level1">
-<h1>About Me</h1>
-<div id="education" class="section level3">
-<h3>Education</h3>
-<ul>
-<li>BS in Dept. of Computer Science at National Chaio Tung University, Taiwan (Sep 2015 - Jun 2019)</li>
-<li>Successfully applied to Exchange Student Program in Dept. of Computer Science in RWTH Aachen University (Apr 2019 - Sep 2019)</li>
-<li>Overall GPA: 4.02/4.3</li>
-<li>Major GPA: 4.01/4.3</li>
-<li>Most Relevant Course: Introduction to Network Programming, Introduction to Wireless Networks, Principles of communication networks, Introduction to Multimedia Information System, Introduction to Machine Learning, UAV Autopilot and Computer Vision</li>
-<li>Area of Interest: Computer Vision, Machine Learning, Internet of Things</li>
-</ul>
-</div>
-<div id="my-github-personal-page" class="section level3">
-<h3>My Github personal page</h3>
-<p><a href="https://github.com/kai0122" title="Github">My Github</a></p>
-</div>
-<div id="language-ability" class="section level3">
-<h3>Language Ability</h3>
-<ul>
-<li>TOEFL iBT: 102/120</li>
-<li>TOEIC (Listening and Reading): 870/990</li>
-<li>SFLPT French Test: A1</li>
-<li>French certification from ACCORD language school: A1.1+</li>
-<li>German certification from SPRACHCAFFE language school: A1.2</li>
-</ul>
-</div>
-<div id="contact-me" class="section level3">
-<h3>Contact Me</h3>
-<ul>
-<li>E-mail: <a href="mailto:show08822@gmail.com">show08822@gmail.com</a></li>
-</ul>
-</div>
-</div>
 
 
 
-</div>
-</div>
+
 
 </div>
 
