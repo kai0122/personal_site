@@ -253,7 +253,7 @@ pre { /* Code block - determines code spacing between lines */
 		* 因為是光滑面，所以系統對物體作功為0
 		* 故只有正向力，且正向力與x垂直
 * Constraint Force:
-<img src="https://i.imgur.com/5fs82uT.png" style="width: 250px;"/>
+<img src="https://i.imgur.com/5fs82uT.png" style="width: 300px;"/>
 	* If the system is at rest: v = 0
 		* Only the tangent component of the applied force is kept
 		<img src="https://i.imgur.com/RCp7FfD.png" style="width: 180px;"/>
