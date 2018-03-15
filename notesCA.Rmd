@@ -300,4 +300,48 @@ pre { /* Code block - determines code spacing between lines */
 	* Constraints are always met
 * Disadvantages
 	* Hard to find a parametric function that captures the desired constraints
+  
+   
+
+
+## Rigid Body Dynamics
+#### Problems:
+* Unconstraint system
+	* No contact
+* Constraint
+	* Collision detection and contact
+* Computational efficiency is important
+* Controllable is desired
+
+### Rigid Body Concepts
+#### Translation -> Rotation
+* Translation
+	* Position
+	* linear velocity
+	* Mass
+	* Linear momentum
+	* Force
+* Rotation
+	* Orientation
+	* Anguler velocity
+	* 
+	* 
+	* 
+
+#### Particle State
+##### Particle: 
+<img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
+##### Rigid Body
+* Position and Orientation
+	* Translation of body
+	* Orientation of body
+	<img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
+	* Body space
+		* 
+		* 
+		* 
+		<img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
+	* World space
+	<img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
+	* Use **x(t) and R(t)** to tranform the body space into world space
 
