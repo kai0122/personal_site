@@ -9,7 +9,56 @@ output:
     smooth_scroll: false
     
 ---
-   
+
+<style type="text/css">
+
+body{ /* Normal  */
+      font-size: 15px;
+  }
+td {  /* Table  */
+  
+}
+h1.title {
+  font-size: 40px;
+  color: DarkRed;
+}
+h1 { /* Header 1 */
+  font-size: 35px;
+  color: DarkBlue;
+}
+h2 { /* Header 2 */
+    font-size: 30px;
+  color: DarkBlue;
+}
+h3 { /* Header 3 */
+  font-size: 25px;
+  font-family: "Times New Roman", Times, serif;
+  color: DarkBlue;
+}
+h4 {
+	font-size: 23px;
+	color: Blue;
+}
+h5 {
+	font-size: 20px;
+	color: DarkGreen;
+}
+code.r{ /* Code block */
+    font-size: 13px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 13px;
+}
+
+.thumbnail:hover {
+    position:relative;
+    width:1000px;
+    height:auto;
+    display:block;
+    z-index:999;
+}
+
+</style>   
 
 <!-- ![](kai.jpg) -->
 <img src="./kai.jpg" align="right" style="width: 300px; margin: 50px; "/>
