@@ -813,11 +813,63 @@ pre { /* Code block - determines code spacing between lines */
 </ul></li>
 </ul>
 </div>
-<div id="particle-state" class="section level4">
-<h4>Particle State</h4>
-<div id="particle" class="section level5">
-<h5>Particle:</h5>
-<p><img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /> ##### Rigid Body * Position and Orientation * Translation of body * Orientation of body <img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /> * Body space * * * <img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /> * World space <img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /> * Use <strong>x(t) and R(t)</strong> to tranform the body space into world space</p>
+</div>
+<div id="particle-state" class="section level3">
+<h3>Particle State</h3>
+<div id="particle" class="section level4">
+<h4>Particle:</h4>
+<p><img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></p>
+</div>
+<div id="rigid-body" class="section level4">
+<h4>Rigid Body</h4>
+<div id="position-and-orientation" class="section level5">
+<h5>Position and Orientation</h5>
+<ul>
+<li>Translation of body</li>
+<li>Orientation of body <img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
+<li>Body space (局部座標系統)
+<ul>
+<li></li>
+<li></li>
+<li><img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
+</ul></li>
+<li>World space (世界座標系統) <img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
+<li>Use <strong>x(t) and R(t)</strong> to tranform the body space into world space</li>
+<li><img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
+</ul>
+</div>
+<div id="linear-velocity-and-angular-velocity" class="section level5">
+<h5>Linear Velocity and Angular Velocity</h5>
+<ul>
+<li>Linear Velocity
+<ul>
+<li></li>
+</ul></li>
+<li>Angular Velocity
+<ul>
+<li><img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
+<li>How are R(t) and w(t) related? <img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
+<li>Consider a vector r(t) at time t specified in world space, how do we represent r`(t) in terms of w(t)? <img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
+<li><img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
+<ol style="list-style-type: decimal">
+<li>Consider two 3 by 1 vectors: a and b <img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
+<li><img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
+<li></li>
+</ol></li>
+</ul></li>
+</ul>
+</div>
+<div id="perspective-of-particles" class="section level5">
+<h5>Perspective of Particles</h5>
+<ul>
+<li>Imagine a regid body is composed of a large number of small particles
+<ul>
+<li>particles indexed from 1 to N</li>
+<li>each particles have a constant location <img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /> in body space</li>
+<li><img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
+</ul></li>
+<li>Velocity of a particle <img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
+</ul>
 </div>
 </div>
 </div>

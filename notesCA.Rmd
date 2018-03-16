@@ -328,20 +328,50 @@ pre { /* Code block - determines code spacing between lines */
 	* 
 	* 
 
-#### Particle State
-##### Particle: 
+### Particle State
+#### Particle: 
 <img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
-##### Rigid Body
-* Position and Orientation
-	* Translation of body
-	* Orientation of body
+  
+#### Rigid Body
+##### Position and Orientation
+* Translation of body
+* Orientation of body
+<img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
+* Body space (局部座標系統)
+	* 
+	* 
+	* 
 	<img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
-	* Body space
-		* 
-		* 
-		* 
+* World space (世界座標系統)
+<img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
+* Use **x(t) and R(t)** to tranform the body space into world space
+* 
+<img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
+ 
+##### Linear Velocity and Angular Velocity
+* Linear Velocity
+	* 
+* Angular Velocity
+	* 
+	<img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
+	* How are R(t) and w(t) related?
+	<img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
+	* Consider a vector r(t) at time t specified in world space, how do we represent r`(t) in terms of w(t)?
+	<img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
+	* 
+	<img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
+		1. Consider two 3 by 1 vectors: a and b 
 		<img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
-	* World space
-	<img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
-	* Use **x(t) and R(t)** to tranform the body space into world space
+		2. 
+		<img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
+		3. 
 
+##### Perspective of Particles
+* Imagine a regid body is composed of a large number of small particles
+	* particles indexed from 1 to N
+	* each particles have a constant location <img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /> in body space
+	* 
+	<img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
+
+* Velocity of a particle
+<img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
