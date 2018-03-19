@@ -798,7 +798,7 @@ pre { /* Code block - determines code spacing between lines */
 <li>Translation
 <ul>
 <li>Position</li>
-<li>linear velocity</li>
+<li>Linear velocity</li>
 <li>Mass</li>
 <li>Linear momentum</li>
 <li>Force</li>
@@ -807,9 +807,9 @@ pre { /* Code block - determines code spacing between lines */
 <ul>
 <li>Orientation</li>
 <li>Anguler velocity</li>
-<li></li>
-<li></li>
-<li></li>
+<li>Inertia tensor (轉動慣量)</li>
+<li>Angular momentum</li>
+<li>Torque</li>
 </ul></li>
 </ul>
 </div>
@@ -817,25 +817,31 @@ pre { /* Code block - determines code spacing between lines */
 <div id="particle-state" class="section level3">
 <h3>Particle State</h3>
 <div id="particle" class="section level4">
-<h4>Particle:</h4>
-<p><img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></p>
+<h4>Particle</h4>
 </div>
 <div id="rigid-body" class="section level4">
 <h4>Rigid Body</h4>
 <div id="position-and-orientation" class="section level5">
 <h5>Position and Orientation</h5>
 <ul>
-<li>Translation of body</li>
-<li>Orientation of body <img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
+<li>Translation of body
+<ul>
+<li>From the origin of the world coordinate</li>
+</ul></li>
+<li>Orientation of body <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
 <li>Body space (局部座標系統)
 <ul>
-<li></li>
-<li></li>
-<li><img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
+<li>A <strong>fixed</strong> and <strong>unchanged</strong> space where the shape of a rigid body is defined</li>
+<li>The geometric center of rigid body lies at the origin of body space</li>
+<li>Aoso called <strong>object space</strong> or <strong>local space</strong> <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
 </ul></li>
-<li>World space (世界座標系統) <img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
+<li>World space (世界座標系統) <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
 <li>Use <strong>x(t) and R(t)</strong> to tranform the body space into world space</li>
-<li><img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
+<li>The world coordinate of an arbitrary point <img src="https://i.imgur.com/.png" style="width: 20px;" /> on the body
+<ul>
+<li>R(t) represents the directions of x, y, z axes of the body space in world space at time <strong>t</strong> <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+</ul></li>
+<li>so x(t) and R(t) define the position and the orientation of the body at time t</li>
 </ul>
 </div>
 <div id="linear-velocity-and-angular-velocity" class="section level5">
@@ -843,35 +849,69 @@ pre { /* Code block - determines code spacing between lines */
 <ul>
 <li>Linear Velocity
 <ul>
-<li></li>
+<li>x`(t) = v(t) is the velocity of the center of mass in world space</li>
 </ul></li>
 <li>Angular Velocity
 <ul>
-<li><img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
-<li>How are R(t) and w(t) related? <img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
-<li>Consider a vector r(t) at time t specified in world space, how do we represent r`(t) in terms of w(t)? <img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
-<li><img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" />
+<li>we describe the spin as a vector <img src="https://i.imgur.com/.png" style="width: 20px;" /></li>
+<li>How are R(t) and w(t) related? <img src="https://i.imgur.com/.png" style="width: 300px;" /></li>
+<li>Consider a vector r(t) at time t specified in world space, how do we represent r`(t) in terms of w(t)? <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+<li>Given the physical meaning of R(t), what does each column change over time? <img src="https://i.imgur.com/.png" style="width: 650px;" />
 <ol style="list-style-type: decimal">
-<li>Consider two 3 by 1 vectors: a and b <img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
-<li><img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
-<li></li>
+<li>Consider two 3 by 1 vectors: a and b, the cross product of them: <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+<li>Gicen am we can define a matrix a* such that: <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+<li><img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
 </ol></li>
+</ul>
+<p>Perspective of Particles: * Imagine a rigid body is composed of a large number of small particles * particles indexed from 1 to N * each particles have a constant location <img src="https://i.imgur.com/.png" style="width: 20px;" /> in body space * the location of i-th particle in world space at time t is: <img src="https://i.imgur.com/.png" style="width: 300px;" /></p>
+<ul>
+<li>Velocity of a particle <img src="https://i.imgur.com/.png" style="width: 650px;" /> <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
 </ul></li>
 </ul>
 </div>
-<div id="perspective-of-particles" class="section level5">
-<h5>Perspective of Particles</h5>
+<div id="mass-and-inertia-" class="section level5">
+<h5>Mass and inertia (轉動慣量)</h5>
 <ul>
-<li>Imagine a regid body is composed of a large number of small particles
+<li>The mass of the i-th particle is m(i), the mass is: <img src="https://i.imgur.com/.png" style="width: 30px;" /></li>
+<li>The center of mass defined in world space is: <img src="https://i.imgur.com/.png" style="width: 40px;" /></li>
+<li>Inertia Tensor:
 <ul>
-<li>particles indexed from 1 to N</li>
-<li>each particles have a constant location <img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /> in body space</li>
-<li><img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
+<li>Inertia tensor describes how the mass of a rigid body is distributed relative to the center of mass <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+<li>I(t) depends on the orientation of a body , but not the translation</li>
+<li>Inertia tensors vary in world space over time, but are constant in body space
+<ul>
+<li>Precompute the integral part in body space to save time</li>
 </ul></li>
-<li>Velocity of a particle <img src="https://i.imgur.com/Hv4m00G.png" style="width: 650px;" /></li>
+<li>Derivation: <img src="https://i.imgur.com/.png" style="width: 300px;" /> <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+</ul></li>
+<li>Inertia Tensor in Body Space:
+<ul>
+<li>把initial tensor變成三個矩陣相乘 <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+</ul></li>
+</ul>
+</div>
+<div id="force-and-torque" class="section level5">
+<h5>Force and Torque</h5>
+<ul>
+<li>Net Force (淨力) <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+<li>Net Torque (力矩) <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
 </ul>
 </div>
 </div>
+</div>
+</div>
+<div id="cloth-animation" class="section level2">
+<h2>Cloth Animation</h2>
+<div id="challenges-of-cloth-simulation" class="section level3">
+<h3>Challenges of Cloth Simulation</h3>
+<pre><code>* Realistic cloth
+* Interactive cloth
+* Stable cloth
+* Complex cloth
+* Collision detection / handling</code></pre>
+</div>
+<div id="section" class="section level3">
+<h3></h3>
 </div>
 </div>
 
