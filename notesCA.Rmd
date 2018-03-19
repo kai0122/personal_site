@@ -335,78 +335,78 @@ pre { /* Code block - determines code spacing between lines */
 * Translation of body
 	* From the origin of the world coordinate
 * Orientation of body
-<img src="https://i.imgur.com/.png" style="width: 650px;" />
+<img src="https://i.imgur.com/UJcGNCW.png" style="width: 650px;" />
 * Body space (局部座標系統)
 	* A **fixed** and **unchanged** space where the shape of a rigid body is defined
 	* The geometric center of rigid body lies at the origin of body space
 	* Aoso called **object space** or **local space**
-	<img src="https://i.imgur.com/.png" style="width: 650px;" />
+	<img src="https://i.imgur.com/lbhrbwh.png" style="width: 650px;" />
 * World space (世界座標系統)
-<img src="https://i.imgur.com/.png" style="width: 650px;" />
+<img src="https://i.imgur.com/q6Oy7DL.png" style="width: 650px;" />
 * Use **x(t) and R(t)** to tranform the body space into world space
-* The world coordinate of an arbitrary point <img src="https://i.imgur.com/.png" style="width: 20px;" /> on the body
+* The world coordinate of an arbitrary point <img src="https://i.imgur.com/ln6aU3g.png" style="width: 20px;" /> on the body
 	* R(t) represents the directions of x, y, z axes of the body space in world space at time **t**
-	<img src="https://i.imgur.com/.png" style="width: 650px;" />
+	<img src="https://i.imgur.com/oDliQnS.png" style="width: 650px;" />
 * so x(t) and R(t) define the position and the orientation of the body at time t
 
 ##### Linear Velocity and Angular Velocity
 * Linear Velocity
 	* x`(t) = v(t) is the velocity of the center of mass in world space
 * Angular Velocity
-	*  we describe the spin as a vector <img src="https://i.imgur.com/.png" style="width: 20px;" />
+	*  we describe the spin as a vector <img src="https://i.imgur.com/7VveL0c.png" style="width: 20px;" />
 	* How are R(t) and w(t) related?
-	<img src="https://i.imgur.com/.png" style="width: 300px;" />
+	<img src="https://i.imgur.com/1LjWAnW.png" style="width: 300px;" />
 	* Consider a vector r(t) at time t specified in world space, how do we represent r`(t) in terms of w(t)?
-	<img src="https://i.imgur.com/.png" style="width: 650px;" />
+	<img src="https://i.imgur.com/lKJIRAx.png" style="width: 650px;" />
 	* Given the physical meaning of R(t), what does each column change over time?
-	<img src="https://i.imgur.com/.png" style="width: 650px;" />
+	<img src="https://i.imgur.com/klA8D3I.png" style="width: 650px;" />
 		1. Consider two 3 by 1 vectors: a and b, the cross product of them: 
-		<img src="https://i.imgur.com/.png" style="width: 650px;" />
-		2. Gicen am we can define a matrix a* such that:
-		<img src="https://i.imgur.com/.png" style="width: 650px;" />
-		3. <img src="https://i.imgur.com/.png" style="width: 650px;" />
+		<img src="https://i.imgur.com/ZyoeeUV.png" style="width: 650px;" />
+		2. Given am we can define a matrix a* such that:
+		<img src="https://i.imgur.com/h8VV0ma.png" style="width: 650px;" />
+		3. <img src="https://i.imgur.com/3xezmje.png" style="width: 650px;" />
 
 	Perspective of Particles:
 		* Imagine a rigid body is composed of a large number of small particles
 		* particles indexed from 1 to N
-		* each particles have a constant location <img src="https://i.imgur.com/.png" style="width: 20px;" /> in body space
+		* each particles have a constant location <img src="https://i.imgur.com/ln6aU3g.png" style="width: 20px;" /> in body space
 		* the location of i-th particle in world space at time t is:
-		<img src="https://i.imgur.com/.png" style="width: 300px;" />
+		<img src="https://i.imgur.com/dVslG9r.png" style="width: 300px;" />
     
 	* Velocity of a particle
-	<img src="https://i.imgur.com/.png" style="width: 650px;" />
-	<img src="https://i.imgur.com/.png" style="width: 650px;" />
+	<img src="https://i.imgur.com/TovpvzJ.png" style="width: 650px;" />
+	<img src="https://i.imgur.com/Yw97q6v.png" style="width: 650px;" />
 
 ##### Mass and inertia (轉動慣量)
-* The mass of the i-th particle is m(i), the mass is: <img src="https://i.imgur.com/.png" style="width: 30px;" />
-* The center of mass defined in world space is: <img src="https://i.imgur.com/.png" style="width: 40px;" />
+* The mass of the i-th particle is m(i), the mass is: <img src="https://i.imgur.com/rkFneo3.png" style="width: 30px;" />
+* The center of mass defined in world space is: <img src="https://i.imgur.com/LOWExDW.png" style="width: 40px;" />
 * Inertia Tensor:
 	* Inertia tensor describes how the mass of a rigid body is distributed relative to the center of mass
-	<img src="https://i.imgur.com/.png" style="width: 650px;" />
+	<img src="https://i.imgur.com/ISma6D3.png" style="width: 650px;" />
 	* I(t) depends on the orientation of a body , but not the translation
 	* Inertia tensors vary in world space over time, but are constant in body space
 		* Precompute the integral part in body space to save time
-	* Derivation: <img src="https://i.imgur.com/.png" style="width: 300px;" />
+	* Derivation: <img src="https://i.imgur.com/Or3cKSO.png" style="width: 300px;" />
 	<img src="https://i.imgur.com/.png" style="width: 650px;" />
 
 * Inertia Tensor in Body Space:
 	* 把initial tensor變成三個矩陣相乘
-	<img src="https://i.imgur.com/.png" style="width: 650px;" />
+	<img src="https://i.imgur.com/0NVi8EA.png" style="width: 650px;" />
 
 ##### Force and Torque
 * Net Force (淨力)
-<img src="https://i.imgur.com/.png" style="width: 650px;" />
+<img src="https://i.imgur.com/RutAMRR.png" style="width: 650px;" />
 * Net Torque (力矩)
-<img src="https://i.imgur.com/.png" style="width: 650px;" />
-     
-
+<img src="https://i.imgur.com/lihAkPP.png" style="width: 650px;" />
+       
+  
 ## Cloth Animation
 ### Challenges of Cloth Simulation
-	* Realistic cloth
-	* Interactive cloth
-	* Stable cloth
-	* Complex cloth
-	* Collision detection / handling
+* Realistic cloth
+* Interactive cloth
+* Stable cloth
+* Complex cloth
+* Collision detection / handling
 
 ### 
 
