@@ -344,9 +344,9 @@ pre { /* Code block - determines code spacing between lines */
 * World space (世界座標系統)
 <img src="https://i.imgur.com/q6Oy7DL.png" style="width: 650px;" />
 * Use **x(t) and R(t)** to tranform the body space into world space
-* The world coordinate of an arbitrary point <img src="https://i.imgur.com/ln6aU3g.png" style="width: 20px;" /> on the body
+* The world coordinate of an arbitrary point <img src="https://i.imgur.com/In6aU3g.png" style="width: 100px;" /> on the body
 	* R(t) represents the directions of x, y, z axes of the body space in world space at time **t**
-	<img src="https://i.imgur.com/oDliQnS.png" style="width: 650px;" />
+	<img src="https://i.imgur.com/oDliQnS.png" style="width: 300px;" />
 * so x(t) and R(t) define the position and the orientation of the body at time t
 
 ##### Linear Velocity and Angular Velocity
@@ -357,9 +357,9 @@ pre { /* Code block - determines code spacing between lines */
 	* How are R(t) and w(t) related?
 	<img src="https://i.imgur.com/1LjWAnW.png" style="width: 300px;" />
 	* Consider a vector r(t) at time t specified in world space, how do we represent r`(t) in terms of w(t)?
-	<img src="https://i.imgur.com/lKJIRAx.png" style="width: 650px;" />
+	<img src="https://i.imgur.com/lKJlRAx.png" style="width: 650px;" />
 	* Given the physical meaning of R(t), what does each column change over time?
-	<img src="https://i.imgur.com/klA8D3I.png" style="width: 650px;" />
+	<img src="https://i.imgur.com/klA8D3l.png" style="width: 650px;" />
 		1. Consider two 3 by 1 vectors: a and b, the cross product of them: 
 		<img src="https://i.imgur.com/ZyoeeUV.png" style="width: 650px;" />
 		2. Given am we can define a matrix a* such that:
@@ -369,7 +369,7 @@ pre { /* Code block - determines code spacing between lines */
 	Perspective of Particles:
 		* Imagine a rigid body is composed of a large number of small particles
 		* particles indexed from 1 to N
-		* each particles have a constant location <img src="https://i.imgur.com/ln6aU3g.png" style="width: 20px;" /> in body space
+		* each particles have a constant location <img src="https://i.imgur.com/In6aU3g.png" style="width: 100px;" /> in body space
 		* the location of i-th particle in world space at time t is:
 		<img src="https://i.imgur.com/dVslG9r.png" style="width: 300px;" />
     
@@ -378,20 +378,20 @@ pre { /* Code block - determines code spacing between lines */
 	<img src="https://i.imgur.com/Yw97q6v.png" style="width: 650px;" />
 
 ##### Mass and inertia (轉動慣量)
-* The mass of the i-th particle is m(i), the mass is: <img src="https://i.imgur.com/rkFneo3.png" style="width: 30px;" />
-* The center of mass defined in world space is: <img src="https://i.imgur.com/LOWExDW.png" style="width: 40px;" />
+* The mass of the i-th particle is m(i), the mass is: <img src="https://i.imgur.com/rkFneo3.png" style="width: 150px;" />
+* The center of mass defined in world space is: <img src="https://i.imgur.com/LOWExDW.png" style="width: 200px;" />
 * Inertia Tensor:
 	* Inertia tensor describes how the mass of a rigid body is distributed relative to the center of mass
-	<img src="https://i.imgur.com/ISma6D3.png" style="width: 650px;" />
+	<img src="https://i.imgur.com/lSma6D3.png" style="width: 650px;" />
 	* I(t) depends on the orientation of a body , but not the translation
 	* Inertia tensors vary in world space over time, but are constant in body space
 		* Precompute the integral part in body space to save time
 	* Derivation: <img src="https://i.imgur.com/Or3cKSO.png" style="width: 300px;" />
-	<img src="https://i.imgur.com/.png" style="width: 650px;" />
-
+	<img src="https://i.imgur.com/X58fpnV.png" style="width: 650px;" />
+   
 * Inertia Tensor in Body Space:
 	* 把initial tensor變成三個矩陣相乘
-	<img src="https://i.imgur.com/0NVi8EA.png" style="width: 650px;" />
+	<img src="https://i.imgur.com/0NV8EA.png" style="width: 650px;" />
 
 ##### Force and Torque
 * Net Force (淨力)
