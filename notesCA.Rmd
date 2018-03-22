@@ -401,21 +401,96 @@ pre { /* Code block - determines code spacing between lines */
        
   
 ## Cloth Animation
-### Challenges of Cloth Simulation
+#### Challenges of Cloth Simulation
 * Realistic cloth
 * Interactive cloth
 * Stable cloth
 * Complex cloth
 * Collision detection / handling
 
-### 
+#### Particle-based Approaches
+* Macroscopic behavior arises from modeling microscopic structure
+* Particle based on thread-level interactions
 
+#### Extend to include dynamics
+* Add cloth springs to model
+	* Stretch
+	* Shearing
+	* Bending
+	<img src="https://i.imgur.com/ZM3uHHS.png" style="width: 650px;" />
+	<img src="https://i.imgur.com/vWO7jzW.png" style="width: 350px;" />
+ 
+### Baraff and Witkin (1998)
+* **"Large steps in cloth simulation"** SIGGRAPH'98
+* Exploit sparseness of Jacobian
+* Used in Maya Cloth
+ 
+##### Newton's 2nd Law of Motion
+* n particles
+<img src="https://i.imgur.com/qTjUwek.png" style="width: 550px;" />
+ 
+##### Explicit Euler (review)
+<img src="https://i.imgur.com/adpqb8K.png" style="width: 650px;" />
+ 
+##### Implicit Euler 
+<img src="https://i.imgur.com/43MSg5Q.png" style="width: 650px;" />
 
+##### Approximation using Taylor Series
+* Recall that a Taylor series of a real function in two variables is given by:
+<img src="https://i.imgur.com/qyvJeCB.png" style="width: 650px;" />
+* We can approximate f(x,v) as:
+	* partial f / partial x is a **matrix** evaluated at (x0, v0)
+	<img src="https://i.imgur.com/jSCeoBp.png" style="width: 650px;" />
+	<img src="https://i.imgur.com/O9dqH2V.png" style="width: 600px;" />
 
+Solving the Implicit Integration: 
+<img src="https://i.imgur.com/kxvFjtp.png" style="width: 650px;" /> 
+<img src="https://i.imgur.com/ZVMHX2F.png" style="width: 650px;" />
 
+#### Triangle-based Cloth Model
+* Particles are linked like a trangular mesh
+* Energy defined over finite regions
+* How do we determine streetch and shear on triangles?
+	* C(x) = ?
 
+##### Basic Idea
+* Represent cloth surface as a triangular surface embedded in 3D
+	* Locally linear mapping **w(u,v)**
+<img src="https://i.imgur.com/IYIof2f.png" style="width: 650px;" />
+<img src="https://i.imgur.com/TtetL6q.png" style="width: 650px;" />
 
+##### Forces as Energy Functions
+* Damping Forces
+	* Instead of deriving form E, Baraff and Witkin differentiate C:
+	<img src="https://i.imgur.com/rlMIXBh.png" style="width: 650px;" />
+	* Propotional to the velocity in that direction
 
+#### Constraints
+* May choose
+	* penalty method
+		* stiff system
+	* Lagrange multipliers
+		* need compute constraint force
+	* Parametric constraint (reduced coordinate)
+		* infeasible for dynamic contact constraints
+* Baraff & Witkin introduced a new approach by modifying mass matrix
+
+##### Zero-acceleration Constraints
+* Basic Idea
+	* Enforcing constraint by mass modification
+	* e.g. zero acceleration along z-axis
+	<img src="https://i.imgur.com/pag2F48.png" style="width: 500px;" />
+
+##### Non-axis zero acceleration constraints
+* For the i-th particle
+<img src="https://i.imgur.com/zoFPVcD.png" style="width: 500px;" />
+<img src="https://i.imgur.com/fALiKVe.png" style="width: 500px;" />
+
+### Higher-order implicit methods
+* implicit Euler has only forst-order accuracy
+* 2nd-order implicit method is used in:
+	* Ko & Choi, SIGGRAPH'02
+	* Bridson, Marino, & Fedkiw, SCA'03 (mixed explicit / implicit method)
 
 
 

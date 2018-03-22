@@ -902,8 +902,8 @@ pre { /* Code block - determines code spacing between lines */
 </div>
 <div id="cloth-animation" class="section level2">
 <h2>Cloth Animation</h2>
-<div id="challenges-of-cloth-simulation" class="section level3">
-<h3>Challenges of Cloth Simulation</h3>
+<div id="challenges-of-cloth-simulation" class="section level4">
+<h4>Challenges of Cloth Simulation</h4>
 <ul>
 <li>Realistic cloth</li>
 <li>Interactive cloth</li>
@@ -912,8 +912,134 @@ pre { /* Code block - determines code spacing between lines */
 <li>Collision detection / handling</li>
 </ul>
 </div>
-<div id="section" class="section level3">
-<h3></h3>
+<div id="particle-based-approaches" class="section level4">
+<h4>Particle-based Approaches</h4>
+<ul>
+<li>Macroscopic behavior arises from modeling microscopic structure</li>
+<li>Particle based on thread-level interactions</li>
+</ul>
+</div>
+<div id="extend-to-include-dynamics" class="section level4">
+<h4>Extend to include dynamics</h4>
+<ul>
+<li>Add cloth springs to model
+<ul>
+<li>Stretch</li>
+<li>Shearing</li>
+<li>Bending <img src="https://i.imgur.com/ZM3uHHS.png" style="width: 650px;" /> <img src="https://i.imgur.com/vWO7jzW.png" style="width: 350px;" /></li>
+</ul></li>
+</ul>
+</div>
+<div id="baraff-and-witkin-1998" class="section level3">
+<h3>Baraff and Witkin (1998)</h3>
+<ul>
+<li><strong>“Large steps in cloth simulation”</strong> SIGGRAPH’98</li>
+<li>Exploit sparseness of Jacobian</li>
+<li>Used in Maya Cloth</li>
+</ul>
+<div id="newtons-2nd-law-of-motion" class="section level5">
+<h5>Newton’s 2nd Law of Motion</h5>
+<ul>
+<li>n particles <img src="https://i.imgur.com/qTjUwek.png" style="width: 550px;" /></li>
+</ul>
+</div>
+<div id="explicit-euler-review" class="section level5">
+<h5>Explicit Euler (review)</h5>
+<p><img src="https://i.imgur.com/adpqb8K.png" style="width: 650px;" /></p>
+</div>
+<div id="implicit-euler" class="section level5">
+<h5>Implicit Euler</h5>
+<p><img src="https://i.imgur.com/43MSg5Q.png" style="width: 650px;" /></p>
+</div>
+<div id="approximation-using-taylor-series" class="section level5">
+<h5>Approximation using Taylor Series</h5>
+<ul>
+<li>Recall that a Taylor series of a real function in two variables is given by: <img src="https://i.imgur.com/qyvJeCB.png" style="width: 650px;" /></li>
+<li>We can approximate f(x,v) as:
+<ul>
+<li>partial f / partial x is a <strong>matrix</strong> evaluated at (x0, v0) <img src="https://i.imgur.com/jSCeoBp.png" style="width: 650px;" /> <img src="https://i.imgur.com/O9dqH2V.png" style="width: 600px;" /></li>
+</ul></li>
+</ul>
+<p>Solving the Implicit Integration: <img src="https://i.imgur.com/kxvFjtp.png" style="width: 650px;" /> <img src="https://i.imgur.com/ZVMHX2F.png" style="width: 650px;" /></p>
+</div>
+<div id="triangle-based-cloth-model" class="section level4">
+<h4>Triangle-based Cloth Model</h4>
+<ul>
+<li>Particles are linked like a trangular mesh</li>
+<li>Energy defined over finite regions</li>
+<li>How do we determine streetch and shear on triangles?
+<ul>
+<li>C(x) = ?</li>
+</ul></li>
+</ul>
+<div id="basic-idea" class="section level5">
+<h5>Basic Idea</h5>
+<ul>
+<li>Represent cloth surface as a triangular surface embedded in 3D
+<ul>
+<li>Locally linear mapping <strong>w(u,v)</strong> <img src="https://i.imgur.com/IYIof2f.png" style="width: 650px;" /> <img src="https://i.imgur.com/TtetL6q.png" style="width: 650px;" /></li>
+</ul></li>
+</ul>
+</div>
+<div id="forces-as-energy-functions" class="section level5">
+<h5>Forces as Energy Functions</h5>
+<ul>
+<li>Damping Forces
+<ul>
+<li>Instead of deriving form E, Baraff and Witkin differentiate C: <img src="https://i.imgur.com/rlMIXBh.png" style="width: 650px;" /></li>
+<li>Propotional to the velocity in that direction</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="constraints" class="section level4">
+<h4>Constraints</h4>
+<ul>
+<li>May choose
+<ul>
+<li>penalty method
+<ul>
+<li>stiff system</li>
+</ul></li>
+<li>Lagrange multipliers
+<ul>
+<li>need compute constraint force</li>
+</ul></li>
+<li>Parametric constraint (reduced coordinate)
+<ul>
+<li>infeasible for dynamic contact constraints</li>
+</ul></li>
+</ul></li>
+<li>Baraff &amp; Witkin introduced a new approach by modifying mass matrix</li>
+</ul>
+<div id="zero-acceleration-constraints" class="section level5">
+<h5>Zero-acceleration Constraints</h5>
+<ul>
+<li>Basic Idea
+<ul>
+<li>Enforcing constraint by mass modification</li>
+<li>e.g. zero acceleration along z-axis <img src="https://i.imgur.com/pag2F48.png" style="width: 500px;" /></li>
+</ul></li>
+</ul>
+</div>
+<div id="non-axis-zero-acceleration-constraints" class="section level5">
+<h5>Non-axis zero acceleration constraints</h5>
+<ul>
+<li>For the i-th particle <img src="https://i.imgur.com/zoFPVcD.png" style="width: 500px;" /> <img src="https://i.imgur.com/fALiKVe.png" style="width: 500px;" /></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="higher-order-implicit-methods" class="section level3">
+<h3>Higher-order implicit methods</h3>
+<ul>
+<li>implicit Euler has only forst-order accuracy</li>
+<li>2nd-order implicit method is used in:
+<ul>
+<li>Ko &amp; Choi, SIGGRAPH’02</li>
+<li>Bridson, Marino, &amp; Fedkiw, SCA’03 (mixed explicit / implicit method)</li>
+</ul></li>
+</ul>
 </div>
 </div>
 
