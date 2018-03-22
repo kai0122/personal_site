@@ -67,7 +67,8 @@ pre { /* Code block - determines code spacing between lines */
 * Lecture: K.W. Chen in CS@NCTU
 
 ## Lab1. Introduction to Open CV and installation Mar 01, 2018
-![Lab1 pdf](./UAV/Lab1.pdf)
+<a href="./UAV/Lab1.pdf" target="_blank">New Tab</a>
+
 
 Install Open CV
 In the Ubuntu 16.04 64bit Required dependencies are the followings 
