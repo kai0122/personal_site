@@ -66,7 +66,7 @@ pre { /* Code block - determines code spacing between lines */
 * Spring 2018
 * Lecture: K.W. Chen in CS@NCTU
 
-### Lab1. Introduction to Open CV and installation Mar 01, 2018
+### Lab1. Introduction to Open CV and Installation Mar 01, 2018
 <a href="./UAV/Lab1.pdf" target="_blank">Lab1.pdf</a>
    
 #### Install Open CV
@@ -105,18 +105,244 @@ target_link_libraries( <project_name> ${OpenCV_LIBS} )
 g++ lab1-2.cpp `pkg-config --cflags --libs opencv`
 ```
 
+##### Course Content
+<a href="./UAV/DIP_1.pdf" target="_blank">CourseWeek1.pdf</a>
+
+### Lab2. Histogram Equalization and Laplacian sharpening
+<a href="./UAV/Lab2.pdf" target="_blank">Lab2.pdf</a>
 
 
+Note: The default image matrix is three-channel type, we have to do the gray scale conversion, only ⅓ of the image will be processed.
+```cpp
+Mat input_img = imread(argv[1]);
+//since the bgr channel is used for default action, then the BGR 3 channel image must be converted to GREY channel
+
+cvtColor(input_img, input_img, CV_BGR2GRAY);
+Mat output_img = input_img.clone();
+histogram_equal(input_img, output_img);
+``` 
+
+Histogram Equalization Function:
+```cpp
+oid histogram_equal(Mat& input, Mat& output)
+{
+    vector<int> hash_distribution;
+    vector<double> intensity_cdf;
+    hash_distribution.resize(256);
+    intensity_cdf.resize(256);
+    for(int i=0;i<input.rows;i++)
+    {
+        for(int j=0;j<input.cols;j++)
+        {
+            hash_distribution[(int) input.at<uchar>(i,j)]++;
+        }
+    }
+
+    //search the maxium value
+    int max_value = 0, cnt=0;
+    double cumulative_cnt = 0.0f;
+    for(int i=0;i<hash_distribution.size();i++)
+    {
+        if(hash_distribution[i]!=0)
+        {
+            max_value = max(max_value, i);
+            cumulative_cnt += (double) hash_distribution[i] / (double)(input.rows * input.cols);
+            cnt += hash_distribution[i];
+            intensity_cdf[i] = cumulative_cnt;
+        }
+    }
+    for(int i=0;i<input.rows;i++)
+    {
+        for(int j=0;j<input.cols;j++)
+        {
+            output.at<uchar>(i,j) = (intensity_cdf[input.at<uchar>(i,j)] * max_value );
+        }
+    }
+}
+```
+
+Laplace sharpening function:
+```cpp
+void  mask(Mat& input, Mat& output) {
+
+	// write down your code here
+	for (int i = 0; i<output.rows; i++) {
+		for (int j = 0; j<output.cols; j++) {
+			int temp = (-4)*(input.at<uchar>(i, j));
+			if (i - 1 >= 0)
+				temp += input.at<uchar>(i - 1, j);
+			if (j - 1 >= 0)
+				temp += input.at<uchar>(i, j - 1);
+			if (i + 1 < output.rows)
+				temp += input.at<uchar>(i + 1, j);
+			if (j + 1 < output.cols)
+				temp += input.at<uchar>(i, j + 1);
+			if (temp > 255)
+				output.at<uchar>(i, j) = 255;
+			else if (temp < 0)
+				output.at<uchar>(i, j) = 0;
+			else
+				output.at<uchar>(i, j) = temp;
+		}
+	}
+}
+```
 
 
+##### Course Content
+<a href="./UAV/DIP_2.pdf" target="_blank">CourseWeek2-1.pdf</a>
+<a href="./UAV/CV_1.pdf" target="_blank">CourseWeek2-2.pdf</a>
+<a href="./UAV/CV_2.pdf" target="_blank">CourseWeek2-3.pdf</a>
 
 
+### Lab2. Otsu threshold and Connected component
+<a href="./UAV/Lab3.pdf" target="_blank">Lab3.pdf</a>
 
+Otsu threshold function:
+```cpp
+float sum = 9999;
+	int bestThreshold;
+	
+	vector<int> histo(256,0);
+	findHistogram(input, histo); // a function to find histogram
+	
+	
+	for(int i=0;i<256;i++){
 
+		vector<int> small;	// vector of smaller pixels
+		vector<int> big;	// vector of bigger pixels
+		for(int j=0;j<i;j++){
+			for(int k=0;k<histo[j];k++)
+				small.push_back(j);
+		}
+		for(int j=i;j<256;j++){
+			for(int k=0;k<histo[j];k++)
+				big.push_back(j);
+		}
 
+		float averageS = average(small);
+		float averageB = average(big);
 
+		
+		float newSum = small.size() * variance(small, averageS, small.size()) + big.size() * variance(big, averageB, big.size());
+		if (sum == 9999){
+			sum = newSum;
+			bestThreshold = i;
+		}
+		else if(newSum <= sum){
+			sum = newSum;
+			bestThreshold = i;
+		}
+	}
 
+	for(int i=0;i<input.rows;i++){
+		for(int j=0;j<input.cols;j++){
+			if(input.at<uchar>(i,j) < bestThreshold)
+				output.at<uchar>(i,j) = 0;
+			else
+				output.at<uchar>(i,j) = 255;
+		}
+	}
 
+	cout << "Threshold: " << bestThreshold << endl;
+```
+
+connected components function:
+```cpp
+void connectedComponents(Mat& input, Mat& output){
+	for(int i=0;i<input.rows;i++){
+		for(int j=0;j<input.cols;j++){
+			if(input.at<uchar>(i,j) < 200){
+				input.at<uchar>(i,j) = 0;
+			}
+			else 
+				input.at<uchar>(i,j) = 255;
+		}
+	}
+
+	int label = 50;
+	for(int i=0;i<input.rows;i++){
+		for(int j=0;j<input.cols;j++){
+			if(input.at<uchar>(i,j) == 255){
+				input.at<uchar>(i,j) = label;
+				findNext(i, j, label, input.rows, input.cols, input);
+				label += 10;
+			}
+		}
+	}
+
+	for(int i=0;i<input.rows;i++){
+		for(int j=0;j<input.cols;j++){
+			if(input.at<uchar>(i,j) != 0){
+				//cout << input.at<uchar>(i,j) << endl;
+				int label2 = input.at<uchar>(i,j);
+				output.at<Vec3b>(i,j)[0] = (label2%45 * 531)% 255;
+				output.at<Vec3b>(i,j)[1] = 255 - label2;
+				output.at<Vec3b>(i,j)[2] = (label2%30 * 35)% 255;
+			}
+			else{
+				output.at<Vec3b>(i,j)[0] = 0;
+				output.at<Vec3b>(i,j)[1] = 0;
+				output.at<Vec3b>(i,j)[2] = 0;	
+			}
+		}
+	}
+}
+```
+
+FindNext function to do find next unchanged pixel:
+```cpp
+void findNext(int i, int j, int label, int rows, int cols, Mat& input){
+	if(i-1 >= 0){
+		if(input.at<uchar>(i-1,j) == 255){
+			input.at<uchar>(i-1,j) = label;
+			findNext(i-1, j, label, input.rows, input.cols, input);
+		}
+		if(j-1 >= 0){
+			if(input.at<uchar>(i-1,j-1) == 255){
+				input.at<uchar>(i-1,j-1) = label;
+				findNext(i-1, j-1, label, input.rows, input.cols, input);
+			}
+		}
+		if(j+1 < cols){
+			if(input.at<uchar>(i-1,j+1) == 255){
+				input.at<uchar>(i-1,j+1) = label;
+				findNext(i-1, j+1, label, input.rows, input.cols, input);
+			}
+		}
+	}
+	if(i+1 < rows){
+		if(input.at<uchar>(i+1,j) == 255){
+			input.at<uchar>(i+1,j) = label;
+			findNext(i+1, j, label, input.rows, input.cols, input);
+		}
+		if(j-1 >= 0){
+			if(input.at<uchar>(i+1,j-1) == 255){
+				input.at<uchar>(i+1,j-1) = label;
+				findNext(i+1, j-1, label, input.rows, input.cols, input);
+			}
+		}
+		if(j+1 < cols){
+			if(input.at<uchar>(i+1,j+1) == 255){
+				input.at<uchar>(i+1,j+1) = label;
+				findNext(i+1, j+1, label, input.rows, input.cols, input);
+			}
+		}
+	}
+	if(j-1 >= 0){
+		if(input.at<uchar>(i,j-1) == 255){
+			input.at<uchar>(i,j-1) = label;
+			findNext(i, j-1, label, input.rows, input.cols, input);
+		}
+	}
+	if(j+1 < cols){
+		if(input.at<uchar>(i,j+1) == 255){
+			input.at<uchar>(i,j+1) = label;
+			findNext(i, j+1, label, input.rows, input.cols, input);
+		}
+	}
+}
+```
 
 
 

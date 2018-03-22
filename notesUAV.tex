@@ -136,7 +136,7 @@
   Lecture: K.W. Chen in \href{mailto:CS@NCTU}{\nolinkurl{CS@NCTU}}
 \end{itemize}
 
-\subsubsection{Lab1. Introduction to Open CV and installation Mar 01,
+\subsubsection{Lab1. Introduction to Open CV and Installation Mar 01,
 2018}\label{lab1.-introduction-to-open-cv-and-installation-mar-01-2018}
 
 Lab1.pdf
@@ -202,5 +202,264 @@ target_link_libraries( <project_name> ${OpenCV_LIBS} )
 \end{Highlighting}
 \end{Shaded}
 \end{enumerate}
+
+\subparagraph{Course Content}\label{course-content}
+
+CourseWeek1.pdf
+
+\subsubsection{Lab2. Histogram Equalization and Laplacian
+sharpening}\label{lab2.-histogram-equalization-and-laplacian-sharpening}
+
+Lab2.pdf
+
+Note: The default image matrix is three-channel type, we have to do the
+gray scale conversion, only ⅓ of the image will be processed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Mat input_img = imread(argv[}\DecValTok{1}\NormalTok{]);}
+\CommentTok{//since the bgr channel is used for default action, then the BGR 3 channel image must be converted to GREY channel}
+
+\NormalTok{cvtColor(input_img, input_img, CV_BGR2GRAY);}
+\NormalTok{Mat output_img = input_img.clone();}
+\NormalTok{histogram_equal(input_img, output_img);}
+\end{Highlighting}
+\end{Shaded}
+
+Histogram Equalization Function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{oid histogram_equal(Mat& input, Mat& output)}
+\NormalTok{\{}
+    \NormalTok{vector<}\DataTypeTok{int}\NormalTok{> hash_distribution;}
+    \NormalTok{vector<}\DataTypeTok{double}\NormalTok{> intensity_cdf;}
+    \NormalTok{hash_distribution.resize(}\DecValTok{256}\NormalTok{);}
+    \NormalTok{intensity_cdf.resize(}\DecValTok{256}\NormalTok{);}
+    \KeywordTok{for}\NormalTok{(}\DataTypeTok{int} \NormalTok{i=}\DecValTok{0}\NormalTok{;i<input.rows;i++)}
+    \NormalTok{\{}
+        \KeywordTok{for}\NormalTok{(}\DataTypeTok{int} \NormalTok{j=}\DecValTok{0}\NormalTok{;j<input.cols;j++)}
+        \NormalTok{\{}
+            \NormalTok{hash_distribution[(}\DataTypeTok{int}\NormalTok{) input.at<}\DataTypeTok{uchar}\NormalTok{>(i,j)]++;}
+        \NormalTok{\}}
+    \NormalTok{\}}
+
+    \CommentTok{//search the maxium value}
+    \DataTypeTok{int} \NormalTok{max_value = }\DecValTok{0}\NormalTok{, cnt=}\DecValTok{0}\NormalTok{;}
+    \DataTypeTok{double} \NormalTok{cumulative_cnt = }\FloatTok{0.0f}\NormalTok{;}
+    \KeywordTok{for}\NormalTok{(}\DataTypeTok{int} \NormalTok{i=}\DecValTok{0}\NormalTok{;i<hash_distribution.size();i++)}
+    \NormalTok{\{}
+        \KeywordTok{if}\NormalTok{(hash_distribution[i]!=}\DecValTok{0}\NormalTok{)}
+        \NormalTok{\{}
+            \NormalTok{max_value = max(max_value, i);}
+            \NormalTok{cumulative_cnt += (}\DataTypeTok{double}\NormalTok{) hash_distribution[i] / (}\DataTypeTok{double}\NormalTok{)(input.rows * input.cols);}
+            \NormalTok{cnt += hash_distribution[i];}
+            \NormalTok{intensity_cdf[i] = cumulative_cnt;}
+        \NormalTok{\}}
+    \NormalTok{\}}
+    \KeywordTok{for}\NormalTok{(}\DataTypeTok{int} \NormalTok{i=}\DecValTok{0}\NormalTok{;i<input.rows;i++)}
+    \NormalTok{\{}
+        \KeywordTok{for}\NormalTok{(}\DataTypeTok{int} \NormalTok{j=}\DecValTok{0}\NormalTok{;j<input.cols;j++)}
+        \NormalTok{\{}
+            \NormalTok{output.at<}\DataTypeTok{uchar}\NormalTok{>(i,j) = (intensity_cdf[input.at<}\DataTypeTok{uchar}\NormalTok{>(i,j)] * max_value );}
+        \NormalTok{\}}
+    \NormalTok{\}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Laplace sharpening function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{void}  \NormalTok{mask(Mat& input, Mat& output) \{}
+
+    \CommentTok{// write down your code here}
+    \KeywordTok{for} \NormalTok{(}\DataTypeTok{int} \NormalTok{i = }\DecValTok{0}\NormalTok{; i<output.rows; i++) \{}
+        \KeywordTok{for} \NormalTok{(}\DataTypeTok{int} \NormalTok{j = }\DecValTok{0}\NormalTok{; j<output.cols; j++) \{}
+            \DataTypeTok{int} \NormalTok{temp = (}\DecValTok{-4}\NormalTok{)*(input.at<}\DataTypeTok{uchar}\NormalTok{>(i, j));}
+            \KeywordTok{if} \NormalTok{(i - }\DecValTok{1} \NormalTok{>= }\DecValTok{0}\NormalTok{)}
+                \NormalTok{temp += input.at<}\DataTypeTok{uchar}\NormalTok{>(i - }\DecValTok{1}\NormalTok{, j);}
+            \KeywordTok{if} \NormalTok{(j - }\DecValTok{1} \NormalTok{>= }\DecValTok{0}\NormalTok{)}
+                \NormalTok{temp += input.at<}\DataTypeTok{uchar}\NormalTok{>(i, j - }\DecValTok{1}\NormalTok{);}
+            \KeywordTok{if} \NormalTok{(i + }\DecValTok{1} \NormalTok{< output.rows)}
+                \NormalTok{temp += input.at<}\DataTypeTok{uchar}\NormalTok{>(i + }\DecValTok{1}\NormalTok{, j);}
+            \KeywordTok{if} \NormalTok{(j + }\DecValTok{1} \NormalTok{< output.cols)}
+                \NormalTok{temp += input.at<}\DataTypeTok{uchar}\NormalTok{>(i, j + }\DecValTok{1}\NormalTok{);}
+            \KeywordTok{if} \NormalTok{(temp > }\DecValTok{255}\NormalTok{)}
+                \NormalTok{output.at<}\DataTypeTok{uchar}\NormalTok{>(i, j) = }\DecValTok{255}\NormalTok{;}
+            \KeywordTok{else} \KeywordTok{if} \NormalTok{(temp < }\DecValTok{0}\NormalTok{)}
+                \NormalTok{output.at<}\DataTypeTok{uchar}\NormalTok{>(i, j) = }\DecValTok{0}\NormalTok{;}
+            \KeywordTok{else}
+                \NormalTok{output.at<}\DataTypeTok{uchar}\NormalTok{>(i, j) = temp;}
+        \NormalTok{\}}
+    \NormalTok{\}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subparagraph{Course Content}\label{course-content-1}
+
+CourseWeek2-1.pdf CourseWeek2-2.pdf CourseWeek2-3.pdf
+
+\subsubsection{Lab2. Otsu threshold and Connected
+component}\label{lab2.-otsu-threshold-and-connected-component}
+
+Lab3.pdf
+
+Otsu threshold function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{float} \NormalTok{sum = }\DecValTok{9999}\NormalTok{;}
+    \DataTypeTok{int} \NormalTok{bestThreshold;}
+    
+    \NormalTok{vector<}\DataTypeTok{int}\NormalTok{> histo(}\DecValTok{256}\NormalTok{,}\DecValTok{0}\NormalTok{);}
+    \NormalTok{findHistogram(input, histo); }\CommentTok{// a function to find histogram}
+    
+    
+    \KeywordTok{for}\NormalTok{(}\DataTypeTok{int} \NormalTok{i=}\DecValTok{0}\NormalTok{;i<}\DecValTok{256}\NormalTok{;i++)\{}
+
+        \NormalTok{vector<}\DataTypeTok{int}\NormalTok{> small;  }\CommentTok{// vector of smaller pixels}
+        \NormalTok{vector<}\DataTypeTok{int}\NormalTok{> big;    }\CommentTok{// vector of bigger pixels}
+        \KeywordTok{for}\NormalTok{(}\DataTypeTok{int} \NormalTok{j=}\DecValTok{0}\NormalTok{;j<i;j++)\{}
+            \KeywordTok{for}\NormalTok{(}\DataTypeTok{int} \NormalTok{k=}\DecValTok{0}\NormalTok{;k<histo[j];k++)}
+                \NormalTok{small.push_back(j);}
+        \NormalTok{\}}
+        \KeywordTok{for}\NormalTok{(}\DataTypeTok{int} \NormalTok{j=i;j<}\DecValTok{256}\NormalTok{;j++)\{}
+            \KeywordTok{for}\NormalTok{(}\DataTypeTok{int} \NormalTok{k=}\DecValTok{0}\NormalTok{;k<histo[j];k++)}
+                \NormalTok{big.push_back(j);}
+        \NormalTok{\}}
+
+        \DataTypeTok{float} \NormalTok{averageS = average(small);}
+        \DataTypeTok{float} \NormalTok{averageB = average(big);}
+
+        
+        \DataTypeTok{float} \NormalTok{newSum = small.size() * variance(small, averageS, small.size()) + big.size() * variance(big, averageB, big.size());}
+        \KeywordTok{if} \NormalTok{(sum == }\DecValTok{9999}\NormalTok{)\{}
+            \NormalTok{sum = newSum;}
+            \NormalTok{bestThreshold = i;}
+        \NormalTok{\}}
+        \KeywordTok{else} \KeywordTok{if}\NormalTok{(newSum <= sum)\{}
+            \NormalTok{sum = newSum;}
+            \NormalTok{bestThreshold = i;}
+        \NormalTok{\}}
+    \NormalTok{\}}
+
+    \KeywordTok{for}\NormalTok{(}\DataTypeTok{int} \NormalTok{i=}\DecValTok{0}\NormalTok{;i<input.rows;i++)\{}
+        \KeywordTok{for}\NormalTok{(}\DataTypeTok{int} \NormalTok{j=}\DecValTok{0}\NormalTok{;j<input.cols;j++)\{}
+            \KeywordTok{if}\NormalTok{(input.at<}\DataTypeTok{uchar}\NormalTok{>(i,j) < bestThreshold)}
+                \NormalTok{output.at<}\DataTypeTok{uchar}\NormalTok{>(i,j) = }\DecValTok{0}\NormalTok{;}
+            \KeywordTok{else}
+                \NormalTok{output.at<}\DataTypeTok{uchar}\NormalTok{>(i,j) = }\DecValTok{255}\NormalTok{;}
+        \NormalTok{\}}
+    \NormalTok{\}}
+
+    \NormalTok{cout << }\StringTok{"Threshold: "} \NormalTok{<< bestThreshold << endl;}
+\end{Highlighting}
+\end{Shaded}
+
+connected components function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{void} \NormalTok{connectedComponents(Mat& input, Mat& output)\{}
+    \KeywordTok{for}\NormalTok{(}\DataTypeTok{int} \NormalTok{i=}\DecValTok{0}\NormalTok{;i<input.rows;i++)\{}
+        \KeywordTok{for}\NormalTok{(}\DataTypeTok{int} \NormalTok{j=}\DecValTok{0}\NormalTok{;j<input.cols;j++)\{}
+            \KeywordTok{if}\NormalTok{(input.at<}\DataTypeTok{uchar}\NormalTok{>(i,j) < }\DecValTok{200}\NormalTok{)\{}
+                \NormalTok{input.at<}\DataTypeTok{uchar}\NormalTok{>(i,j) = }\DecValTok{0}\NormalTok{;}
+            \NormalTok{\}}
+            \KeywordTok{else} 
+                \NormalTok{input.at<}\DataTypeTok{uchar}\NormalTok{>(i,j) = }\DecValTok{255}\NormalTok{;}
+        \NormalTok{\}}
+    \NormalTok{\}}
+
+    \DataTypeTok{int} \NormalTok{label = }\DecValTok{50}\NormalTok{;}
+    \KeywordTok{for}\NormalTok{(}\DataTypeTok{int} \NormalTok{i=}\DecValTok{0}\NormalTok{;i<input.rows;i++)\{}
+        \KeywordTok{for}\NormalTok{(}\DataTypeTok{int} \NormalTok{j=}\DecValTok{0}\NormalTok{;j<input.cols;j++)\{}
+            \KeywordTok{if}\NormalTok{(input.at<}\DataTypeTok{uchar}\NormalTok{>(i,j) == }\DecValTok{255}\NormalTok{)\{}
+                \NormalTok{input.at<}\DataTypeTok{uchar}\NormalTok{>(i,j) = label;}
+                \NormalTok{findNext(i, j, label, input.rows, input.cols, input);}
+                \NormalTok{label += }\DecValTok{10}\NormalTok{;}
+            \NormalTok{\}}
+        \NormalTok{\}}
+    \NormalTok{\}}
+
+    \KeywordTok{for}\NormalTok{(}\DataTypeTok{int} \NormalTok{i=}\DecValTok{0}\NormalTok{;i<input.rows;i++)\{}
+        \KeywordTok{for}\NormalTok{(}\DataTypeTok{int} \NormalTok{j=}\DecValTok{0}\NormalTok{;j<input.cols;j++)\{}
+            \KeywordTok{if}\NormalTok{(input.at<}\DataTypeTok{uchar}\NormalTok{>(i,j) != }\DecValTok{0}\NormalTok{)\{}
+                \CommentTok{//cout << input.at<uchar>(i,j) << endl;}
+                \DataTypeTok{int} \NormalTok{label2 = input.at<}\DataTypeTok{uchar}\NormalTok{>(i,j);}
+                \NormalTok{output.at<Vec3b>(i,j)[}\DecValTok{0}\NormalTok{] = (label2%}\DecValTok{45} \NormalTok{* }\DecValTok{531}\NormalTok{)% }\DecValTok{255}\NormalTok{;}
+                \NormalTok{output.at<Vec3b>(i,j)[}\DecValTok{1}\NormalTok{] = }\DecValTok{255} \NormalTok{- label2;}
+                \NormalTok{output.at<Vec3b>(i,j)[}\DecValTok{2}\NormalTok{] = (label2%}\DecValTok{30} \NormalTok{* }\DecValTok{35}\NormalTok{)% }\DecValTok{255}\NormalTok{;}
+            \NormalTok{\}}
+            \KeywordTok{else}\NormalTok{\{}
+                \NormalTok{output.at<Vec3b>(i,j)[}\DecValTok{0}\NormalTok{] = }\DecValTok{0}\NormalTok{;}
+                \NormalTok{output.at<Vec3b>(i,j)[}\DecValTok{1}\NormalTok{] = }\DecValTok{0}\NormalTok{;}
+                \NormalTok{output.at<Vec3b>(i,j)[}\DecValTok{2}\NormalTok{] = }\DecValTok{0}\NormalTok{;   }
+            \NormalTok{\}}
+        \NormalTok{\}}
+    \NormalTok{\}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+FindNext function to do find next unchanged pixel:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{void} \NormalTok{findNext(}\DataTypeTok{int} \NormalTok{i, }\DataTypeTok{int} \NormalTok{j, }\DataTypeTok{int} \NormalTok{label, }\DataTypeTok{int} \NormalTok{rows, }\DataTypeTok{int} \NormalTok{cols, Mat& input)\{}
+    \KeywordTok{if}\NormalTok{(i}\DecValTok{-1} \NormalTok{>= }\DecValTok{0}\NormalTok{)\{}
+        \KeywordTok{if}\NormalTok{(input.at<}\DataTypeTok{uchar}\NormalTok{>(i}\DecValTok{-1}\NormalTok{,j) == }\DecValTok{255}\NormalTok{)\{}
+            \NormalTok{input.at<}\DataTypeTok{uchar}\NormalTok{>(i}\DecValTok{-1}\NormalTok{,j) = label;}
+            \NormalTok{findNext(i}\DecValTok{-1}\NormalTok{, j, label, input.rows, input.cols, input);}
+        \NormalTok{\}}
+        \KeywordTok{if}\NormalTok{(j}\DecValTok{-1} \NormalTok{>= }\DecValTok{0}\NormalTok{)\{}
+            \KeywordTok{if}\NormalTok{(input.at<}\DataTypeTok{uchar}\NormalTok{>(i}\DecValTok{-1}\NormalTok{,j}\DecValTok{-1}\NormalTok{) == }\DecValTok{255}\NormalTok{)\{}
+                \NormalTok{input.at<}\DataTypeTok{uchar}\NormalTok{>(i}\DecValTok{-1}\NormalTok{,j}\DecValTok{-1}\NormalTok{) = label;}
+                \NormalTok{findNext(i}\DecValTok{-1}\NormalTok{, j}\DecValTok{-1}\NormalTok{, label, input.rows, input.cols, input);}
+            \NormalTok{\}}
+        \NormalTok{\}}
+        \KeywordTok{if}\NormalTok{(j}\DecValTok{+1} \NormalTok{< cols)\{}
+            \KeywordTok{if}\NormalTok{(input.at<}\DataTypeTok{uchar}\NormalTok{>(i}\DecValTok{-1}\NormalTok{,j}\DecValTok{+1}\NormalTok{) == }\DecValTok{255}\NormalTok{)\{}
+                \NormalTok{input.at<}\DataTypeTok{uchar}\NormalTok{>(i}\DecValTok{-1}\NormalTok{,j}\DecValTok{+1}\NormalTok{) = label;}
+                \NormalTok{findNext(i}\DecValTok{-1}\NormalTok{, j}\DecValTok{+1}\NormalTok{, label, input.rows, input.cols, input);}
+            \NormalTok{\}}
+        \NormalTok{\}}
+    \NormalTok{\}}
+    \KeywordTok{if}\NormalTok{(i}\DecValTok{+1} \NormalTok{< rows)\{}
+        \KeywordTok{if}\NormalTok{(input.at<}\DataTypeTok{uchar}\NormalTok{>(i}\DecValTok{+1}\NormalTok{,j) == }\DecValTok{255}\NormalTok{)\{}
+            \NormalTok{input.at<}\DataTypeTok{uchar}\NormalTok{>(i}\DecValTok{+1}\NormalTok{,j) = label;}
+            \NormalTok{findNext(i}\DecValTok{+1}\NormalTok{, j, label, input.rows, input.cols, input);}
+        \NormalTok{\}}
+        \KeywordTok{if}\NormalTok{(j}\DecValTok{-1} \NormalTok{>= }\DecValTok{0}\NormalTok{)\{}
+            \KeywordTok{if}\NormalTok{(input.at<}\DataTypeTok{uchar}\NormalTok{>(i}\DecValTok{+1}\NormalTok{,j}\DecValTok{-1}\NormalTok{) == }\DecValTok{255}\NormalTok{)\{}
+                \NormalTok{input.at<}\DataTypeTok{uchar}\NormalTok{>(i}\DecValTok{+1}\NormalTok{,j}\DecValTok{-1}\NormalTok{) = label;}
+                \NormalTok{findNext(i}\DecValTok{+1}\NormalTok{, j}\DecValTok{-1}\NormalTok{, label, input.rows, input.cols, input);}
+            \NormalTok{\}}
+        \NormalTok{\}}
+        \KeywordTok{if}\NormalTok{(j}\DecValTok{+1} \NormalTok{< cols)\{}
+            \KeywordTok{if}\NormalTok{(input.at<}\DataTypeTok{uchar}\NormalTok{>(i}\DecValTok{+1}\NormalTok{,j}\DecValTok{+1}\NormalTok{) == }\DecValTok{255}\NormalTok{)\{}
+                \NormalTok{input.at<}\DataTypeTok{uchar}\NormalTok{>(i}\DecValTok{+1}\NormalTok{,j}\DecValTok{+1}\NormalTok{) = label;}
+                \NormalTok{findNext(i}\DecValTok{+1}\NormalTok{, j}\DecValTok{+1}\NormalTok{, label, input.rows, input.cols, input);}
+            \NormalTok{\}}
+        \NormalTok{\}}
+    \NormalTok{\}}
+    \KeywordTok{if}\NormalTok{(j}\DecValTok{-1} \NormalTok{>= }\DecValTok{0}\NormalTok{)\{}
+        \KeywordTok{if}\NormalTok{(input.at<}\DataTypeTok{uchar}\NormalTok{>(i,j}\DecValTok{-1}\NormalTok{) == }\DecValTok{255}\NormalTok{)\{}
+            \NormalTok{input.at<}\DataTypeTok{uchar}\NormalTok{>(i,j}\DecValTok{-1}\NormalTok{) = label;}
+            \NormalTok{findNext(i, j}\DecValTok{-1}\NormalTok{, label, input.rows, input.cols, input);}
+        \NormalTok{\}}
+    \NormalTok{\}}
+    \KeywordTok{if}\NormalTok{(j}\DecValTok{+1} \NormalTok{< cols)\{}
+        \KeywordTok{if}\NormalTok{(input.at<}\DataTypeTok{uchar}\NormalTok{>(i,j}\DecValTok{+1}\NormalTok{) == }\DecValTok{255}\NormalTok{)\{}
+            \NormalTok{input.at<}\DataTypeTok{uchar}\NormalTok{>(i,j}\DecValTok{+1}\NormalTok{) = label;}
+            \NormalTok{findNext(i, j}\DecValTok{+1}\NormalTok{, label, input.rows, input.cols, input);}
+        \NormalTok{\}}
+    \NormalTok{\}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
 
 \end{document}
