@@ -165,4 +165,37 @@ In the Ubuntu 16.04 64bit Required dependencies are the followings:
 \end{Highlighting}
 \end{Shaded}
 
+\subparagraph{Once installed}\label{once-installed}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pkg-config} \NormalTok{--modversion opencv}
+\end{Highlighting}
+\end{Shaded}
+
+If the version is shown, then we're good to rock with opencv. * Build
+your opencv\_file.cpp with CMake or g++ standards
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  With CMake (Don't forget to add CMakeLists.txt)
+
+\begin{verbatim}
+cmake_minimum_required(VERSION 2.8)
+project( <project_name> )
+find_package( OpenCV REQUIRED )
+add_executable( <project_name> <project_name>.cpp )
+target_link_libraries( <project_name> ${OpenCV_LIBS} )
+\end{verbatim}
+\item
+  With g++ and flags for opencv libraries
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{g++} \NormalTok{lab1-2.cpp }\KeywordTok{`pkg-config} \NormalTok{--cflags --libs opencv}\KeywordTok{`}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
+
 \end{document}
