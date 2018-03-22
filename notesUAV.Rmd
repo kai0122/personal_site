@@ -72,7 +72,6 @@ PDF: <a href="./UAV/Lab1.pdf" target="_blank">Lab1.pdf</a>
 #### Install Open CV
   
 In the Ubuntu 16.04 64bit Required dependencies are the followings 
-
 1.	Git 
 2.	Python 2.6 or later and Numpy 1.5 or later with developer packages (python-dev, python-numpy) 
 3.	CMake 2.6 or higher 
