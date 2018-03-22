@@ -1,5 +1,93 @@
 ---
-title: "Learning Notes"
+title: "UAV Drone autopilot, computer vision and image processing"
+output:
+ pdf_document: default
+ html_document:
+   toc: true
+   toc_depth: 4
+   toc_float:
+    collapsed: false
+    smooth_scroll: false
+
 ---
 
-Why I am awesome.
+<style type="text/css">
+
+body{ /* Normal  */
+      font-size: 15px;
+  }
+td {  /* Table  */
+  
+}
+h1.title {
+  font-size: 40px;
+  color: DarkRed;
+}
+h1 { /* Header 1 */
+  font-size: 35px;
+  color: DarkBlue;
+}
+h2 { /* Header 2 */
+    font-size: 30px;
+  color: DarkBlue;
+}
+h3 { /* Header 3 */
+  font-size: 25px;
+  font-family: "Times New Roman", Times, serif;
+  color: DarkBlue;
+}
+h4 {
+	font-size: 23px;
+	color: Blue;
+}
+h5 {
+	font-size: 20px;
+	color: DarkGreen;
+}
+code.r{ /* Code block */
+    font-size: 13px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 13px;
+}
+
+.thumbnail:hover {
+    position:relative;
+    width:1000px;
+    height:auto;
+    display:block;
+    z-index:999;
+}
+
+</style>
+
+## Course Informations
+* No textbook
+* Spring 2018
+* Lecture: K.W. Chen in CS@NCTU
+
+## Lab1. Introduction to Open CV and installation Mar 01, 2018
+![Lab1 pdf](./UAV/Lab1.pdf)
+
+Install Open CV
+In the Ubuntu 16.04 64bit Required dependencies are the followings 
+1.Git 
+2.Python 2.6 or later and Numpy 1.5 or later with developer packages (python-dev, python-numpy) 
+3.CMake 2.6 or higher 
+4.GCC 4.4.x or later 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
