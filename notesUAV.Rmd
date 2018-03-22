@@ -195,7 +195,7 @@ void  mask(Mat& input, Mat& output) {
 <a href="./UAV/CV_2.pdf" target="_blank">CourseWeek2-3.pdf</a>
 
 
-### Lab2. Otsu threshold and Connected component
+### Lab3. Otsu threshold and Connected component
 <a href="./UAV/Lab3.pdf" target="_blank">Lab3.pdf</a>
 
 Otsu threshold function:
@@ -344,5 +344,8 @@ void findNext(int i, int j, int label, int rows, int cols, Mat& input){
 }
 ```
 
-
+##### Course Content
+<a href="./UAV/CV_3.pdf" target="_blank">CourseWeek3-1.pdf</a>
+<a href="./UAV/CV_4.pdf" target="_blank">CourseWeek3-2.pdf</a>
+<a href="./UAV/PR.pdf" target="_blank">CourseWeek3-3.pdf</a>
 
