@@ -35,6 +35,7 @@ navbar:
   - icon: fab fa-instagram
     href: https://www.instagram.com/k.k.y0122/      
 
+icon: ./favicon.ico
 
 output:
  html_document:
