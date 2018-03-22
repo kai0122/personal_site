@@ -67,17 +67,19 @@ pre { /* Code block - determines code spacing between lines */
 * Lecture: K.W. Chen in CS@NCTU
 
 ### Lab1. Introduction to Open CV and installation Mar 01, 2018
-PDF: <a href="./UAV/Lab1.pdf" target="_blank">Lab1.pdf</a>
+<a href="./UAV/Lab1.pdf" target="_blank">Lab1.pdf</a>
    
 #### Install Open CV
-  
-In the Ubuntu 16.04 64bit Required dependencies are the followings 
+In the Ubuntu 16.04 64bit Required dependencies are the followings: 
 
 1.	Git 
 2.	Python 2.6 or later and Numpy 1.5 or later with developer packages (python-dev, python-numpy) 
 3.	CMake 2.6 or higher 
 4.	GCC 4.4.x or later 
 
+```bash
+sudo apt-get install libopencv-dev python-opencv
+```
 
 
 
