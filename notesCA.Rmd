@@ -456,13 +456,13 @@ Solving the Implicit Integration:
 ##### Basic Idea
 * Represent cloth surface as a triangular surface embedded in 3D
 	* Locally linear mapping **w(u,v)**
-<img src="https://i.imgur.com/IYIof2f.png" style="width: 650px;" />
+<img src="https://i.imgur.com/IYLof2f.png" style="width: 650px;" />
 <img src="https://i.imgur.com/TtetL6q.png" style="width: 650px;" />
 
 ##### Forces as Energy Functions
 * Damping Forces
 	* Instead of deriving form E, Baraff and Witkin differentiate C:
-	<img src="https://i.imgur.com/rlMIXBh.png" style="width: 650px;" />
+	<img src="https://i.imgur.com/rIMIXBh.png" style="width: 650px;" />
 	* Propotional to the velocity in that direction
 
 #### Constraints
@@ -479,12 +479,12 @@ Solving the Implicit Integration:
 * Basic Idea
 	* Enforcing constraint by mass modification
 	* e.g. zero acceleration along z-axis
-	<img src="https://i.imgur.com/pag2F48.png" style="width: 500px;" />
+	<img src="https://i.imgur.com/pag2F48.png" style="width: 600px;" />
 
 ##### Non-axis zero acceleration constraints
 * For the i-th particle
-<img src="https://i.imgur.com/zoFPVcD.png" style="width: 500px;" />
-<img src="https://i.imgur.com/fALiKVe.png" style="width: 500px;" />
+<img src="https://i.imgur.com/zoFPVcD.png" style="width: 600px;" />
+<img src="https://i.imgur.com/fALiKVe.png" style="width: 600px;" />
 
 ### Higher-order implicit methods
 * implicit Euler has only forst-order accuracy
