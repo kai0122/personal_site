@@ -67,7 +67,7 @@ For Example:
 **+**
 <img src="https://i.imgur.com/nwjzwY2.jpg" class="thumbnail" width="500" />
 **=**
-<img src="https://i.imgur.com/uigps19.jpg" class="thumbnail" width="500" />
+<img src="https://i.imgur.com/uigps19.jpg" class="thumbnail" width="500" /> 
 
 ## Open Data (3/19/2018)
 ### Final A1-size Exhibition
@@ -75,3 +75,19 @@ For Example:
  - 名字
  - 資料來源
  - 用的軟體技術
+
+## 擴增虛實境 (3/26/2018)
+### AR + 谿山行旅圖
+* Unity
+	* Terrain
+	* Particle System (For Clouds, Rire or Waterfall)
+	* Lighting & Skybox
+	* Gyro & Camera
+		* Let Camara move with Smartphone
+
+* Vuforia (AR Resources)
+
+#### SLAM Version (AR 定位技術)
+Objects will not disappear when the camara leave the picture.
+
+
