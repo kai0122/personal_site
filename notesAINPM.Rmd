@@ -63,7 +63,7 @@ pre { /* Code block - determines code spacing between lines */
 ## Open Data (3/12/2018)
   
 ### Style Transfer: Google Deep Dream Generator
-#### Excercise 1: 尋-交大實景做Content + 故宮國寶做Styler -> 做一新畫印在A3/A4上（下週秀出） 
+### Excercise 1: 尋-交大實景做Content + 故宮國寶做Styler -> 做一新畫印在A3/A4上（下週秀出） 
  - Styler Examples: 140.113.73.215/calligraphy.php    
  - 陶瓷
  - 銅器
