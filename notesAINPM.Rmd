@@ -86,8 +86,8 @@ For Example:
 		* Let Camara move with Smartphone
 
 * Vuforia (AR Resources)
-
-#### SLAM Version (AR 定位技術)
+  
+##### SLAM Version (AR 定位技術)
 Objects will not disappear when the camara leave the picture.
 
 
