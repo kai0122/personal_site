@@ -178,7 +178,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3,h4,h5",
+      selectors: "h1,h2,h3,h4",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
@@ -390,11 +390,19 @@ h3 { /* Header 3 */
   font-family: "Times New Roman", Times, serif;
   color: DarkBlue;
 }
+h4 {
+    font-size: 23px;
+    color: Blue;
+}
+h5 {
+    font-size: 20px;
+    color: DarkGreen;
+}
 code.r{ /* Code block */
-    font-size: 18px;
+    font-size: 13px;
 }
 pre { /* Code block - determines code spacing between lines */
-    font-size: 18px;
+    font-size: 13px;
 }
 
 .thumbnail:hover {

@@ -3,12 +3,13 @@ title: "AI in National Palace Museum"
 output:
  html_document:
    toc: true
-   toc_depth: 5
+   toc_depth: 4
    toc_float:
     collapsed: false
     smooth_scroll: false
 
 ---
+
 <style type="text/css">
 
 body{ /* Normal  */
@@ -34,11 +35,19 @@ h3 { /* Header 3 */
   font-family: "Times New Roman", Times, serif;
   color: DarkBlue;
 }
+h4 {
+	font-size: 23px;
+	color: Blue;
+}
+h5 {
+	font-size: 20px;
+	color: DarkGreen;
+}
 code.r{ /* Code block */
-    font-size: 18px;
+    font-size: 13px;
 }
 pre { /* Code block - determines code spacing between lines */
-    font-size: 18px;
+    font-size: 13px;
 }
 
 .thumbnail:hover {
