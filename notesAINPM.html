@@ -468,6 +468,43 @@ pre { /* Code block - determines code spacing between lines */
 </div>
 </div>
 </div>
+<div id="unity-5-or-2017-422018" class="section level2">
+<h2>Unity 5 or 2017 (4/2/2018)</h2>
+<ul>
+<li>c# or JavaScript</li>
+<li>plane, shader, animation</li>
+<li>3D objects</li>
+</ul>
+</div>
+<div id="ar-in-unity-472018" class="section level2">
+<h2>AR in Unity (4/7/2018)</h2>
+<ul>
+<li>Steps:
+<ol start="0" style="list-style-type: decimal">
+<li>Import Vuforia Package</li>
+<li>Select 3D Projects</li>
+<li>Select ./Game Objects/Vuforia/AR Camera</li>
+<li>Enable Player Setting (./file/…Setting/Player Setting)</li>
+<li>Go to Vuforia Website (License Manager)
+<ul>
+<li>Get Free License Key</li>
+</ul></li>
+<li>Paste to Vuforia Configuration</li>
+<li>Vuforia Website (Target Manager -&gt; Add Target -&gt; Simple Image)</li>
+<li>Download Database -&gt; Assets -&gt; Import Packages</li>
+<li>Game Objects -&gt; Vuforia -&gt; image</li>
+<li>Image Target
+<ul>
+<li>image import: Change to Spyrite (Must under image target object)</li>
+</ul></li>
+<li><p>Animation:</p>
+<pre class="c#"><code>// if detect image -&gt; play animation
+target.SetActive(true);
+// else -&gt; do not play
+target.SetActive(false);</code></pre></li>
+</ol></li>
+</ul>
+</div>
 
 
 
