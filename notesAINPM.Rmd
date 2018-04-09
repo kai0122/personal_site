@@ -105,26 +105,26 @@ Objects will not disappear when the camara leave the picture.
 * 3D objects
 
 ## AR in Unity (4/7/2018)
-* Steps:
-	0. Import Vuforia Package
-	1. Select 3D Projects
-	2. Select ./Game Objects/Vuforia/AR Camera
-	3. Enable Player Setting (./file/...Setting/Player Setting)
-	4. Go to Vuforia Website (License Manager)
-		* Get Free License Key
-	5. Paste to Vuforia Configuration
-	6. Vuforia Website (Target Manager -> Add Target -> Simple Image)
-	7. Download Database -> Assets -> Import Packages
-	8. Game Objects -> Vuforia -> image
-	9. Image Target
-		* image import: Change to Spyrite (Must under image target object)
-	10. Animation:
-	```c#
-	// if detect image -> play animation
-	target.SetActive(true);
-	// else -> do not play
-	target.SetActive(false);
-	```
+##### Steps:
+0. Import Vuforia Package
+1. Select 3D Projects
+2. Select ./Game Objects/Vuforia/AR Camera
+3. Enable Player Setting (./file/...Setting/Player Setting)
+4. Go to Vuforia Website (License Manager)
+	* Get Free License Key
+5. Paste to Vuforia Configuration
+6. Vuforia Website (Target Manager -> Add Target -> Simple Image)
+7. Download Database -> Assets -> Import Packages
+8. Game Objects -> Vuforia -> image
+9. Image Target
+	* image import: Change to Spyrite (Must under image target object)
+10. Animation:
+```c#
+// if detect image -> play animation
+target.SetActive(true);
+// else -> do not play
+target.SetActive(false);
+```
 
 
 
