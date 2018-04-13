@@ -11,7 +11,7 @@
 
 
 
-<title>AI in National Palace Museum</title>
+<title></title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,9 +19,6 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -168,107 +165,6 @@ $(document).ready(function () {
 
 
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3,h4",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = false;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
-
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
-
-
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
@@ -363,156 +259,84 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">AI in National Palace Museum</h1>
 
 </div>
 
 
-<style type="text/css">
-
-body{ /* Normal  */
-      font-size: 15px;
-  }
-td {  /* Table  */
-  
-}
-h1.title {
-  font-size: 40px;
-  color: DarkRed;
-}
-h1 { /* Header 1 */
-  font-size: 35px;
-  color: DarkBlue;
-}
-h2 { /* Header 2 */
-    font-size: 30px;
-  color: DarkBlue;
-}
-h3 { /* Header 3 */
-  font-size: 25px;
-  font-family: "Times New Roman", Times, serif;
-  color: DarkBlue;
-}
-h4 {
-    font-size: 23px;
-    color: Blue;
-}
-h5 {
-    font-size: 20px;
-    color: DarkGreen;
-}
-code.r{ /* Code block */
-    font-size: 13px;
-}
-pre { /* Code block - determines code spacing between lines */
-    font-size: 13px;
-}
-
-.thumbnail:hover {
-    position:relative;
-    width:1000px;
-    height:auto;
-    display:block;
-    z-index:999;
-}
-
-</style>
-<div id="open-data-3122018" class="section level2">
-<h2>Open Data (3/12/2018)</h2>
-<div id="style-transfer-google-deep-dream-generator" class="section level3">
-<h3>Style Transfer: Google Deep Dream Generator</h3>
-</div>
-<div id="excercise-1--content-styler---a3a4" class="section level3">
-<h3>Excercise 1: 尋-交大實景做Content + 故宮國寶做Styler -&gt; 做一新畫印在A3/A4上（下週秀出）</h3>
+<div id="schreiben" class="section level2">
+<h2>Schreiben</h2>
+<div id="anrede-und-gruformel" class="section level3">
+<h3>Anrede und Grußformel</h3>
+<div id="-sie" class="section level4">
+<h4>最尊敬(不太熟，不認識) Sie</h4>
 <ul>
-<li>Styler Examples: 140.113.73.215/calligraphy.php<br />
+<li><strong>Sehr geehrter Herr/Frau</strong> + (姓氏) &lt;-&gt; Mit Freundlichen Grüßen + (自己的全名)</li>
+</ul>
+</div>
+<div id="-sie" class="section level4">
+<h4>第二熟(熟悉的長輩) Sie</h4>
+<ul>
+<li><strong>Liebe Frau / Lieber Herr</strong> + (姓氏) &lt;-&gt; Viele Grüße + (自己的全名)</li>
+</ul>
+</div>
+<div id="-du" class="section level4">
+<h4>朋友 Du</h4>
+<ul>
+<li><strong>Liebe(女) / Lieber(男)</strong> + (名字) &lt;-&gt; Liebe Grüße + (名字)</li>
+</ul>
+</div>
+<div id="-du" class="section level4">
+<h4>非常熟 Du</h4>
+<ul>
+<li><strong>Hallo / Hi</strong> + (名字) &lt;-&gt; Tschau / Tschüs / Bis Bald + (名字)</li>
+</ul>
+</div>
+</div>
+<div class="section level3">
+<h3>文章內容</h3>
+<div class="section level4">
+<h4>萬用</h4>
+<ul>
+<li>Ich bin ja einverstanden. 我贊成 / Ich bin für deine Meinung.</li>
+<li>Lange nicht gesehen! / Lange nichts von dir gehört.</li>
+<li>Ich freue mich sehr auf die Reise.</li>
+<li>Vielen Dank für die Einladung. Wir haben viel Spaß mit dir gehabt.</li>
+</ul>
+</div>
+<div class="section level4">
+<h4>句型</h4>
+<ul>
+<li>Ich möchte + TIME + mit + PERSON (Dativ.) zusammen + VERB.</li>
+<li>Ich finde ….. gut / Interessant / super, weil + …… + VERB.</li>
+<li>Ich freue mich auf … (Akkusativ.) .</li>
+<li>Ich finde, dass … + VERB.</li>
+<li>Es ist gut / wichtig, dass … + VERB.</li>
+<li>Ich finde (nicht ) gut / wichtig, dass … + VERB.</li>
+</ul>
+</div>
+<div class="section level4">
+<h4>沒去赴約</h4>
+<ul>
+<li>Ich bin zu Hause geblieben, weil ich Fieber hatte.<br />
 </li>
-<li>陶瓷</li>
-<li>銅器</li>
-<li>書法</li>
-<li>繪畫</li>
-<li>珍玩</li>
-</ul>
-<p>For Example: <img src="https://i.imgur.com/22aJPFK.jpg" class="thumbnail" width="500" /> <strong>+</strong> <img src="https://i.imgur.com/nwjzwY2.jpg" class="thumbnail" width="500" /> <strong>=</strong> <img src="https://i.imgur.com/uigps19.jpg" class="thumbnail" width="500" /></p>
-</div>
-</div>
-<div id="open-data-3192018" class="section level2">
-<h2>Open Data (3/19/2018)</h2>
-<div id="final-a1-size-exhibition" class="section level3">
-<h3>Final A1-size Exhibition</h3>
-<ul>
-<li>題目</li>
-<li>名字</li>
-<li>資料來源</li>
-<li>用的軟體技術</li>
+<li>Ich habe meine Eltern besucht.</li>
+<li>Mein Hals tut mir weh. / Ich habe Kopfschmerzen. / Ich habe eine Erkältung. / Ich fühle mich nicht wohl.</li>
+<li>Mein Auto ist kaputt.</li>
 </ul>
 </div>
-</div>
-<div id="-3262018" class="section level2">
-<h2>擴增虛實境 (3/26/2018)</h2>
-<div id="ar-" class="section level3">
-<h3>AR + 谿山行旅圖</h3>
+<div class="section level4">
+<h4>約人</h4>
 <ul>
-<li>Unity
-<ul>
-<li>Terrain</li>
-<li>Particle System (For Clouds, Rire or Waterfall)</li>
-<li>Lighting &amp; Skybox</li>
-<li>Gyro &amp; Camera
-<ul>
-<li>Let Camara move with Smartphone</li>
-</ul></li>
-</ul></li>
-<li>Vuforia (AR Resources)</li>
-</ul>
-<div id="slam-version-ar-" class="section level5">
-<h5>SLAM Version (AR 定位技術)</h5>
-<p>Objects will not disappear when the camara leave the picture.</p>
-</div>
-</div>
-</div>
-<div id="unity-5-or-2017-422018" class="section level2">
-<h2>Unity 5 or 2017 (4/2/2018)</h2>
-<ul>
-<li>c# or JavaScript</li>
-<li>plane, shader, animation</li>
-<li>3D objects</li>
+<li>Hast du Lust, mit mir ins Kino zu gehen?</li>
+<li>Wir müssen mal am Abend etwas trinken gehen und von alten Zeiten reden.</li>
+<li>Wir treffen uns bei mir zu hause. Ich freue mich auf Ihren Besuch.</li>
 </ul>
 </div>
-<div id="ar-in-unity-472018" class="section level2">
-<h2>AR in Unity (4/7/2018)</h2>
-<div id="steps" class="section level5">
-<h5>Steps:</h5>
-<ol start="0" style="list-style-type: decimal">
-<li>Import Vuforia Package</li>
-<li>Select 3D Projects</li>
-<li>Select ./Game Objects/Vuforia/AR Camera</li>
-<li>Enable Player Setting (./file/…Setting/Player Setting)</li>
-<li>Go to Vuforia Website (License Manager)
-<ul>
-<li>Get Free License Key</li>
-</ul></li>
-<li>Paste to Vuforia Configuration</li>
-<li>Vuforia Website (Target Manager -&gt; Add Target -&gt; Simple Image)</li>
-<li>Download Database -&gt; Assets -&gt; Import Packages</li>
-<li>Game Objects -&gt; Vuforia -&gt; image</li>
-<li>Image Target
-<ul>
-<li>image import: Change to Spyrite (Must under image target object)</li>
-</ul></li>
-<li><p>Animation:</p>
-<pre class="c#"><code>// if detect image -&gt; play animation
-target.SetActive(true);
-// else -&gt; do not play
-target.SetActive(false);</code></pre></li>
-</ol>
 </div>
 </div>
 
 
 
-</div>
-</div>
 
 </div>
 

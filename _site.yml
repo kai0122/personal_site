@@ -21,6 +21,8 @@ navbar:
        href: notesSFC.html
      - text: "Computer Animation and Special Effects"
        href: notesCA.html
+     - text: "Deutschkurs A2"
+       href: notesDeutschA2.html
   - text: "Graduation Project"
     menu:
       - text: "Introduction"

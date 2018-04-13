@@ -491,6 +491,259 @@ Solving the Implicit Integration:
 * 2nd-order implicit method is used in:
 	* Ko & Choi, SIGGRAPH'02
 	* Bridson, Marino, & Fedkiw, SCA'03 (mixed explicit / implicit method)
+ 
+ 
+## Representing Rotations
+### 3-D Transformations
+* Translate: P` = P + T
+* Scale: P` = SP
+* Rotate: P` = RP
+* Representing P in a homogeneous coordinate: P` = MP
+	* M can be used for animation, viewing, or modeling
+  
+#### Homogeneous Coordinate
+* In graphics, we use homogeneous coordinate for transformation.
+* 4x4 matrix can represent translation, scaling and rotation and other transformations
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+	* Translation
+	<img src="https://i.imgur.com/.png" style="width: 650px;" />
+	* Scaling
+	<img src="https://i.imgur.com/.png" style="width: 650px;" />
+	* Rotation
+	<img src="https://i.imgur.com/.png" style="width: 650px;" />
+* Compounding Transformations
+	* Transformations can be treated as a series of matrix multiplications
+	<img src="https://i.imgur.com/.png" style="width: 650px;" />
+* Two ways of Interpreting a Rotation Matrix
+	* Rotating a vector:
+	<img src="https://i.imgur.com/.png" style="width: 650px;" />
+	* Rotating a  coordinate:
+	<img src="https://i.imgur.com/.png" style="width: 650px;" />
+  
+
+#### Rotation Matrix
+* Rows / Columns of Matrix must be orthonormal **(Unit length and orthogonal)**
+* Interpolating the components of two matrices doesn't maintain the orthonormality
+	* The generated matrix is not a rotation matrix
+  
+   
+### Representing 3D rotations
+* Rotation Matrix
+	* orthonormal columns / rows
+	* bad for interpolation(內插)
+* Fixed Angle
+	* rotate about global axes
+	* bad for interpolation, gimbal lock
+* Euler Angle
+	* rotate about local axes
+	* same problem as Fixed Angle
+* Axis Angle
+	* good interpolation, no gimbal lock
+	* bad for compounding rotations
+* Quaternion
+	* similar to axis angle but in different form
+	* q = [s, v]
+	* good for compounding rotations
+  
+ 
+#### Fixed Angle Representation
+* Ordered triple of rotations about **global axes**
+* Any triple can be used that doesn't repeat an axis immediately, e.g., x-y-z is fine, so is x-y-x. But x-x-z is not.
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+   
+#### Euler Angle
+* Ordered triple of rotations about **local axes**
+* Any triple can be used that doesn't repeat an axis immediately, e.g., x-y-z is fine, so is x-y-x. But x-x-z is not.
+* **Euler angle ordering is equivalent to reverse ordering in fixed angles**
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+
+#### Gimbal Lock
+* a mechanical device allowing the rotation of an object in multiple dimensions
+* Gimbal Lock occurs when two of the rotation axes align
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+* Gimbal Lock is a basic problem with 3D representations using fixed of Euler angles
+
+#### Axis Angle Representation
+* Euler's rotation theorem
+	* Any 3D rotation can ve described by 4 parameters
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+
+##### Axis Angle Interpolation
+* Interpolate axis and angle separately
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+   
+##### Axis Angle v.s. Quaternion
+* Axis Angle
+	* Can interpolate the axis and angle separately
+	* No gimbal lock
+	* Cannot compose rotations efficiently
+* Quaternion
+	* Good interpolation
+	* No gimbal lock
+	* Can be composed
+  
+#### Quaternion
+* 4-tuple of real numbers
+	* q = (s, x, y, z) or [s, v]
+	* **s** is a scalar; **v** is a vector
+* Same information as axis/angle but in a different form
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+   
+##### Quaternion Math
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+* a point in space is represented as [0, x, y, z]
+* Multiplicative identity: q·[1, 0, 0, 0] = q
+* Inverse:
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+   
+
+##### Quaternion Rotation
+* To ratate a vector **v** using quaternion
+	* Represent the vector as [0, v]
+	* Represent the rotation as a quaternion q
+	<img src="https://i.imgur.com/.png" style="width: 650px;" />
+* q and -q represent the same orientation
+* Why q and -q represent same rotation?
+<img src="https://i.imgur.com/.png" style="width: 650px;" />  
+* Compose Rotations
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+
+### Visualizing Rotations
+* View rotations as points lying on an n-D sphere
+* Interpolating rotation means moving on n-D sphere
+* Quaternion Interpolation
+	* A quaternion is a point on a 4D unit sphere
+	* Unit quaternion: q = (s, x, y, z), ||q|| = 1
+* Linear Interpolation
+	* Linear Interpolation generates unequal spacing of points after projecting to circle
+	<img src="https://i.imgur.com/.png" style="width: 150px;" />
+  
+  
+#### Spherical Linear Interpolation (slerp)
+* 是四元數的一種線性插值運算，主要用於在兩個表示旋轉的四元數之間平滑差值。
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+* Poof of Slerp Equation
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+* Pick Shortest path
+	* Recall that q and -q represent the same rotation
+	* Have to go the short way
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+
+#### Subdivision Scheme
+* Defines a curve by breaking a simpler curve into smaller pieces
+* The limit curve (obtained by subdividing infinitely many times) will be a smooth curve
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+  
+  
+  
+## Kinematics
+* The branch of mechanics concerned with the motions of objects without regard to the forces that cause the motion
+* **Degrees of Freedom (DOF)**: The minimum number of coordinates required to specify completely the motion of an object.
+	* 3 DOF joint
+		* gimbal
+		* ball and socket
+	* 2 DOF joint
+		* universal
+
+##### Joint Space v.s. Cartesian Space
+* Joint Space
+	* space formed by joint angles
+	* position all joints: fine level control
+* Cartesian Space
+	* 3D space
+	* specify environment interactions
+   
+##### Forward and Inverse Kinematics
+* Forward Kinematics
+	* mapping from joint space to cartesian space
+* Inverse Kinematics
+	* mapping from cartesian space to joint space
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+  
+##### Notations
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+   
+### Acclaim Format
+* Skeletal animation file format including
+	* .ASF: Skeleton file
+	* .AMC: Motion file
+* All information in **ASF** file is specified with respect to the **global coordinate**, while all information in **AMC** file is specified with respect to the **local coordinate**.
+  
+#### ASF File
+* Describe the local frame of each bone of a neutral (zero) pose in the global coordinate, e.g. Euler angle in xyz order.
+  
+  
+##### Why is IK hard?
+* Redundancy
+* Natural motion
+	* joint limits
+	* minimum jerk
+* Singularities
+   
+### Solving inverse Kinematics
+* Analytic method
+* Inverse-Jacobian method
+* Optimization-based method
+* Example-based method
+   
+#### Analytic Method
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+  
+#### Inverse-Jacobian method
+* When linkage is complicated
+* Iteratively change the joint angles to approach the goal position and orientation
+  
+##### Jacobian
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+* Example: Jacobian for a 2D arm
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+* Computing Jacobian analytically (A small example)
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+
+##### Rotational DOFs
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+  
+##### 3-DOF Rotational Joints
+* handle as three 1-DOF joints, so we can use the same formula for computing the derivative as we did earlier.
+	* we repeat this for each of the three axis
+  
+##### Iterative IK Using Inverse Jacobian
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+* Jacobian may not be invertible!
+	* Non-square matrix
+		* pseudo inverse
+	* Singularity
+		* causes infinite joint velocities
+		* occurs when any angle cannot achieve V that is not perpendiculat to the arm
+   
+##### Remedy to Singularity Problem
+* Add redundancy
+	* add nore joints to the original joint chain (more DOFs are added)
+	* Jacobian matrix is not square
+* Use pseudo inverse of Jacobian!
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+    
+##### Adding more control to IK
+* Pseudo inverse computes one of many possible solutions that minimize joint angle velocities
+* IK using pseudo inverse Jacobian may not provide natural poses
+* A control term can be added to the pseudo inverse Jacobian solution
+	* The control term should not add anything to the velocities, that is:
+	<img src="https://i.imgur.com/.png" style="width: 650px;" />
+  
+##### Null space
+<img src="https://i.imgur.com/.png" style="width: 650px;" />
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

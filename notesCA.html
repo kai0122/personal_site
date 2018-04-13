@@ -314,6 +314,9 @@ div.tocify {
     <li>
       <a href="notesCA.html">Computer Animation and Special Effects</a>
     </li>
+    <li>
+      <a href="notesDeutschA2.html">Deutschkurs A2</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -1040,6 +1043,348 @@ pre { /* Code block - determines code spacing between lines */
 <li>Bridson, Marino, &amp; Fedkiw, SCA’03 (mixed explicit / implicit method)</li>
 </ul></li>
 </ul>
+</div>
+</div>
+<div id="representing-rotations" class="section level2">
+<h2>Representing Rotations</h2>
+<div id="d-transformations" class="section level3">
+<h3>3-D Transformations</h3>
+<ul>
+<li>Translate: P` = P + T</li>
+<li>Scale: P` = SP</li>
+<li>Rotate: P` = RP</li>
+<li>Representing P in a homogeneous coordinate: P` = MP
+<ul>
+<li>M can be used for animation, viewing, or modeling</li>
+</ul></li>
+</ul>
+<div id="homogeneous-coordinate" class="section level4">
+<h4>Homogeneous Coordinate</h4>
+<ul>
+<li>In graphics, we use homogeneous coordinate for transformation.</li>
+<li>4x4 matrix can represent translation, scaling and rotation and other transformations <img src="https://i.imgur.com/.png" style="width: 650px;" />
+<ul>
+<li>Translation <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+<li>Scaling <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+<li>Rotation <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+</ul></li>
+<li>Compounding Transformations
+<ul>
+<li>Transformations can be treated as a series of matrix multiplications <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+</ul></li>
+<li>Two ways of Interpreting a Rotation Matrix
+<ul>
+<li>Rotating a vector: <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+<li>Rotating a coordinate: <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+</ul></li>
+</ul>
+</div>
+<div id="rotation-matrix" class="section level4">
+<h4>Rotation Matrix</h4>
+<ul>
+<li>Rows / Columns of Matrix must be orthonormal <strong>(Unit length and orthogonal)</strong></li>
+<li>Interpolating the components of two matrices doesn’t maintain the orthonormality
+<ul>
+<li>The generated matrix is not a rotation matrix</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="representing-3d-rotations" class="section level3">
+<h3>Representing 3D rotations</h3>
+<ul>
+<li>Rotation Matrix
+<ul>
+<li>orthonormal columns / rows</li>
+<li>bad for interpolation(內插)</li>
+</ul></li>
+<li>Fixed Angle
+<ul>
+<li>rotate about global axes</li>
+<li>bad for interpolation, gimbal lock</li>
+</ul></li>
+<li>Euler Angle
+<ul>
+<li>rotate about local axes</li>
+<li>same problem as Fixed Angle</li>
+</ul></li>
+<li>Axis Angle
+<ul>
+<li>good interpolation, no gimbal lock</li>
+<li>bad for compounding rotations</li>
+</ul></li>
+<li>Quaternion
+<ul>
+<li>similar to axis angle but in different form</li>
+<li>q = [s, v]</li>
+<li>good for compounding rotations</li>
+</ul></li>
+</ul>
+<div id="fixed-angle-representation" class="section level4">
+<h4>Fixed Angle Representation</h4>
+<ul>
+<li>Ordered triple of rotations about <strong>global axes</strong></li>
+<li>Any triple can be used that doesn’t repeat an axis immediately, e.g., x-y-z is fine, so is x-y-x. But x-x-z is not. <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+</ul>
+</div>
+<div id="euler-angle" class="section level4">
+<h4>Euler Angle</h4>
+<ul>
+<li>Ordered triple of rotations about <strong>local axes</strong></li>
+<li>Any triple can be used that doesn’t repeat an axis immediately, e.g., x-y-z is fine, so is x-y-x. But x-x-z is not.</li>
+<li><strong>Euler angle ordering is equivalent to reverse ordering in fixed angles</strong> <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+</ul>
+</div>
+<div id="gimbal-lock" class="section level4">
+<h4>Gimbal Lock</h4>
+<ul>
+<li>a mechanical device allowing the rotation of an object in multiple dimensions</li>
+<li>Gimbal Lock occurs when two of the rotation axes align <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+<li>Gimbal Lock is a basic problem with 3D representations using fixed of Euler angles</li>
+</ul>
+</div>
+<div id="axis-angle-representation" class="section level4">
+<h4>Axis Angle Representation</h4>
+<ul>
+<li>Euler’s rotation theorem
+<ul>
+<li>Any 3D rotation can ve described by 4 parameters <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+</ul></li>
+</ul>
+<div id="axis-angle-interpolation" class="section level5">
+<h5>Axis Angle Interpolation</h5>
+<ul>
+<li>Interpolate axis and angle separately <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+</ul>
+</div>
+<div id="axis-angle-v.s.-quaternion" class="section level5">
+<h5>Axis Angle v.s. Quaternion</h5>
+<ul>
+<li>Axis Angle
+<ul>
+<li>Can interpolate the axis and angle separately</li>
+<li>No gimbal lock</li>
+<li>Cannot compose rotations efficiently</li>
+</ul></li>
+<li>Quaternion
+<ul>
+<li>Good interpolation</li>
+<li>No gimbal lock</li>
+<li>Can be composed</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="quaternion" class="section level4">
+<h4>Quaternion</h4>
+<ul>
+<li>4-tuple of real numbers
+<ul>
+<li>q = (s, x, y, z) or [s, v]</li>
+<li><strong>s</strong> is a scalar; <strong>v</strong> is a vector</li>
+</ul></li>
+<li>Same information as axis/angle but in a different form <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+</ul>
+<div id="quaternion-math" class="section level5">
+<h5>Quaternion Math</h5>
+<p><img src="https://i.imgur.com/.png" style="width: 650px;" /> * a point in space is represented as [0, x, y, z] * Multiplicative identity: q·[1, 0, 0, 0] = q * Inverse: <img src="https://i.imgur.com/.png" style="width: 650px;" /></p>
+</div>
+<div id="quaternion-rotation" class="section level5">
+<h5>Quaternion Rotation</h5>
+<ul>
+<li>To ratate a vector <strong>v</strong> using quaternion
+<ul>
+<li>Represent the vector as [0, v]</li>
+<li>Represent the rotation as a quaternion q <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+</ul></li>
+<li>q and -q represent the same orientation</li>
+<li>Why q and -q represent same rotation? <img src="https://i.imgur.com/.png" style="width: 650px;" /><br />
+</li>
+<li>Compose Rotations <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="visualizing-rotations" class="section level3">
+<h3>Visualizing Rotations</h3>
+<ul>
+<li>View rotations as points lying on an n-D sphere</li>
+<li>Interpolating rotation means moving on n-D sphere</li>
+<li>Quaternion Interpolation
+<ul>
+<li>A quaternion is a point on a 4D unit sphere</li>
+<li>Unit quaternion: q = (s, x, y, z), ||q|| = 1</li>
+</ul></li>
+<li>Linear Interpolation
+<ul>
+<li>Linear Interpolation generates unequal spacing of points after projecting to circle <img src="https://i.imgur.com/.png" style="width: 150px;" /></li>
+</ul></li>
+</ul>
+<div id="spherical-linear-interpolation-slerp" class="section level4">
+<h4>Spherical Linear Interpolation (slerp)</h4>
+<ul>
+<li>是四元數的一種線性插值運算，主要用於在兩個表示旋轉的四元數之間平滑差值。 <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+<li>Poof of Slerp Equation <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+<li>Pick Shortest path
+<ul>
+<li>Recall that q and -q represent the same rotation</li>
+<li>Have to go the short way <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+</ul></li>
+</ul>
+</div>
+<div id="subdivision-scheme" class="section level4">
+<h4>Subdivision Scheme</h4>
+<ul>
+<li>Defines a curve by breaking a simpler curve into smaller pieces</li>
+<li>The limit curve (obtained by subdividing infinitely many times) will be a smooth curve <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="kinematics-1" class="section level2">
+<h2>Kinematics</h2>
+<ul>
+<li>The branch of mechanics concerned with the motions of objects without regard to the forces that cause the motion</li>
+<li><strong>Degrees of Freedom (DOF)</strong>: The minimum number of coordinates required to specify completely the motion of an object.
+<ul>
+<li>3 DOF joint
+<ul>
+<li>gimbal</li>
+<li>ball and socket</li>
+</ul></li>
+<li>2 DOF joint
+<ul>
+<li>universal</li>
+</ul></li>
+</ul></li>
+</ul>
+<div id="joint-space-v.s.-cartesian-space" class="section level5">
+<h5>Joint Space v.s. Cartesian Space</h5>
+<ul>
+<li>Joint Space
+<ul>
+<li>space formed by joint angles</li>
+<li>position all joints: fine level control</li>
+</ul></li>
+<li>Cartesian Space
+<ul>
+<li>3D space</li>
+<li>specify environment interactions</li>
+</ul></li>
+</ul>
+</div>
+<div id="forward-and-inverse-kinematics" class="section level5">
+<h5>Forward and Inverse Kinematics</h5>
+<ul>
+<li>Forward Kinematics
+<ul>
+<li>mapping from joint space to cartesian space</li>
+</ul></li>
+<li>Inverse Kinematics
+<ul>
+<li>mapping from cartesian space to joint space <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+</ul></li>
+</ul>
+</div>
+<div id="notations" class="section level5">
+<h5>Notations</h5>
+<p><img src="https://i.imgur.com/.png" style="width: 650px;" /></p>
+</div>
+<div id="acclaim-format" class="section level3">
+<h3>Acclaim Format</h3>
+<ul>
+<li>Skeletal animation file format including
+<ul>
+<li>.ASF: Skeleton file</li>
+<li>.AMC: Motion file</li>
+</ul></li>
+<li>All information in <strong>ASF</strong> file is specified with respect to the <strong>global coordinate</strong>, while all information in <strong>AMC</strong> file is specified with respect to the <strong>local coordinate</strong>.</li>
+</ul>
+<div id="asf-file" class="section level4">
+<h4>ASF File</h4>
+<ul>
+<li>Describe the local frame of each bone of a neutral (zero) pose in the global coordinate, e.g. Euler angle in xyz order.</li>
+</ul>
+<div id="why-is-ik-hard" class="section level5">
+<h5>Why is IK hard?</h5>
+<ul>
+<li>Redundancy</li>
+<li>Natural motion
+<ul>
+<li>joint limits</li>
+<li>minimum jerk</li>
+</ul></li>
+<li>Singularities</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="solving-inverse-kinematics" class="section level3">
+<h3>Solving inverse Kinematics</h3>
+<ul>
+<li>Analytic method</li>
+<li>Inverse-Jacobian method</li>
+<li>Optimization-based method</li>
+<li>Example-based method</li>
+</ul>
+<div id="analytic-method" class="section level4">
+<h4>Analytic Method</h4>
+<p><img src="https://i.imgur.com/.png" style="width: 650px;" /></p>
+</div>
+<div id="inverse-jacobian-method" class="section level4">
+<h4>Inverse-Jacobian method</h4>
+<ul>
+<li>When linkage is complicated</li>
+<li>Iteratively change the joint angles to approach the goal position and orientation</li>
+</ul>
+<div id="jacobian" class="section level5">
+<h5>Jacobian</h5>
+<p><img src="https://i.imgur.com/.png" style="width: 650px;" /> * Example: Jacobian for a 2D arm <img src="https://i.imgur.com/.png" style="width: 650px;" /> * Computing Jacobian analytically (A small example) <img src="https://i.imgur.com/.png" style="width: 650px;" /></p>
+</div>
+<div id="rotational-dofs" class="section level5">
+<h5>Rotational DOFs</h5>
+<p><img src="https://i.imgur.com/.png" style="width: 650px;" /></p>
+</div>
+<div id="dof-rotational-joints" class="section level5">
+<h5>3-DOF Rotational Joints</h5>
+<ul>
+<li>handle as three 1-DOF joints, so we can use the same formula for computing the derivative as we did earlier.
+<ul>
+<li>we repeat this for each of the three axis</li>
+</ul></li>
+</ul>
+</div>
+<div id="iterative-ik-using-inverse-jacobian" class="section level5">
+<h5>Iterative IK Using Inverse Jacobian</h5>
+<p><img src="https://i.imgur.com/.png" style="width: 650px;" /> * Jacobian may not be invertible! * Non-square matrix * pseudo inverse * Singularity * causes infinite joint velocities * occurs when any angle cannot achieve V that is not perpendiculat to the arm</p>
+</div>
+<div id="remedy-to-singularity-problem" class="section level5">
+<h5>Remedy to Singularity Problem</h5>
+<ul>
+<li>Add redundancy
+<ul>
+<li>add nore joints to the original joint chain (more DOFs are added)</li>
+<li>Jacobian matrix is not square</li>
+</ul></li>
+<li>Use pseudo inverse of Jacobian! <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+</ul>
+</div>
+<div id="adding-more-control-to-ik" class="section level5">
+<h5>Adding more control to IK</h5>
+<ul>
+<li>Pseudo inverse computes one of many possible solutions that minimize joint angle velocities</li>
+<li>IK using pseudo inverse Jacobian may not provide natural poses</li>
+<li>A control term can be added to the pseudo inverse Jacobian solution
+<ul>
+<li>The control term should not add anything to the velocities, that is: <img src="https://i.imgur.com/.png" style="width: 650px;" /></li>
+</ul></li>
+</ul>
+</div>
+<div id="null-space" class="section level5">
+<h5>Null space</h5>
+<p><img src="https://i.imgur.com/.png" style="width: 650px;" /></p>
+</div>
+</div>
 </div>
 </div>
 
